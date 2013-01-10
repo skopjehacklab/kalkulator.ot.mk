@@ -25,8 +25,8 @@ function Calculator() {
         var zaboluvanje = osnovica_za_pridonesi * pzaboluvanje;
         var pridonesi = penzisko + zdravstveno + pridones + zaboluvanje;
 
-        var osnova = bruto - danocno_osloboduvanje - pridonesi;
-        var personalen = osnova * ppersonalen;
+        var osnovica_za_danok = bruto - danocno_osloboduvanje - pridonesi;
+        var personalen = osnovica_za_danok * ppersonalen;
         var davacki = personalen + pridonesi;
         var neto = bruto - davacki;
 
@@ -39,7 +39,7 @@ function Calculator() {
         vals.push({ name: 'Вкупно придонеси',                       value: pridonesi.toFixed(2) });
         vals.push({ name: 'Бруто - придонеси',                      value: (bruto - pridonesi).toFixed(2) });
         vals.push({ name: 'Даночно ослободување', p: danocno_osloboduvanje, value: danocno_osloboduvanje.toFixed(2) });
-        vals.push({ name: 'Даночна основа',                         value: osnova.toFixed(2) });
+        vals.push({ name: 'Даночна основа',                         value: osnovica_za_danok.toFixed(2) });
         vals.push({ name: 'Персонален данок', p: ppersonalen*100+'%',                       value: personalen.toFixed(2) });
         vals.push({ name: 'Вкупно придонеси и данок',               value: davacki.toFixed(2) });
         vals.push({ name: 'Нето плата',                             value: neto.toFixed(2) });
