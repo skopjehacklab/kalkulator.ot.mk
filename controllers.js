@@ -45,7 +45,7 @@ function Calculator() {
         vals.push({ name: 'Вкупно придонеси и данок',               value: davacki.toFixed(2) });
         vals.push({ name: 'Нето плата',                             value: neto.toFixed(2) });
 
-        return vals;
+        return {neto: neto, vals: vals};
     }
 
     var neto2bruto = function (neto) {
@@ -57,13 +57,14 @@ function Calculator() {
 
     this.getBrutoVals = function() {
         var bruto = parseFloat(this.bruto.toString());
-        this.vals = calculate(bruto);
-        this.neto = vals.slice(-1)[0].value;
+        var result = calculate(bruto);
+        this.vals =  result.vals;
+        this.neto =  result.neto;
     }
 
     this.getNetoVals = function() {
         var bruto = neto2bruto(parseFloat(this.neto.toString()));
-        this.vals = calculate(bruto);
+        this.vals = calculate(bruto).vals;
         this.bruto = bruto.toFixed(2);
     }
 
