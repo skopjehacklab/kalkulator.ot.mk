@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:ng="http://angularjs.org">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>пресметка на бруто плата</title>
+        <link rel="stylesheet" href="plati.css" type="text/css" media="screen" charset="utf-8">
+        <link rel="stylesheet" href="plati_print.css" type="text/css" media="print" charset="utf-8">
+        <script type="text/javascript" charset="utf-8" src="controllers.js"></script>
+        <script type="text/javascript" charset="utf-8" src="angular.min.js" ng:autobind></script>
+    </head>
+    <body ng:controller="Calculator">
+        <h1>Информации за придонесите и бруто/нето износот на платата</h1>
+        <a href="https://github.com/vladan/vladan.github.com"><img class="ribbon" src="forkme.png" alt="Fork me on GitHub"></a>
+        <div class="info">
+            <a href="http://dl.dropbox.com/u/13597364/upatstvo_bruto_plata.pdf"><img src="http://dl.dropbox.com/u/13597364/f02a62981db2.png" alt="закон за пресметување на плати"></a>
+            <a href="http://www.sfid.mk/default.aspx?cId=5&EventId=211&Lan=MK" target="_blank">Најниската основица за пресметка на придонеси од плата за 2012</a>
+            <a href="http://www.piom.com.mk/informacii/finansii/88.html" target="_blank">Стапка на придонесот за пензиско и инвалидско осигурување</a>
+            <a href="http://ujp.gov.mk/" target="_blank">Управа за јавни приходи</a>
+        </div>
+        <div class="form">
+            <p>
+            <label for="bruto">Бруто:</label>
+            <input type="text" name="bruto" id="bruto" placeholder="бруто"
+            ng:validate="number" ng:change="getBrutoVals()" />
+            </p><p>
+            <label for="neto">Нето:</label>
+            <input type="text" name="neto" id="neto" placeholder="нето"
+            ng:validate="number" ng:change="getNetoVals()" />
+            </p>
+        </div>
+        <div id="results">
+            <p ng:repeat="val in vals">{{ val.name }} {{ val.p }} {{ val.value }}</p>
+        </div>
+    </body>
+</html>

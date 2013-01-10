@@ -1,0 +1,90 @@
+body {
+  padding: 0 20px;
+  font: 0.8em sans-serif;
+}
+h1 {
+  display:none;
+}
+body > div {
+  margin: 0 auto;
+  width: 550px;
+  padding: 0px 80px 20px 80px;
+}
+div.form p input[type='text'] {
+  width: 300px;
+}
+body > div.form p > label {
+  margin: 0 0 0 -80px;
+  padding: 12px 0 0 22px;
+  width: 50px;
+  text-align: right;
+}
+p {
+  clear: both;
+}
+div.info {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 0;
+  width: 150px;
+  margin: 0 15px;
+  padding: 0;
+  font-size: 0.8em;
+  text-align: right;
+}
+div.info img {
+  height:64px;
+  margin: 0 -10px 25px 0;
+}
+.info a {
+  display: block;
+  margin: 10px 0;
+  text-decoration: none;
+  color: #8f8f8f;
+}
+.info a:hover {
+  color: #000000;
+}
+img.ribbon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 0;
+}
+input.ng-directive {
+  margin:5px 10px 0 0;
+}
+p > * {
+  display: block;
+  float: left;
+  margin:5px 0px;
+  padding:5px;
+}
+#results {
+  border-top: 1px solid #9f9f9f;
+  clear: both;
+  margin-top: 40px;
+  padding:0 80px;
+}
+#results p {
+  border-bottom:1px solid #dfdfdf;
+  overflow:hidden;
+}
+#results p:first-child {
+  font-weight:bold;
+}
+#results p:last-child {
+  font-weight:bold;
+  border-bottom:1px solid #000000;
+}
+#results > p > * {
+  padding-top:0;
+}
+#results > p > span:first-child {
+  width:340px;
+}
+#results > p > span:last-child {
+  float:right;
+  text-align:right;
+}
