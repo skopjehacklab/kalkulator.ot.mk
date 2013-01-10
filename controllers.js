@@ -12,13 +12,14 @@ function Calculator() {
     var min_osnovica_za_pridonesi = 15295.50;
 
     var calculate = function (bruto) {
+        var osnovica_za_pridonesi = bruto;
+
         if (bruto > max_osnovica_za_pridonesi) {
            osnovica_za_pridonesi = max_osnovica_za_pridonesi;
         } else if (bruto < min_osnovica_za_pridonesi) {
            osnovica_za_pridonesi = min_osnovica_za_pridonesi;
-        } else {
-           osnovica_za_pridonesi = bruto
         }
+
         var penzisko    = osnovica_za_pridonesi * ppenzisko;
         var zdravstveno = osnovica_za_pridonesi * pzdravstveno;
         var pridones    = osnovica_za_pridonesi * ppridones;
@@ -30,7 +31,7 @@ function Calculator() {
         var davacki           = personalen + pridonesi;
         var neto              = bruto - davacki;
 
-        vals = Array()
+        var vals = Array()
         vals.push({ name: 'Бруто плата',                            value: bruto.toFixed(2) });
         vals.push({ name: 'Придонес за пензискo осигурување', p: ppenzisko*100+'%',         value: penzisko.toFixed(2) });
         vals.push({ name: 'Придонес за здравствено осигурување', p: pzdravstveno*100+'%',   value: zdravstveno.toFixed(2) });
@@ -43,6 +44,7 @@ function Calculator() {
         vals.push({ name: 'Персонален данок', p: ppersonalen*100+'%',       value: personalen.toFixed(2) });
         vals.push({ name: 'Вкупно придонеси и данок',               value: davacki.toFixed(2) });
         vals.push({ name: 'Нето плата',                             value: neto.toFixed(2) });
+
         return vals;
     }
 
