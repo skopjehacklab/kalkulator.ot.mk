@@ -1,22 +1,35 @@
 function Calculator() {
 
+    // коефицинети
     var ppenzisko = 0.18;
     var pzdravstveno = 0.073;
     var ppridones = 0.012;
     var pzaboluvanje = 0.005;
     var ppersonalen = 0.10;
-    var osloboduvanje = 7269;
+
+    var danocno_osloboduvanje = 7470;
+    var max_osnovica_za_pridonesi = 183546;
+    var min_osnovica_za_pridonesi = 15295.50;
 
     var calculate = function (bruto) {
-        var penzisko    = bruto * ppenzisko;
-        var zdravstveno = bruto * pzdravstveno;
-        var pridones    = bruto * ppridones;
-        var zaboluvanje = bruto * pzaboluvanje;
+        if (bruto > max_osnovica_za_pridonesi) {
+           osnovica_za_pridonesi = max_osnovica_za_pridonesi;
+        } else if (bruto < min_osnovica_za_pridonesi) {
+           osnovica_za_pridonesi = min_osnovica_za_pridonesi;
+        } else {
+           osnovica_za_pridonesi = bruto
+        }
+        var penzisko    = osnovica_za_pridonesi * ppenzisko;
+        var zdravstveno = osnovica_za_pridonesi * pzdravstveno;
+        var pridones    = osnovica_za_pridonesi * ppridones;
+        var zaboluvanje = osnovica_za_pridonesi * pzaboluvanje;
         var pridonesi = penzisko + zdravstveno + pridones + zaboluvanje;
+
         var osnova = bruto - osloboduvanje - pridonesi;
         var personalen = osnova * ppersonalen;
         var davacki = personalen + pridonesi;
         var neto = bruto - davacki;
+
         vals = Array()
         vals.push({ name: 'Бруто плата',                            value: bruto.toFixed(2) });
         vals.push({ name: 'Придонес за пензискo осигурување', p: ppenzisko*100+'%',         value: penzisko.toFixed(2) });
