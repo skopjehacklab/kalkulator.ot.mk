@@ -58,7 +58,7 @@ function Calculator() {
     this.getBrutoVals = function() {
         var bruto = parseFloat(this.bruto.toString());
         this.vals = calculate(bruto);
-        this.neto = vals.slice(-1)[0].value;
+        this.neto = this.vals.slice(-1)[0].value;
     }
 
     this.getNetoVals = function() {
