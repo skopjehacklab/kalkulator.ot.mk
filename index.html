@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:ng="http://angularjs.org">
+<html ng-app>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
         <title>пресметка на бруто плата</title>
@@ -19,11 +19,10 @@
         <div class="form">
             <p>
             <label for="bruto">Бруто:</label>
-            <input type="text" name="bruto" id="bruto" placeholder="бруто"
-            ng:validate="number" ng:change="getBrutoVals()" />
+            <input type="number" min="11115" integer name="bruto" id="bruto" placeholder="бруто" ng:change="getBrutoVals()" />
             </p><p>
             <label for="neto">Нето:</label>
-            <input type="text" name="neto" id="neto" placeholder="нето"
+            <input type="number" min="8050" integer name="neto" id="neto" placeholder="нето"
             ng:validate="number" ng:change="getNetoVals()" />
             </p>
         </div>
