@@ -1,4 +1,4 @@
-function Calculator() {
+function Calculator($scope) {
 
     // коефицинети
     var ppenzisko = 0.18;
@@ -55,17 +55,17 @@ function Calculator() {
         return bruto;
     }
 
-    this.getBrutoVals = function() {
-        var bruto = parseFloat(this.bruto.toString());
+    $scope.getBrutoVals = function() {
+        var bruto = parseFloat($scope.bruto.toString());
         var result = calculate(bruto);
-        this.vals =  result.vals;
-        this.neto =  result.neto;
+        $scope.vals =  result.vals;
+        $scope.neto =  result.neto;
     }
 
-    this.getNetoVals = function() {
-        var bruto = neto2bruto(parseFloat(this.neto.toString()));
-        this.vals = calculate(bruto).vals;
-        this.bruto = bruto.toFixed(2);
+    $scope.getNetoVals = function() {
+        var bruto = neto2bruto(parseFloat($scope.neto.toString()));
+        $scope.vals = calculate(bruto).vals;
+        $scope.bruto = bruto.toFixed(2);
     }
 
 }

@@ -6,7 +6,7 @@
   <link href="plati.css" rel="stylesheet" type="text/css">
   <link href="plati_print.css" rel="stylesheet" type="text/css" media="print">
   <script src="controllers.js"></script>
-  <script src="angular.min.js" ng:autobind></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js"></script>
 </head>
 
 <body ng:controller="Calculator">
@@ -21,12 +21,11 @@
    <div class="form">
    <p>
      <label for="bruto">Бруто:</label>
-     <input type="number" min="11115" integer name="bruto" id="bruto" placeholder="бруто" ng:change="getBrutoVals()" />
+     <input type="number" ng-model="bruto" placeholder="бруто" ng:change="getBrutoVals()" />
    </p>
    <p>
      <label for="neto">Нето:</label>
-     <input type="number" min="8050" integer name="neto" id="neto" placeholder="нето"
-         ng:validate="number" ng:change="getNetoVals()" />
+     <input type="number" ng-model="neto" placeholder="нето" ng:change="getNetoVals()" />
    </p>
    </div>
 
