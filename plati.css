@@ -1,27 +1,7 @@
 body {
-  padding: 0 20px;
   font: 0.8em sans-serif;
 }
-h1 {
-  display:none;
-}
-body > div {
-  margin: 0 auto;
-  width: 550px;
-  padding: 0px 80px 20px 80px;
-}
-div.form p input[type='text'] {
-  width: 300px;
-}
-body > div.form p > label {
-  margin: 0 0 0 -80px;
-  padding: 12px 0 0 22px;
-  width: 50px;
-  text-align: right;
-}
-p {
-  clear: both;
-}
+
 div.info {
   position: absolute;
   top: 0;
@@ -37,54 +17,48 @@ div.info img {
   height:64px;
   margin: 0 -10px 25px 0;
 }
-.info a {
+div.info a {
   display: block;
   margin: 10px 0;
   text-decoration: none;
   color: #8f8f8f;
 }
-.info a:hover {
+div.info a:hover {
   color: #000000;
 }
-img.ribbon {
-  position: absolute;
-  top: 0;
-  left: 0;
-  border: 0;
+
+body > table {
+  margin: 0 auto;
+  width: 550px;
 }
-input.ng-directive {
-  margin:5px 10px 0 0;
+
+#form tr td {
+  padding: 0.3em;
 }
-p > * {
-  display: block;
-  float: left;
-  margin:5px 0px;
-  padding:5px;
+#form td:first-child {
+  text-align: right;
 }
+#form input {
+  padding: 0.2em;
+}
+
 #results {
   border-top: 1px solid #9f9f9f;
-  clear: both;
-  margin-top: 40px;
-  padding:0 80px;
+  border-bottom: 1px solid #000000;
 }
-#results p {
-  border-bottom:1px solid #dfdfdf;
-  overflow:hidden;
+#results tr:first-child {
+  font-weight: bold;
 }
-#results p:first-child {
-  font-weight:bold;
+#results tr:last-child {
+  font-weight: bold;
 }
-#results p:last-child {
-  font-weight:bold;
-  border-bottom:1px solid #000000;
+#results tr td {
+  border-bottom: 1px solid #dfdfdf;
+  padding: 1em;
 }
-#results > p > * {
-  padding-top:0;
+#results tr td:first-child {
+  width: 340px;
 }
-#results > p > span:first-child {
-  width:340px;
-}
-#results > p > span:last-child {
-  float:right;
+#results tr td:last-child {
   text-align:right;
 }
