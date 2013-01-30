@@ -7,9 +7,9 @@ function Calculator($scope) {
     var pzaboluvanje = 0.005;
     var ppersonalen = 0.10;
 
-    var danocno_osloboduvanje = 7470;
-    var max_osnovica_za_pridonesi = 183546;
-    var min_osnovica_za_pridonesi = 15295.50;
+    var danocno_osloboduvanje = 7269;
+    var max_osnovica_za_pridonesi = 183570;
+    var min_osnovica_za_pridonesi = 15298;
 
     var calculate = function (bruto) {
         var osnovica_za_pridonesi = bruto;
