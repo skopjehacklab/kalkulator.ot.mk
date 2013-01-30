@@ -8,8 +8,9 @@ function Calculator($scope) {
     var ppersonalen = 0.10;
 
     var danocno_osloboduvanje = 7269;
-    var max_osnovica_za_pridonesi = 183570;
-    var min_osnovica_za_pridonesi = 15298;
+    var referentna_vrednost = 30595;
+    var max_osnovica_za_pridonesi = referentna_vrednost * 6;
+    var min_osnovica_za_pridonesi = Math.round(referentna_vrednost / 2);
 
     var calculate = function (bruto) {
         var osnovica_za_pridonesi = bruto;
@@ -27,6 +28,8 @@ function Calculator($scope) {
         var pridonesi   = penzisko + zdravstveno + pridones + zaboluvanje;
 
         var osnovica_za_danok = bruto - danocno_osloboduvanje - pridonesi;
+        osnovica_za_danok = osnovica_za_danok > 0 ? osnovica_za_danok: 0;
+
         var personalen        = osnovica_za_danok * ppersonalen;
         var davacki           = personalen + pridonesi;
         var neto              = bruto - davacki;
