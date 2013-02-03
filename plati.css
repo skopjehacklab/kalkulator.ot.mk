@@ -27,7 +27,7 @@ div.info a:hover {
   color: #000000;
 }
 
-body > table {
+table {
   margin: 0 auto;
   width: 550px;
 }
