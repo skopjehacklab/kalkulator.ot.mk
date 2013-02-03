@@ -1,8 +1,8 @@
 body {
   font: 0.8em sans-serif;
 }
-
-div.info {
+#print-header { display: none }
+#info {
   position: absolute;
   top: 0;
   right: 0;
@@ -13,17 +13,17 @@ div.info {
   font-size: 0.8em;
   text-align: right;
 }
-div.info img {
+#info img {
   height:64px;
   margin: 0 -10px 25px 0;
 }
-div.info a {
+#info a {
   display: block;
   margin: 10px 0;
   text-decoration: none;
   color: #8f8f8f;
 }
-div.info a:hover {
+#info a:hover {
   color: #000000;
 }
 

@@ -5,7 +5,7 @@ body {
   padding: 0 20px 20px 20px;
   font: 0.8em sans-serif;
 }
-h1 {
+#print-header {
   display: block;
   font-weight: normal;
   text-align: center;
@@ -17,11 +17,8 @@ body > div {
   width: 550px;
   padding: 10px 80px;
 }
-body > div.form {
+#form, #info, #ribbon {
   display: none;
-}
-img {
-  display:none;
 }
 p {
   clear: both;
