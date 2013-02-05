@@ -15,20 +15,26 @@
       <a href="http://www.ujp.gov.mk/mk/javnost/soopstenija/pogledni/356" target="_blank">Стапки на придонесите од задолжително социјално осигурување за 2013 година</a>
    </div>
 
-   <form name="myForm" ng:controller="Calculator">
+   <form name="myForm" ng-controller="Calculator">
    <table id="form">
       <tr>
          <td>Бруто:</td>
          <td>
-            <input type="number" name="bruto" ng-model="bruto" placeholder="бруто" ng:change="bruto_change()" />
-            <span class="error" ng-show="myForm.bruto.$error.number">Невалиден број!</span>
+            <input type="number" name="bruto" ng-model="bruto" placeholder="бруто"
+               ng-change="bruto_change()" min="{{min_bruto_plata}}"/>
+            <span class="error" ng-show="myForm.bruto.$error.number">Не е број!</span>
+            <span class="error" ng-show="myForm.bruto.$error.min">Минимум бруто плата е {{min_bruto_plata}}!</span>
+            <span class="error" ng-hide="myForm.bruto.$valid">Невалиден број!</span>
          </td>
       </tr>
       <tr>
          <td>Нето:</td>
          <td>
-            <input type="number" name="neto" ng-model="neto" placeholder="нето" ng:change="neto_change()" />
-            <span class="error" ng-show="myForm.neto.$error.number">Невалиден број!</span>
+            <input type="number" name="neto" ng-model="neto" placeholder="нето"
+               ng-change="neto_change()" min="{{min_neto_plata}}"/>
+            <span class="error" ng-show="myForm.neto.$error.number">Не е број!</span>
+            <span class="error" ng-show="myForm.neto.$error.min">Минимум нето плата е {{min_neto_plata}}!</span>
+            <span class="error" ng-hide="myForm.neto.$valid">Невалиден број!</span>
          </td>
       </tr>
    </table>
