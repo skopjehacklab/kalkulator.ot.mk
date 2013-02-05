@@ -14,6 +14,7 @@ function Calculator($scope) {
     $scope.max_osnovica_za_pridonesi = $scope.referentna_vrednost * 6;
     $scope.min_osnovica_za_pridonesi = Math.round($scope.referentna_vrednost / 2);
     $scope.min_neto_plata = 8050;
+    $scope.min_bruto_plata = 12268; // fixme: треба да се пресмета не да се фиксира
 
     var calculate = function (bruto) {
         var osnovica_za_pridonesi = bruto;
@@ -55,11 +56,21 @@ function Calculator($scope) {
 
     $scope.bruto_change = function() {
         var bruto = parseFloat($scope.bruto.toString());
+        if (bruto < $scope.min_neto_plata) {
+           $scope.myForm.bruto.$error.min = true;
+           return;
+        }
+        $scope.myForm.bruto.$error.min = false;
         $scope.neto = calculate(bruto);
     }
 
     $scope.neto_change = function() {
         var neto = parseFloat($scope.neto.toString());  // cheap way to clean the input
+        if (neto < $scope.min_neto_plata) {
+           $scope.myForm.neto.$error.min = true;
+           return;
+        }
+        $scope.myForm.neto.$error.min = false;
         var bruto = neto2bruto(neto);
         $scope.bruto = bruto;
         calculate(bruto);
