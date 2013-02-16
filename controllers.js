@@ -75,5 +75,12 @@ function Calculator($scope, $location) {
         $scope.bruto = bruto;
         calculate(bruto);
     }
-    $scope.bruto = parseFloat($location.path().replace('/','')) || undefined;
+    $scope.bruto = parseFloat($location.absUrl().split('?')[1]) || undefined;
+    // view is not ready yet, so delay bruto_change
+    setTimeout(function() {
+        // Must tell angular we're modifying this scope.
+        $scope.$apply(function() {
+            $scope.bruto_change();
+        });
+    }, 1);
 }
