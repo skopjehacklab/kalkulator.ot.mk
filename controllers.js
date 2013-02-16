@@ -77,7 +77,7 @@ function Calculator($scope, $location) {
     }
     $scope.bruto = parseFloat($location.absUrl().split('?')[1]) || undefined;
     // view is not ready yet, so delay bruto_change
-    setTimeout(function() {
+    if ($scope.bruto) setTimeout(function() {
         // Must tell angular we're modifying this scope.
         $scope.$apply(function() {
             $scope.bruto_change();
