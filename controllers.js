@@ -1,4 +1,4 @@
-function Calculator($scope) {
+function Calculator($scope, $location) {
 
     // коефицинети
     $scope.k = {
@@ -75,5 +75,5 @@ function Calculator($scope) {
         $scope.bruto = bruto;
         calculate(bruto);
     }
-
+    $scope.bruto = parseFloat($location.path().replace('/','')) || undefined;
 }
