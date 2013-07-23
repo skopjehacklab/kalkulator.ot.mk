@@ -26,13 +26,14 @@ function Calculator($scope, $location) {
            osnovica_za_pridonesi = $scope.min_osnovica_za_pridonesi;
         }
 
-        var penzisko    = Math.round(osnovica_za_pridonesi * $scope.k.penzisko);
-        var zdravstveno = Math.round(osnovica_za_pridonesi * $scope.k.zdravstveno);
-        var pridones    = Math.round(osnovica_za_pridonesi * $scope.k.pridones);
-        var zaboluvanje = Math.round(osnovica_za_pridonesi * $scope.k.boluvanje);
-        var pridonesi   = penzisko + zdravstveno + pridones + zaboluvanje;
+        var penzisko    = $scope.penzisko    = Math.round(osnovica_za_pridonesi * $scope.k.penzisko);
+        var zdravstveno = $scope.zdravstveno = Math.round(osnovica_za_pridonesi * $scope.k.zdravstveno);
+        var pridones    = $scope.pridones    = Math.round(osnovica_za_pridonesi * $scope.k.pridones);
+        var boluvanje   = $scope.boluvanje   = Math.round(osnovica_za_pridonesi * $scope.k.boluvanje);
+        var pridonesi   = penzisko + zdravstveno + pridones + boluvanje;
 
-        var osnovica_za_danok = bruto - $scope.danocno_osloboduvanje - pridonesi;
+        $scope.bruto_minus_pridonesi = bruto - pridonesi;
+        var osnovica_za_danok = $scope.bruto_minus_pridonesi - $scope.danocno_osloboduvanje;
         osnovica_za_danok = osnovica_za_danok > 0 ? osnovica_za_danok: 0;
         var personalec        = Math.round(osnovica_za_danok * $scope.k.personalen);
         var davacki           = personalec + pridonesi;
@@ -58,6 +59,10 @@ function Calculator($scope, $location) {
         var bruto = parseFloat($scope.bruto.toString());
         if (bruto < $scope.min_neto_plata) {
            $scope.myForm.bruto.$error.min = true;
+           ['penzisko', 'zdravstveno', 'pridones', 'boluvanje',
+              'personalec', 'osnovica_za_danok', 'pridonesi', 'neto'].forEach(function (property) {
+              delete $scope[property];
+           });
            return;
         }
         $scope.myForm.bruto.$error.min = false;
