@@ -1,4 +1,4 @@
-function Calculator($scope, $location) {
+function Calculator($scope, $location, $timeout) {
 
     // коефицинети
     $scope.k = {
@@ -82,10 +82,7 @@ function Calculator($scope, $location) {
     }
     $scope.bruto = parseFloat($location.absUrl().split('?')[1]) || undefined;
     // view is not ready yet, so delay bruto_change
-    if ($scope.bruto) setTimeout(function() {
-        // Must tell angular we're modifying this scope.
-        $scope.$apply(function() {
-            $scope.bruto_change();
-        });
+    if ($scope.bruto) $timeout(function() {
+        $scope.bruto_change();
     }, 1);
 }
