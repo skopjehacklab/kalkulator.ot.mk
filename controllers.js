@@ -57,7 +57,8 @@ function Calculator($scope, $location, $timeout) {
 
     $scope.bruto_change = function() {
         var bruto = parseFloat($scope.bruto.toString());
-        if (bruto < $scope.min_neto_plata) {
+        $scope.neto = calculate(bruto);
+        if ($scope.neto < $scope.min_neto_plata) {
            $scope.myForm.bruto.$error.min = true;
            ['penzisko', 'zdravstveno', 'pridones', 'boluvanje', 'bruto_minus_pridonesi',
               'personalec', 'osnovica_za_danok', 'pridonesi', 'neto'].forEach(function (property) {
@@ -66,7 +67,6 @@ function Calculator($scope, $location, $timeout) {
            return;
         }
         $scope.myForm.bruto.$error.min = false;
-        $scope.neto = calculate(bruto);
     }
 
     $scope.neto_change = function() {
