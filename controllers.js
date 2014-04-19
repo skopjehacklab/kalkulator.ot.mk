@@ -9,7 +9,7 @@ function Calculator($scope, $location, $timeout) {
        personalen : 0.10
     }
 
-    $scope.danocno_osloboduvanje = 7269;
+    $scope.danocno_osloboduvanje = 7276;
     $scope.referentna_vrednost = 30595;
     $scope.max_osnovica_za_pridonesi = $scope.referentna_vrednost * 6;
     $scope.min_osnovica_za_pridonesi = Math.round($scope.referentna_vrednost / 2);
