@@ -10,12 +10,11 @@ function Calculator($scope, $location, $timeout) {
     }
 
     $scope.danocno_osloboduvanje = 7320;
-    $scope.referentna_vrednost = 30595; // сѐ уште нема податок за 2015 година
+    $scope.referentna_vrednost = 31644;
     $scope.max_osnovica_za_pridonesi = $scope.referentna_vrednost * 6;
     $scope.min_osnovica_za_pridonesi = Math.round($scope.referentna_vrednost / 2);
     $scope.min_neto_plata = 9590;
-    $scope.min_bruto_plata = 12268; // fixme: треба да се пресмета не да се фиксира. може и да биде фиксна,
-                                    // затоа што секако треба да биде врзна со 9590
+    $scope.min_bruto_plata = 1314; // мојата пресметка вели оваа сума, ама не сум 100% сигурен дека е точна
 
     var calculate = function (bruto) {
         var osnovica_za_pridonesi = bruto;
