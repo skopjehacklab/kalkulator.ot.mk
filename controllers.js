@@ -14,7 +14,7 @@ function Calculator($scope, $location, $timeout) {
     $scope.max_osnovica_za_pridonesi = $scope.referentna_vrednost * 6;
     $scope.min_osnovica_za_pridonesi = Math.round($scope.referentna_vrednost / 2);
     $scope.min_neto_plata = 9590;
-    $scope.min_bruto_plata = 1314; // мојата пресметка вели оваа сума, ама не сум 100% сигурен дека е точна
+    $scope.min_bruto_plata = 14114; // мојата пресметка вели оваа сума, ама не сум 100% сигурен дека е точна
 
     var calculate = function (bruto) {
         var osnovica_za_pridonesi = bruto;
