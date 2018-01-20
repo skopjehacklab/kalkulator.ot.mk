@@ -7,7 +7,7 @@ function Calculator($scope, $location, $timeout) {
        pridones   : 0.012,
        boluvanje  : 0.005,
        personalen : 0.10,
-       neto_to_bruto_konficent: 0.657   // n = b * 73% - (b * 7.3% - du / 10) => b = (n - du / 10) / 0.657       
+       neto_to_bruto_konficent: 0.657   // n = b * 73% - (b * 7.3% - du / 10) => b = (n - du / 10) / 0.657
     }
 
     $scope.total_davacki_bez_personalen_koficent = $scope.k.penzisko + $scope.k.zdravstveno + $scope.k.pridones + $scope.k.boluvanje;
@@ -36,9 +36,9 @@ function Calculator($scope, $location, $timeout) {
         var boluvanje   = osnovica_za_pridonesi * $scope.k.boluvanje;
         var pridonesi   = penzisko + zdravstveno + pridones + boluvanje;
 
-        $scope.penzisko    = Math.round(penzisko);   
+        $scope.penzisko    = Math.round(penzisko);
         $scope.zdravstveno = Math.round(zdravstveno);
-        $scope.pridones    = Math.round(pridones);  
+        $scope.pridones    = Math.round(pridones);
         $scope.boluvanje   = Math.round(boluvanje);
 
         $scope.bruto_minus_pridonesi = bruto - pridonesi;
@@ -57,7 +57,7 @@ function Calculator($scope, $location, $timeout) {
 
     var neto2bruto = function (neto) {
         var bruto = (neto - $scope.danocno_osloboduvanje / 10) / $scope.k.neto_to_bruto_konficent;
-        
+
         var personalec = (bruto * (1 - $scope.total_davacki_bez_personalen_koficent) - $scope.danocno_osloboduvanje) * $scope.k.personalen;
 
         var osnovica_za_pridonesi = bruto;
