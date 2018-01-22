@@ -39,7 +39,7 @@ function Calculator($scope, $location, $timeout) {
         $scope.pridones    = Math.round(pridones);
         $scope.boluvanje   = Math.round(boluvanje);
 
-        $scope.bruto_minus_pridonesi = bruto - pridonesi;
+        $scope.bruto_minus_pridonesi = Math.round(bruto - pridonesi);
         var osnovica_za_danok = $scope.bruto_minus_pridonesi - $scope.danocno_osloboduvanje;
         osnovica_za_danok = osnovica_za_danok > 0 ? osnovica_za_danok: 0;
         var personalec        = osnovica_za_danok * $scope.k.personalen;
@@ -47,8 +47,8 @@ function Calculator($scope, $location, $timeout) {
         var neto              = bruto - davacki;
 
         $scope.personalec = Math.round(personalec);
-        $scope.osnovica_za_danok = osnovica_za_danok;
-        $scope.pridonesi = pridonesi;
+        $scope.osnovica_za_danok = Math.round(osnovica_za_danok);
+        $scope.pridonesi = Math.round(pridonesi);
 
         return neto;
     }
@@ -57,7 +57,7 @@ function Calculator($scope, $location, $timeout) {
         var p = $scope.k.personalen * 100;
         var danok = ((neto - $scope.danocno_osloboduvanje) * p) / (100 - p)
         var bruto = (neto + danok) / (1 - $scope.total_davacki_bez_personalen_koficent)
-        return bruto;
+        return Math.round(bruto);
     }
 
     $scope.bruto_change = function() {
