@@ -1,7 +1,7 @@
 {
     "version": "1.0.0",
     "summary": "Апликација за калкулирање нето/бруто плата.",
-    "repository": "https://github.com/skopjehacklab/kalkulator.ot.mk.git",
+    "repository": "https://github.com/skopjehacklab/kalkulator.git",
     "license": "GPL",
     "source-directories": [
         "src"
