@@ -7,13 +7,11 @@ function Calculator($scope, $location, $timeout) {
        pridones   : 0.012,
        boluvanje  : 0.005,
        personalen : 0.10,
-       neto_to_bruto_konficent: 0.657   // n = b * 73% - (b * 7.3% - du / 10) => b = (n - du / 10) / 0.657
     }
 
     $scope.total_davacki_bez_personalen_koficent = $scope.k.penzisko + $scope.k.zdravstveno + $scope.k.pridones + $scope.k.boluvanje;
-    $scope.k.neto_to_bruto_konficent = 1 - ($scope.total_davacki_bez_personalen_koficent) - (1 - ($scope.total_davacki_bez_personalen_koficent)) * $scope.k.personalen;
 
-    $scope.danocno_osloboduvanje = 7531;
+    $scope.danocno_osloboduvanje = 7456;
     $scope.referentna_vrednost = 32877;
     $scope.max_osnovica_za_pridonesi = $scope.referentna_vrednost * 12;
     $scope.min_osnovica_za_pridonesi = $scope.referentna_vrednost / 2;
@@ -56,23 +54,9 @@ function Calculator($scope, $location, $timeout) {
     }
 
     var neto2bruto = function (neto) {
-        var bruto = (neto - $scope.danocno_osloboduvanje / 10) / $scope.k.neto_to_bruto_konficent;
-
-        var personalec = (bruto * (1 - $scope.total_davacki_bez_personalen_koficent) - $scope.danocno_osloboduvanje) * $scope.k.personalen;
-
-        var osnovica_za_pridonesi = bruto;
-        if (bruto > $scope.max_osnovica_za_pridonesi) {
-            osnovica_za_pridonesi = $scope.max_osnovica_za_pridonesi;
-        } else
-        if (bruto < $scope.min_osnovica_za_pridonesi) {
-                osnovica_za_pridonesi = $scope.min_osnovica_za_pridonesi;
-        }
-        var penzisko = osnovica_za_pridonesi * $scope.k.penzisko;
-        var zdravstveno = osnovica_za_pridonesi * $scope.k.zdravstveno;
-        var pridones = osnovica_za_pridonesi * $scope.k.pridones;
-        var boluvanje = osnovica_za_pridonesi * $scope.k.boluvanje;
-        bruto = neto + personalec + penzisko + zdravstveno + pridones + boluvanje;
-
+        var p = $scope.k.personalen * 100;
+        var danok = ((neto - $scope.danocno_osloboduvanje) * p) / (100 - p)
+        var bruto = (neto + danok) / (1 - $scope.total_davacki_bez_personalen_koficent)
         return bruto;
     }
 
