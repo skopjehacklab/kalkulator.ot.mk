@@ -9,10 +9,10 @@ plata.m.ie.mk
 * нема сервер
 
 Апликацијата е достапна `овде <http://plata.m.ie.mk/>`_. Да го поставите овој
-код извршете ги командиве::
+код извршете ја командава::
 
-    git checkout -B gh-pages
-    git push -f origin gh-pages
+    git push origin +angular:gh-pages
 
 Со ова ќе се препише ``gh-pages``. Немојте да работите директно таму, кодот
-менувајте го во овој branch, git push, па после претходниве 2 команди.
+менувајте го во ``angular``, ``git push origin angular``, па после аплицирајте
+ги промените на ``gh-pages``.
