@@ -17,8 +17,8 @@ function Calculator($scope, $location, $timeout) {
     $scope.referentna_vrednost = 32877;
     $scope.max_osnovica_za_pridonesi = $scope.referentna_vrednost * 12;
     $scope.min_osnovica_za_pridonesi = $scope.referentna_vrednost / 2;
-    $scope.min_neto_plata = 9590;
-    $scope.min_bruto_plata = $scope.min_osnovica_za_pridonesi;
+    $scope.min_neto_plata = 12000;
+    $scope.min_bruto_plata = 17300;
 
     var calculate = function (bruto) {
         var osnovica_za_pridonesi = bruto;
