@@ -3,21 +3,13 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (onInput)
 
 
-main =
-  Html.beginnerProgram
-    { model  = model
-    , view   = view
-    , update = update
-    }
-
-
 -- референтни вредности
 referentnaVrednost = 32877
 licnoOsloboduvanje = 7456
 
 -- ограничувања
 minNeto     = 12000
-minBruto    = 17300
+minBruto    = 17130
 maxOsnovica = referentnaVrednost * 12
 minOsnovica = referentnaVrednost / 2
 
@@ -35,6 +27,10 @@ presmetajDanoci : Float -> Danoci -> Danoci
 presmetajDanoci osnovica d =
   { pdd = osnovica * d.pdd
   }
+
+sumaDanoci : Danoci -> Float
+sumaDanoci d =
+  d.pdd
 
 -- Константни коефициенти
 type alias Pridonesi =
@@ -60,49 +56,55 @@ presmetajPridonesi bruto p =
   , boluvanje   = bruto * p.boluvanje
   }
 
-pridonesiToList : Pridonesi -> List Float
-pridonesiToList p =
-  [ p.penzisko
-  , p.zdravstveno
-  , p.pridones
-  , p.boluvanje
-  ]
-
 sumaPridonesi : Pridonesi -> Float
 sumaPridonesi p =
-  List.sum (pridonesiToList p)
+  p.penzisko + p.zdravstveno + p.pridones + p.boluvanje
 
 vkupnoPridonesiProcenti : Float
 vkupnoPridonesiProcenti = sumaPridonesi procentiPridonesi
 
 
 
-bruto2neto : Float -> Pridonesi -> Model
-bruto2neto bruto procenti =
+-- Главни функции за конверзија од бруто во нето и обратно
+
+bruto2neto : Float -> Model
+bruto2neto bruto =
   let
     pridonesi = presmetajPridonesi bruto procentiPridonesi
     vkupnoPridonesi = sumaPridonesi pridonesi
     pddOsnovica = bruto - vkupnoPridonesi - licnoOsloboduvanje
     danoci = presmetajDanoci pddOsnovica procentiDanoci
-    neto = bruto - vkupnoPridonesi - danoci.pdd
+    vkupnoDanoci = sumaDanoci danoci
+    neto = bruto - vkupnoPridonesi - vkupnoDanoci
   in
     { bruto = bruto
     , neto = neto
     , pridonesi = pridonesi
     , danoci = danoci
     , pddOsnovica = pddOsnovica
-    , vkupnoDavacki = vkupnoPridonesi + danoci.pdd
+    , vkupnoDavacki = vkupnoPridonesi + vkupnoDanoci
     , vkupnoPridonesi = vkupnoPridonesi
     , brutoMinusPridonesi = bruto - vkupnoPridonesi
     }
 
-neto2bruto : Float -> Pridonesi -> Model
-neto2bruto neto procenti =
+neto2bruto : Float -> Model
+neto2bruto neto =
   let
     pdd = ((neto - licnoOsloboduvanje) * procentiDanoci.pdd) / (1 - procentiDanoci.pdd)
     bruto = (neto + pdd) / (1 - vkupnoPridonesiProcenti)
   in
-    bruto2neto bruto procentiPridonesi
+    bruto2neto bruto
+
+
+
+-- имплементација на стандардните Elm ствари: main, model, update, view
+
+main =
+  Html.beginnerProgram
+    { model  = model
+    , view   = view
+    , update = update
+    }
 
 
 type alias Model =
@@ -138,9 +140,9 @@ update : Msg -> Model -> Model
 update msg model =
   case msg of
     Bruto amount ->
-      bruto2neto (Result.withDefault 0 (String.toFloat amount)) procentiPridonesi
+      bruto2neto (Result.withDefault 0 (String.toFloat amount))
     Neto amount ->
-      neto2bruto (Result.withDefault 0 (String.toFloat amount)) procentiPridonesi
+      neto2bruto (Result.withDefault 0 (String.toFloat amount))
 
 
 view : Model -> Html Msg
@@ -170,25 +172,25 @@ details model =
     [ table []
       [ tr []
           [ td [] [ text "Придонеси за задолжително ПИО" ]
-          , td [] [ text ((toString procentiPridonesi.penzisko) ++ "%") ]
+          , td [] [ text (toString (procentiPridonesi.penzisko * 100) ++ "%") ]
           , td [] [ text (toString (round model.pridonesi.penzisko)) ]
           , td [] [ text "МКД" ]
           ]
       , tr []
           [ td [] [ text "Придонеси за задолжително здравствено осигурување" ]
-          , td [] [ text ((toString procentiPridonesi.zdravstveno) ++ "%") ]
+          , td [] [ text (toString (procentiPridonesi.zdravstveno * 100) ++ "%") ]
           , td [] [ text (toString (round model.pridonesi.zdravstveno)) ]
           , td [] [ text "МКД" ]
           ]
       , tr []
           [ td [] [ text "Придонеси за вработување" ]
-          , td [] [ text ((toString procentiPridonesi.pridones) ++ "%") ]
+          , td [] [ text (toString (procentiPridonesi.pridones * 100) ++ "%") ]
           , td [] [ text (toString (round model.pridonesi.pridones)) ]
           , td [] [ text "МКД" ]
           ]
       , tr []
           [ td [] [ text "Дополнителен придонес за задолжително осигурување во случај повреда или професионално заболување" ]
-          , td [] [ text ((toString (procentiPridonesi.boluvanje)) ++ "%") ]
+          , td [] [ text (toString (procentiPridonesi.boluvanje * 100) ++ "%") ]
           , td [] [ text (toString (round model.pridonesi.boluvanje)) ]
           , td [] [ text "МКД" ]
           ]
@@ -214,6 +216,12 @@ details model =
           [ td [] [ text "Даночна основа за пресметка на персонален данок на доход" ]
           , td [] []
           , td [] [ text (toString (round model.pddOsnovica)) ]
+          , td [] [ text "МКД" ]
+          ]
+      , tr []
+          [ td [] [ text "Персонален данок" ]
+          , td [] [ text (toString (procentiDanoci.pdd * 100) ++ "%") ]
+          , td [] [ text (toString (round model.danoci.pdd)) ]
           , td [] [ text "МКД" ]
           ]
       , tr []
