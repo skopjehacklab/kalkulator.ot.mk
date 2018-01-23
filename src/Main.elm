@@ -146,9 +146,22 @@ update msg model =
 view : Model -> Html Msg
 view model =
   div []
-    [ input [ type_ "text", placeholder "Бруто", onInput Bruto, value (toString (round model.bruto)) ] []
-    , input [ type_ "text", placeholder "Нето", onInput Neto, value (toString (round model.neto)) ] []
+    [ inputFields model
     , details model
+    ]
+
+
+inputFields : Model -> Html Msg
+inputFields model =
+  div []
+    [ label []
+      [ span [] [ text "Бруто : " ]
+      , input [ type_ "text", placeholder "Бруто", onInput Bruto, value (toString (round model.bruto)) ] []
+      ]
+    , label []
+      [ span [] [ text "Нето : " ]
+      , input [ type_ "text", placeholder "Нето", onInput Neto, value (toString (round model.neto)) ] []
+      ]
     ]
 
 details : Model -> Html msg
@@ -165,6 +178,12 @@ details model =
           [ td [] [ text "Придонеси за задолжително здравствено осигурување" ]
           , td [] [ text ((toString procentiPridonesi.zdravstveno) ++ "%") ]
           , td [] [ text (toString (round model.pridonesi.zdravstveno)) ]
+          , td [] [ text "МКД" ]
+          ]
+      , tr []
+          [ td [] [ text "Придонеси за вработување" ]
+          , td [] [ text ((toString procentiPridonesi.pridones) ++ "%") ]
+          , td [] [ text (toString (round model.pridonesi.pridones)) ]
           , td [] [ text "МКД" ]
           ]
       , tr []
