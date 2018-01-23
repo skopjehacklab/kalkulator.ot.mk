@@ -54,8 +54,7 @@ function Calculator($scope, $location, $timeout) {
     }
 
     var neto2bruto = function (neto) {
-        var p = $scope.k.personalen * 100;
-        var danok = ((neto - $scope.danocno_osloboduvanje) * p) / (100 - p)
+        var danok = ((neto - $scope.danocno_osloboduvanje) * $scope.k.personalen) / (1 - $scope.k.personalen)
         var bruto = (neto + danok) / (1 - $scope.total_davacki_bez_personalen_koficent)
         return Math.round(bruto);
     }
