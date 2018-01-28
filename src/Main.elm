@@ -1,16 +1,20 @@
+import Round
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onInput)
 
 
 -- референтни вредности
-referentnaVrednost = 32877
-licnoOsloboduvanje = 7456
+referentnaVrednost = 34079.0
+licnoOsloboduvanje = 7531.0
+
+rounds : Float -> Float
+rounds x = Round.roundNum 0 x
 
 -- ограничувања
-minNeto     = 12000
-minBruto    = 17130
-maxOsnovica = referentnaVrednost * 12
+minNeto     = 12000.0
+minBruto    = 17130.0
+maxOsnovica = referentnaVrednost * 16
 minOsnovica = referentnaVrednost / 2
 
 -- Даноци (за сега само еден)
@@ -25,7 +29,7 @@ procentiDanoci =
 
 presmetajDanoci : Float -> Danoci -> Danoci
 presmetajDanoci osnovica d =
-  { pdd = osnovica * d.pdd
+  { pdd = rounds (osnovica * d.pdd)
   }
 
 sumaDanoci : Danoci -> Float
@@ -50,10 +54,10 @@ procentiPridonesi =
 
 presmetajPridonesi : Float -> Pridonesi -> Pridonesi
 presmetajPridonesi bruto p =
-  { penzisko    = bruto * p.penzisko
-  , zdravstveno = bruto * p.zdravstveno
-  , pridones    = bruto * p.pridones
-  , boluvanje   = bruto * p.boluvanje
+  { penzisko    = rounds (bruto * p.penzisko)
+  , zdravstveno = rounds (bruto * p.zdravstveno)
+  , pridones    = rounds (bruto * p.pridones)
+  , boluvanje   = rounds (bruto * p.boluvanje)
   }
 
 sumaPridonesi : Pridonesi -> Float
@@ -90,10 +94,9 @@ bruto2neto bruto =
 neto2bruto : Float -> Model
 neto2bruto neto =
   let
-    pdd = ((neto - licnoOsloboduvanje) * procentiDanoci.pdd) / (1 - procentiDanoci.pdd)
-    bruto = (neto + pdd) / (1 - vkupnoPridonesiProcenti)
+    bruto = (neto - licnoOsloboduvanje * procentiDanoci.pdd) / (((1 - vkupnoPridonesiProcenti) - procentiDanoci.pdd) + (vkupnoPridonesiProcenti * procentiDanoci.pdd))
   in
-    bruto2neto bruto
+    bruto2neto (rounds bruto)
 
 
 
@@ -140,9 +143,19 @@ update : Msg -> Model -> Model
 update msg model =
   case msg of
     Bruto amount ->
-      bruto2neto (Result.withDefault 0 (String.toFloat amount))
+      let
+        fAmount = Result.withDefault 0 (String.toFloat amount)
+      in
+        if fAmount >= minBruto
+        then bruto2neto fAmount
+        else { model | bruto = fAmount }
     Neto amount ->
-      neto2bruto (Result.withDefault 0 (String.toFloat amount))
+      let
+        fAmount = Result.withDefault 0 (String.toFloat amount)
+      in
+        if fAmount >= minNeto
+        then neto2bruto fAmount
+        else { model | neto = fAmount }
 
 
 view : Model -> Html Msg
@@ -158,11 +171,11 @@ inputFields model =
   div []
     [ label []
       [ span [] [ text "Бруто : " ]
-      , input [ type_ "text", placeholder "Бруто", onInput Bruto, value (toString (round model.bruto)) ] []
+      , input [ type_ "text", placeholder "Бруто", onInput Bruto, value (toString model.bruto) ] []
       ]
     , label []
       [ span [] [ text "Нето : " ]
-      , input [ type_ "text", placeholder "Нето", onInput Neto, value (toString (round model.neto)) ] []
+      , input [ type_ "text", placeholder "Нето", onInput Neto, value (toString model.neto) ] []
       ]
     ]
 
@@ -173,37 +186,37 @@ details model =
       [ tr []
           [ td [] [ text "Придонеси за задолжително ПИО" ]
           , td [] [ text (toString (procentiPridonesi.penzisko * 100) ++ "%") ]
-          , td [] [ text (toString (round model.pridonesi.penzisko)) ]
+          , td [] [ text (toString model.pridonesi.penzisko) ]
           , td [] [ text "МКД" ]
           ]
       , tr []
           [ td [] [ text "Придонеси за задолжително здравствено осигурување" ]
           , td [] [ text (toString (procentiPridonesi.zdravstveno * 100) ++ "%") ]
-          , td [] [ text (toString (round model.pridonesi.zdravstveno)) ]
+          , td [] [ text (toString model.pridonesi.zdravstveno) ]
           , td [] [ text "МКД" ]
           ]
       , tr []
           [ td [] [ text "Придонеси за вработување" ]
           , td [] [ text (toString (procentiPridonesi.pridones * 100) ++ "%") ]
-          , td [] [ text (toString (round model.pridonesi.pridones)) ]
+          , td [] [ text (toString model.pridonesi.pridones) ]
           , td [] [ text "МКД" ]
           ]
       , tr []
           [ td [] [ text "Дополнителен придонес за задолжително осигурување во случај повреда или професионално заболување" ]
           , td [] [ text (toString (procentiPridonesi.boluvanje * 100) ++ "%") ]
-          , td [] [ text (toString (round model.pridonesi.boluvanje)) ]
+          , td [] [ text (toString model.pridonesi.boluvanje) ]
           , td [] [ text "МКД" ]
           ]
       , tr []
           [ td [] [ text "Вкупно придонеси" ]
           , td [] []
-          , td [] [ text (toString (round model.vkupnoPridonesi)) ]
+          , td [] [ text (toString model.vkupnoPridonesi) ]
           , td [] [ text "МКД" ]
           ]
       , tr []
           [ td [] [ text "Бруто плата намалена за придонеси" ]
           , td [] []
-          , td [] [ text (toString (round model.brutoMinusPridonesi)) ]
+          , td [] [ text (toString model.brutoMinusPridonesi) ]
           , td [] [ text "МКД" ]
           ]
       , tr []
@@ -215,25 +228,25 @@ details model =
       , tr []
           [ td [] [ text "Даночна основа за пресметка на персонален данок на доход" ]
           , td [] []
-          , td [] [ text (toString (round model.pddOsnovica)) ]
+          , td [] [ text (toString model.pddOsnovica) ]
           , td [] [ text "МКД" ]
           ]
       , tr []
-          [ td [] [ text "Персонален данок" ]
+          [ td [] [ text "Персонален данок на доход (ПДД)" ]
           , td [] [ text (toString (procentiDanoci.pdd * 100) ++ "%") ]
-          , td [] [ text (toString (round model.danoci.pdd)) ]
+          , td [] [ text (toString model.danoci.pdd) ]
           , td [] [ text "МКД" ]
           ]
       , tr []
           [ td [] [ text "Вкупно придонеси и данок" ]
           , td [] []
-          , td [] [ text (toString (round model.vkupnoDavacki)) ]
+          , td [] [ text (toString model.vkupnoDavacki) ]
           , td [] [ text "МКД" ]
           ]
       , tr []
           [ td [] [ text "Нето" ]
           , td [] []
-          , td [] [ text (toString (round model.neto)) ]
+          , td [] [ text (toString model.neto) ]
           , td [] [ text "МКД" ]
           ]
       ]
