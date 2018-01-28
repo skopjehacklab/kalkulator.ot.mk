@@ -11,12 +11,12 @@ function Calculator($scope, $location, $timeout) {
 
     $scope.total_davacki_bez_personalen_koficent = $scope.k.penzisko + $scope.k.zdravstveno + $scope.k.pridones + $scope.k.boluvanje;
 
-    $scope.danocno_osloboduvanje = 7456;
-    $scope.referentna_vrednost = 32877;
-    $scope.max_osnovica_za_pridonesi = $scope.referentna_vrednost * 12;
+    $scope.danocno_osloboduvanje = 7531.0;
+    $scope.referentna_vrednost = 34079.0;
+    $scope.max_osnovica_za_pridonesi = $scope.referentna_vrednost * 16;
     $scope.min_osnovica_za_pridonesi = $scope.referentna_vrednost / 2;
-    $scope.min_neto_plata = 12000;
-    $scope.min_bruto_plata = 17300;
+    $scope.min_neto_plata = 12000.0;
+    $scope.min_bruto_plata = 17130.0;
 
     var calculate = function (bruto) {
         var osnovica_za_pridonesi = bruto;
@@ -28,27 +28,27 @@ function Calculator($scope, $location, $timeout) {
            osnovica_za_pridonesi = $scope.min_osnovica_za_pridonesi;
         }
 
-        var penzisko    = osnovica_za_pridonesi * $scope.k.penzisko;
-        var zdravstveno = osnovica_za_pridonesi * $scope.k.zdravstveno;
-        var pridones    = osnovica_za_pridonesi * $scope.k.pridones;
-        var boluvanje   = osnovica_za_pridonesi * $scope.k.boluvanje;
+        var penzisko    = Math.round(osnovica_za_pridonesi * $scope.k.penzisko);
+        var zdravstveno = Math.round(osnovica_za_pridonesi * $scope.k.zdravstveno);
+        var pridones    = Math.round(osnovica_za_pridonesi * $scope.k.pridones);
+        var boluvanje   = Math.round(osnovica_za_pridonesi * $scope.k.boluvanje);
         var pridonesi   = penzisko + zdravstveno + pridones + boluvanje;
 
-        $scope.penzisko    = Math.round(penzisko);
-        $scope.zdravstveno = Math.round(zdravstveno);
-        $scope.pridones    = Math.round(pridones);
-        $scope.boluvanje   = Math.round(boluvanje);
+        $scope.penzisko    = penzisko;
+        $scope.zdravstveno = zdravstveno;
+        $scope.pridones    = pridones;
+        $scope.boluvanje   = boluvanje;
 
-        $scope.bruto_minus_pridonesi = Math.round(bruto - pridonesi);
+        $scope.bruto_minus_pridonesi = bruto - pridonesi;
         var osnovica_za_danok = $scope.bruto_minus_pridonesi - $scope.danocno_osloboduvanje;
         osnovica_za_danok = osnovica_za_danok > 0 ? osnovica_za_danok: 0;
-        var personalec        = osnovica_za_danok * $scope.k.personalen;
+        var personalec        = Math.round(osnovica_za_danok * $scope.k.personalen);
         var davacki           = personalec + pridonesi;
         var neto              = bruto - davacki;
 
-        $scope.personalec = Math.round(personalec);
-        $scope.osnovica_za_danok = Math.round(osnovica_za_danok);
-        $scope.pridonesi = Math.round(pridonesi);
+        $scope.personalec = personalec;
+        $scope.osnovica_za_danok = osnovica_za_danok;
+        $scope.pridonesi = pridonesi;
 
         return neto;
     }
