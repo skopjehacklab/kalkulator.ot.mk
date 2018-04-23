@@ -141,14 +141,20 @@ bruto2neto bruto =
 neto2bruto : Int -> Model
 neto2bruto neto =
     let
-        vkupnoPridonesiProcenti =
+        vkupnoPridonesi =
             sumaPridonesi procentiPridonesi
 
-        -- ова фејла
+        -- ова фејла (помалку)
+        p =
+            procentiDanoci.pdd * 100
+
+        danok =
+            ((toFloat (neto - licnoOsloboduvanje)) * p) / (100 - p)
+
         bruto =
-            (toFloat neto - ((toFloat licnoOsloboduvanje) * procentiDanoci.pdd)) / (((1 - vkupnoPridonesiProcenti) - procentiDanoci.pdd) + (vkupnoPridonesiProcenti * procentiDanoci.pdd))
+            ((toFloat neto) + danok) / (1 - vkupnoPridonesi)
     in
-        bruto2neto (rounds bruto)
+        bruto2neto (floor bruto)
 
 
 main : Platform.Program Never Model Msg
