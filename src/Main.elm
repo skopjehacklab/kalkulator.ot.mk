@@ -5,11 +5,6 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (onInput)
 
 
-rounds : Float -> Int
-rounds x =
-    round x
-
-
 referentnaVrednost : Int
 referentnaVrednost =
     34079
@@ -37,7 +32,12 @@ maxOsnovica =
 
 minOsnovica : Int
 minOsnovica =
-    rounds ((toFloat referentnaVrednost) / 2)
+    round ((toFloat referentnaVrednost) / 2)
+
+
+od : Float -> Int -> Int
+od x =
+    toFloat >> (*) x >> round
 
 
 
@@ -57,7 +57,7 @@ procentiDanoci =
 
 presmetajDanoci : Int -> Danoci Float -> Danoci Int
 presmetajDanoci osnovica d =
-    { pdd = rounds ((toFloat osnovica) * d.pdd)
+    { pdd = osnovica |> od d.pdd
     }
 
 
@@ -89,10 +89,10 @@ procentiPridonesi =
 
 presmetajPridonesi : Int -> Pridonesi Float -> Pridonesi Int
 presmetajPridonesi bruto p =
-    { penzisko = rounds (toFloat bruto * p.penzisko)
-    , zdravstveno = rounds (toFloat bruto * p.zdravstveno)
-    , pridones = rounds (toFloat bruto * p.pridones)
-    , boluvanje = rounds (toFloat bruto * p.boluvanje)
+    { penzisko = bruto |> od p.penzisko
+    , zdravstveno = bruto |> od p.zdravstveno
+    , pridones = bruto |> od p.pridones
+    , boluvanje = bruto |> od p.boluvanje
     }
 
 
