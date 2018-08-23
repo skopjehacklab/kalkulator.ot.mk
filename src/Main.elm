@@ -1,5 +1,6 @@
-module Main exposing (..)
+module Main exposing (Danoci, Model, Msg(..), Pridonesi, bold, bruto2neto, containerStyle, details, initModel, inputFields, licnoOsloboduvanje, main, maxOsnovica, minBruto, minNeto, minOsnovica, neto2bruto, od, presmetajDanoci, presmetajPridonesi, procentiDanoci, procentiPridonesi, referentnaVrednost, ribbon, rowStyle, splitter, sumaDanoci, sumaPridonesi, td, update, view)
 
+import Browser exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onInput)
@@ -32,7 +33,7 @@ maxOsnovica =
 
 minOsnovica : Int
 minOsnovica =
-    round ((toFloat referentnaVrednost) / 2)
+    round (toFloat referentnaVrednost / 2)
 
 
 od : Float -> Int -> Int
@@ -127,15 +128,15 @@ bruto2neto bruto =
         neto =
             bruto - vkupnoPridonesi - vkupnoDanoci
     in
-        { bruto = bruto
-        , neto = neto
-        , pridonesi = pridonesi
-        , danoci = danoci
-        , pddOsnovica = pddOsnovica
-        , vkupnoDavacki = vkupnoPridonesi + vkupnoDanoci
-        , vkupnoPridonesi = vkupnoPridonesi
-        , brutoMinusPridonesi = bruto - vkupnoPridonesi
-        }
+    { bruto = bruto
+    , neto = neto
+    , pridonesi = pridonesi
+    , danoci = danoci
+    , pddOsnovica = pddOsnovica
+    , vkupnoDavacki = vkupnoPridonesi + vkupnoDanoci
+    , vkupnoPridonesi = vkupnoPridonesi
+    , brutoMinusPridonesi = bruto - vkupnoPridonesi
+    }
 
 
 neto2bruto : Int -> Model
@@ -149,27 +150,21 @@ neto2bruto neto =
             procentiDanoci.pdd * 100
 
         danok =
-            ((toFloat (neto - licnoOsloboduvanje)) * p) / (100 - p)
+            (toFloat (neto - licnoOsloboduvanje) * p) / (100 - p)
 
         bruto =
-            ((toFloat neto) + danok) / (1 - vkupnoPridonesi)
+            (toFloat neto + danok) / (1 - vkupnoPridonesi)
     in
-        bruto2neto (floor bruto)
+    bruto2neto (floor bruto)
 
 
-main : Platform.Program Never Model Msg
+main : Platform.Program () Model Msg
 main =
-    Html.program
-        { init = init
+    Browser.sandbox
+        { init = initModel
         , view = view
         , update = update
-        , subscriptions = subscriptions
         }
-
-
-init : ( Model, Cmd Msg )
-init =
-    ( initModel, Cmd.none )
 
 
 type alias Model =
@@ -202,80 +197,68 @@ type Msg
     | Neto String
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
+update : Msg -> Model -> Model
 update msg model =
     case msg of
         Bruto amount ->
             let
                 fAmount =
-                    Result.withDefault 0 (String.toInt amount)
+                    Maybe.withDefault 0 (String.toInt amount)
             in
-                if fAmount >= minBruto then
-                    ( bruto2neto fAmount, Cmd.none )
-                else
-                    ( { model | bruto = fAmount }, Cmd.none )
+            if fAmount >= minBruto then
+                bruto2neto fAmount
+
+            else
+                { model | bruto = fAmount }
 
         Neto amount ->
             let
                 fAmount =
-                    Result.withDefault 0 (String.toInt amount)
+                    Maybe.withDefault 0 (String.toInt amount)
             in
-                if fAmount >= minNeto then
-                    ( neto2bruto fAmount, Cmd.none )
-                else
-                    ( { model | neto = fAmount }, Cmd.none )
+            if fAmount >= minNeto then
+                neto2bruto fAmount
 
-
-
--- SUBSCRIPTIONS
-
-
-subscriptions : Model -> Sub Msg
-subscriptions model =
-    Sub.none
+            else
+                { model | neto = fAmount }
 
 
 
 -- VIEWS AND STYLES
 
 
-containerStyle : Attribute msg
+containerStyle : List (Attribute msg)
 containerStyle =
-    style
-        [ ( "width", "600px" )
-        , ( "left", "50%" )
-        , ( "margin-left", "-300px" )
-        , ( "position", "absolute" )
-        , ( "vertical-align", "center" )
-        , ( "font", "0.8em sans-serif" )
-        ]
+    [ style "width" "600px"
+    , style "left" "50%"
+    , style "margin-left" "-300px"
+    , style "position" "absolute"
+    , style "vertical-align" "center"
+    , style "font" "0.8em sans-serif"
+    ]
 
 
-rowStyle : Attribute msg
+rowStyle : List (Attribute msg)
 rowStyle =
-    style
-        [ ( "border-bottom", "1px solid #afafaf" )
-        , ( "padding", "15px" )
-        ]
+    [ style "border-bottom" "1px solid #afafaf"
+    , style "padding" "15px"
+    ]
 
 
-bold : Attribute msg
+bold : List (Attribute msg)
 bold =
-    style
-        [ ( "font-weight", "bold" )
-        ]
+    [ style "font-weight" "bold"
+    ]
 
 
 ribbon : Html Msg
 ribbon =
     a [ href "https://github.com/skopjehacklab/kalkulator.ot.mk" ]
         [ img
-            [ style
-                [ ( "position", "absolute" )
-                , ( "top", "0" )
-                , ( "left", "0" )
-                , ( "border", "0" )
-                ]
+            [ style "position" "absolute"
+            , style "top" "0"
+            , style "left" "0"
+            , style "border" "0"
             , src "https://s3.amazonaws.com/github/ribbons/forkme_left_orange_ff7600.png"
             , alt "Fork me on GitHub"
             ]
@@ -283,28 +266,27 @@ ribbon =
         ]
 
 
-splitter : Attribute msg
+splitter : List (Attribute msg)
 splitter =
-    style
-        [ ( "margin-bottom", "30px" )
-        , ( "border-bottom", "5px solid #afafaf" )
-        , ( "border-left", "5px solid #afafaf" )
-        , ( "border-right", "5px solid #afafaf" )
-        , ( "padding", "30px 25px" )
-        , ( "background-color", "#fffcda" )
-        ]
+    [ style "margin-bottom" "30px"
+    , style "border-bottom" "5px solid #afafaf"
+    , style "border-left" "5px solid #afafaf"
+    , style "border-right" "5px solid #afafaf"
+    , style "padding" "30px 25px"
+    , style "background-color" "#fffcda"
+    ]
 
 
 td : String -> Html Msg
 td txt =
-    Html.td [ rowStyle ] [ text txt ]
+    Html.td rowStyle [ text txt ]
 
 
 view : Model -> Html Msg
 view model =
     div []
         [ div [] [ ribbon ]
-        , div [ containerStyle ]
+        , div containerStyle
             [ inputFields model
             , details model
             ]
@@ -313,92 +295,92 @@ view model =
 
 inputFields : Model -> Html Msg
 inputFields model =
-    table [ splitter ]
+    table splitter
         [ tr []
             [ th [] [ text "Бруто" ]
             , th [] [ text "Нето" ]
             ]
         , tr []
-            [ Html.td [] [ input [ type_ "text", placeholder "Бруто", onInput Bruto, value (toString model.bruto), style [ ( "width", "250px" ) ] ] [] ]
-            , Html.td [] [ input [ type_ "text", placeholder "Нето", onInput Neto, value (toString model.neto), style [ ( "width", "250px" ) ] ] [] ]
+            [ Html.td [] [ input [ type_ "text", placeholder "Бруто", onInput Bruto, value (String.fromInt model.bruto), style "width" "250px" ] [] ]
+            , Html.td [] [ input [ type_ "text", placeholder "Нето", onInput Neto, value (String.fromInt model.neto), style "width" "250px" ] [] ]
             ]
         ]
 
 
 details : Model -> Html Msg
 details model =
-    div [ style [ ( "margin", "0 0 50px 0" ) ] ]
+    div [ style "margin" "0 0 50px 0" ]
         [ table []
-            [ tr [ bold ]
+            [ tr bold
                 [ td "Бруто"
                 , td ""
-                , td (toString model.bruto)
+                , td (String.fromInt model.bruto)
                 , td "МКД"
                 ]
             , tr []
                 [ td "Придонеси за задолжително ПИО"
-                , td (toString (procentiPridonesi.penzisko * 100) ++ "%")
-                , td (toString model.pridonesi.penzisko)
+                , td (String.fromFloat (procentiPridonesi.penzisko * 100) ++ "%")
+                , td (String.fromInt model.pridonesi.penzisko)
                 , td "МКД"
                 ]
             , tr []
                 [ td "Придонеси за задолжително здравствено осигурување"
-                , td (toString (procentiPridonesi.zdravstveno * 100) ++ "%")
-                , td (toString model.pridonesi.zdravstveno)
+                , td (String.fromFloat (procentiPridonesi.zdravstveno * 100) ++ "%")
+                , td (String.fromInt model.pridonesi.zdravstveno)
                 , td "МКД"
                 ]
             , tr []
                 [ td "Придонеси за вработување"
-                , td (toString (procentiPridonesi.pridones * 100) ++ "%")
-                , td (toString model.pridonesi.pridones)
+                , td (String.fromFloat (procentiPridonesi.pridones * 100) ++ "%")
+                , td (String.fromInt model.pridonesi.pridones)
                 , td "МКД"
                 ]
             , tr []
                 [ td "Дополнителен придонес за задолжително осигурување во случај повреда или професионално заболување"
-                , td (toString (procentiPridonesi.boluvanje * 100) ++ "%")
-                , td (toString model.pridonesi.boluvanje)
+                , td (String.fromFloat (procentiPridonesi.boluvanje * 100) ++ "%")
+                , td (String.fromInt model.pridonesi.boluvanje)
                 , td "МКД"
                 ]
-            , tr [ bold ]
+            , tr bold
                 [ td "Вкупно придонеси"
                 , td ""
-                , td (toString model.vkupnoPridonesi)
+                , td (String.fromInt model.vkupnoPridonesi)
                 , td "МКД"
                 ]
             , tr []
                 [ td "Бруто плата намалена за придонеси"
                 , td ""
-                , td (toString model.brutoMinusPridonesi)
+                , td (String.fromInt model.brutoMinusPridonesi)
                 , td "МКД"
                 ]
             , tr []
                 [ td "Лично ослободување"
                 , td ""
-                , td (toString licnoOsloboduvanje)
+                , td (String.fromInt licnoOsloboduvanje)
                 , td "МКД"
                 ]
             , tr []
                 [ td "Даночна основа за пресметка на персонален данок на доход"
                 , td ""
-                , td (toString model.pddOsnovica)
+                , td (String.fromInt model.pddOsnovica)
                 , td "МКД"
                 ]
             , tr []
                 [ td "Персонален данок на доход (ПДД)"
-                , td (toString (procentiDanoci.pdd * 100) ++ "%")
-                , td (toString model.danoci.pdd)
+                , td (String.fromFloat (procentiDanoci.pdd * 100) ++ "%")
+                , td (String.fromInt model.danoci.pdd)
                 , td "МКД"
                 ]
             , tr []
                 [ td "Вкупно придонеси и данок"
                 , td ""
-                , td (toString model.vkupnoDavacki)
+                , td (String.fromInt model.vkupnoDavacki)
                 , td "МКД"
                 ]
-            , tr [ bold ]
+            , tr bold
                 [ td "Нето"
                 , td ""
-                , td (toString model.neto)
+                , td (String.fromInt model.neto)
                 , td "МКД"
                 ]
             ]
