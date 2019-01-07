@@ -3,7 +3,8 @@ module Main exposing (Danoci, Model, Msg(..), Pridonesi, bold, bruto2neto, conta
 import Browser exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Html.Events exposing (onInput)
+import Html.Events exposing (on, onInput, keyCode)
+import Json.Decode as Json
 
 referentnaVrednost : Int
 referentnaVrednost =
@@ -136,6 +137,8 @@ bruto2neto bruto =
     in
     { bruto = bruto
     , neto = neto
+    , savedBruto = bruto
+    , savedNeto = neto
     , pridonesi = pridonesi
     , danoci = danoci
     , pddOsnovica = pddOsnovica
@@ -158,7 +161,11 @@ neto2bruto neto =
 --        danok =
 --            (toFloat (neto - licnoOsloboduvanje) * p) / (100 - p)
 
-        brutoBezPridonesi = (toFloat neto - 90000 * procentiDanoci.pdd1 - toFloat licnoOsloboduvanje*procentiDanoci.pdd1+90000*procentiDanoci.pdd)/(1-procentiDanoci.pdd1)
+        brutoBezPridonesi =
+         if (neto>81000) then
+               (toFloat neto - 90000 * procentiDanoci.pdd1 - toFloat licnoOsloboduvanje*procentiDanoci.pdd1+90000*procentiDanoci.pdd)/(1-procentiDanoci.pdd1)
+           else 
+               (toFloat neto - 8000 * procentiDanoci.pdd)/(1-procentiDanoci.pdd)
         danok =  brutoBezPridonesi - toFloat neto
 
         bruto =
@@ -179,6 +186,8 @@ main =
 type alias Model =
     { bruto : Int
     , neto : Int
+    , savedBruto : Int
+    , savedNeto : Int
     , pridonesi : Pridonesi Int
     , danoci : Danoci Int
     , pddOsnovica : Int
@@ -192,6 +201,8 @@ initModel : Model
 initModel =
     { bruto = 0
     , neto = 0
+    , savedBruto = 0
+    , savedNeto = 0
     , pridonesi = presmetajPridonesi 0 procentiPridonesi
     , danoci = presmetajDanoci 0 procentiDanoci
     , pddOsnovica = 0
@@ -201,35 +212,46 @@ initModel =
     }
 
 
+onKeyDown : (Int -> msg) -> Attribute msg
+onKeyDown tagger =
+  on "keydown" (Json.map tagger keyCode)
+
 type Msg
     = Bruto String
     | Neto String
-
+    | KeyDownBruto Int
+    | KeyDownNeto Int
 
 update : Msg -> Model -> Model
 update msg model =
     case msg of
-        Bruto amount ->
+        KeyDownBruto key ->
+          if key == 13 then
             let
-                fAmount =
-                    Maybe.withDefault 0 (String.toInt amount)
+                fAmount = model.savedBruto
             in
-            if fAmount >= minBruto then
+             if fAmount >= minBruto then
                 bruto2neto fAmount
+             else 
+                model
+          else 
+           model
 
-            else
-                { model | bruto = fAmount }
+        KeyDownNeto key ->
+          if key == 13 then
+            let
+                fAmount = model.savedNeto
+            in
+             if fAmount >= minNeto then
+                neto2bruto fAmount
+             else model
+          else model
+
+        Bruto amount ->
+                { model | savedBruto = Maybe.withDefault 0 (String.toInt amount) }
 
         Neto amount ->
-            let
-                fAmount =
-                    Maybe.withDefault 0 (String.toInt amount)
-            in
-            if fAmount >= minNeto then
-                neto2bruto fAmount
-
-            else
-                { model | neto = fAmount }
+                { model | savedNeto = Maybe.withDefault 0 (String.toInt amount) }
 
 
 
@@ -310,8 +332,8 @@ inputFields model =
             , th [] [ text "Нето" ]
             ]
         , tr []
-            [ Html.td [] [ input [ type_ "text", placeholder "Бруто", onInput Bruto, value (String.fromInt model.bruto), style "width" "250px" ] [] ]
-            , Html.td [] [ input [ type_ "text", placeholder "Нето", onInput Neto, value (String.fromInt model.neto), style "width" "250px" ] [] ]
+            [ Html.td [] [ input [ type_ "text", placeholder "Бруто", onInput Bruto, onKeyDown KeyDownBruto, value (String.fromInt model.savedBruto), style "width" "250px" ] [] ]
+            , Html.td [] [ input [ type_ "text", placeholder "Нето", onInput Neto, onKeyDown KeyDownNeto, value (String.fromInt model.savedNeto), style "width" "250px" ] [] ]
             ]
         ]
 
