@@ -70,7 +70,7 @@ presmetajDanoci osnovica d =
 
 sumaDanoci : Danoci Int -> Int
 sumaDanoci d =
-    d.pdd
+    d.pdd + d.pdd1
 
 
 
@@ -152,14 +152,17 @@ neto2bruto neto =
             sumaPridonesi procentiPridonesi
 
         -- ова фејла (помалку)
-        p =
-            procentiDanoci.pdd * 100
+--        p =
+--            procentiDanoci.pdd * 100
 
-        danok =
-            (toFloat (neto - licnoOsloboduvanje) * p) / (100 - p)
+--        danok =
+--            (toFloat (neto - licnoOsloboduvanje) * p) / (100 - p)
+
+        brutoBezPridonesi = (toFloat neto - 90000 * procentiDanoci.pdd1 - toFloat licnoOsloboduvanje*procentiDanoci.pdd1+90000*procentiDanoci.pdd)/(1-procentiDanoci.pdd1)
+        danok =  brutoBezPridonesi - toFloat neto
 
         bruto =
-            (toFloat neto + danok) / (1 - vkupnoPridonesi)
+            (brutoBezPridonesi) / (1 - vkupnoPridonesi)
     in
     bruto2neto (floor bruto)
 
