@@ -5,7 +5,6 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onInput)
 
-
 referentnaVrednost : Int
 referentnaVrednost =
     34079
@@ -13,7 +12,7 @@ referentnaVrednost =
 
 licnoOsloboduvanje : Int
 licnoOsloboduvanje =
-    7531
+    8000
 
 
 minNeto : Int
@@ -46,19 +45,26 @@ od x =
 
 
 type alias Danoci number =
-    { pdd : number -- персонален данок на добивка
+    { 
+     pdd : number, -- персонален данок на добивка
+     pdd1 : number -- персонален данок на добивка
     }
 
 
 procentiDanoci : Danoci Float
 procentiDanoci =
-    { pdd = 0.1
+    { 
+        pdd = 0.1,
+        pdd1 = 0.18
     }
 
 
 presmetajDanoci : Int -> Danoci Float -> Danoci Int
 presmetajDanoci osnovica d =
-    { pdd = osnovica |> od d.pdd
+    { 
+        pdd = if osnovica<90000 then osnovica |> od d.pdd else 90000 |> od d.pdd,
+        pdd1 = if osnovica > 90000 then
+            (osnovica-90000) |> od d.pdd1 else 0 
     }
 
 
@@ -81,8 +87,8 @@ type alias Pridonesi number =
 
 procentiPridonesi : Pridonesi Float
 procentiPridonesi =
-    { penzisko = 0.18
-    , zdravstveno = 0.073
+    { penzisko = 0.184
+    , zdravstveno = 0.074
     , pridones = 0.012
     , boluvanje = 0.005
     }
@@ -366,9 +372,9 @@ details model =
                 , td "МКД"
                 ]
             , tr []
-                [ td "Персонален данок на доход (ПДД)"
-                , td (String.fromFloat (procentiDanoci.pdd * 100) ++ "%")
-                , td (String.fromInt model.danoci.pdd)
+                [ td "Данок на Личен доход (ДЛД)"
+                , td (String.fromFloat (toFloat (round ((toFloat(model.danoci.pdd + model.danoci.pdd1)/toFloat(model.pddOsnovica)) * 10000)) / 100) ++ "%")
+                , td (String.fromInt (model.danoci.pdd + model.danoci.pdd1))
                 , td "МКД"
                 ]
             , tr []
