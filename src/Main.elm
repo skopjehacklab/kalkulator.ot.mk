@@ -331,7 +331,7 @@ details model =
                 ]
             , tr []
                 [ td "Придонеси за задолжително здравствено осигурување"
-                , td (String.fromFloat (procentiPridonesi.zdravstveno * 100) ++ "%")
+                , td (String.fromFloat (toFloat (round (procentiPridonesi.zdravstveno * 1000)) / 10) ++ "%")
                 , td (String.fromInt model.pridonesi.zdravstveno)
                 , td "МКД"
                 ]
@@ -373,7 +373,7 @@ details model =
                 ]
             , tr []
                 [ td "Данок на Личен доход (ДЛД)"
-                , td (String.fromFloat (toFloat (round ((toFloat(model.danoci.pdd + model.danoci.pdd1)/toFloat(model.pddOsnovica)) * 10000)) / 100) ++ "%")
+                , td (String.fromFloat (if model.pddOsnovica>0 then (toFloat (round ((toFloat(model.danoci.pdd + model.danoci.pdd1)/toFloat(model.pddOsnovica)) * 10000)) / 100) else procentiDanoci.pdd * 100)  ++ "%")
                 , td (String.fromInt (model.danoci.pdd + model.danoci.pdd1))
                 , td "МКД"
                 ]
