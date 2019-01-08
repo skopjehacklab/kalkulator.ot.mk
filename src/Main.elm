@@ -51,6 +51,11 @@ type alias Danoci number =
      pdd1 : number -- персонален данок на добивка
     }
 
+-- Лимит за 10/18%
+
+limitProgresivenDanok : Int
+limitProgresivenDanok =
+  90000
 
 procentiDanoci : Danoci Float
 procentiDanoci =
@@ -63,9 +68,9 @@ procentiDanoci =
 presmetajDanoci : Int -> Danoci Float -> Danoci Int
 presmetajDanoci osnovica d =
     { 
-        pdd = if osnovica<90000 then osnovica |> od d.pdd else 90000 |> od d.pdd,
-        pdd1 = if osnovica > 90000 then
-            (osnovica-90000) |> od d.pdd1 else 0 
+        pdd = if osnovica<limitProgresivenDanok then osnovica |> od d.pdd else limitProgresivenDanok |> od d.pdd,
+        pdd1 = if osnovica > limitProgresivenDanok then
+            (osnovica-limitProgresivenDanok) |> od d.pdd1 else 0 
     }
 
 
@@ -154,18 +159,11 @@ neto2bruto neto =
         vkupnoPridonesi =
             sumaPridonesi procentiPridonesi
 
-        -- ова фејла (помалку)
---        p =
---            procentiDanoci.pdd * 100
-
---        danok =
---            (toFloat (neto - licnoOsloboduvanje) * p) / (100 - p)
-
         brutoBezPridonesi =
-         if (neto>81000) then
-               (toFloat neto - 90000 * procentiDanoci.pdd1 - toFloat licnoOsloboduvanje*procentiDanoci.pdd1+90000*procentiDanoci.pdd)/(1-procentiDanoci.pdd1)
+         if (toFloat neto>( toFloat limitProgresivenDanok + toFloat licnoOsloboduvanje - toFloat limitProgresivenDanok * procentiDanoci.pdd1)) then
+               (toFloat neto - toFloat limitProgresivenDanok * procentiDanoci.pdd1 - toFloat licnoOsloboduvanje*procentiDanoci.pdd1+toFloat limitProgresivenDanok*procentiDanoci.pdd)/(1-procentiDanoci.pdd1)
            else 
-               (toFloat neto - 8000 * procentiDanoci.pdd)/(1-procentiDanoci.pdd)
+               (toFloat neto - toFloat licnoOsloboduvanje * procentiDanoci.pdd)/(1-procentiDanoci.pdd)
         danok =  brutoBezPridonesi - toFloat neto
 
         bruto =
