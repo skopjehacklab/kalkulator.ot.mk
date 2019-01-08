@@ -160,7 +160,7 @@ neto2bruto neto =
             sumaPridonesi procentiPridonesi
 
         brutoBezPridonesi =
-         if (toFloat neto>( toFloat limitProgresivenDanok + toFloat licnoOsloboduvanje - toFloat limitProgresivenDanok * procentiDanoci.pdd1)) then
+         if (toFloat neto>( toFloat limitProgresivenDanok + toFloat licnoOsloboduvanje - toFloat limitProgresivenDanok * procentiDanoci.pdd)) then
                (toFloat neto - toFloat limitProgresivenDanok * procentiDanoci.pdd1 - toFloat licnoOsloboduvanje*procentiDanoci.pdd1+toFloat limitProgresivenDanok*procentiDanoci.pdd)/(1-procentiDanoci.pdd1)
            else 
                (toFloat neto - toFloat licnoOsloboduvanje * procentiDanoci.pdd)/(1-procentiDanoci.pdd)
