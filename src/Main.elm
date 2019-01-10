@@ -1,5 +1,3 @@
-module Main exposing (Danoci, Msg(..), Pridonesi, TaxModel, bold, bruto2neto, containerStyle, details, initModel, inputFields, licnoOsloboduvanje, main, maxOsnovica, minBruto, minNeto, minOsnovica, neto2bruto, od, presmetajDanoci, presmetajPridonesi, procentiDanoci, procentiPridonesi, referentnaVrednost, ribbon, rowStyle, splitter, sumaDanoci, sumaPridonesi, td, update, view)
-
 import Browser exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -299,6 +297,16 @@ splitter =
     , style "background-color" "#fffcda"
     ]
 
+inputStyle : List (Attribute msg)
+inputStyle = 
+    [ style "box-sizing" "border-box"
+    , style "line-height" "1.25"
+    , style "padding" ".5rem .75rem"
+    , style "background-clip" "padding-box"
+    , style "width" "250px"
+    , style "border-radius" ".25rem"
+    , style "border" "1px solid rgba(0,0,0,.15)"
+    ]
 
 td : String -> Html Msg
 td txt =
@@ -324,8 +332,8 @@ inputFields model =
             , th [] [ text "Нето" ]
             ]
         , tr []
-            [ Html.td [] [ input [ type_ "number", placeholder "Бруто", onInput Bruto, value model.brutoText, style "width" "250px" ] [] ]
-            , Html.td [] [ input [ type_ "number", placeholder "Нето", onInput Neto, value model.netoText, style "width" "250px" ] [] ]
+            [ Html.td [] [ input ([ type_ "number", placeholder "Бруто", onInput Bruto, value model.brutoText ] ++ inputStyle) [] ]
+            , Html.td [] [ input ([ type_ "number", placeholder "Нето", onInput Neto, value model.netoText ] ++ inputStyle) [] ]
             ]
         ]
 
