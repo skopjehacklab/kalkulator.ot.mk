@@ -1,4 +1,4 @@
-module Main exposing (Danoci, Model, Msg(..), Pridonesi, bold, bruto2neto, containerStyle, details, initModel, inputFields, licnoOsloboduvanje, main, maxOsnovica, minBruto, minNeto, minOsnovica, neto2bruto, od, presmetajDanoci, presmetajPridonesi, procentiDanoci, procentiPridonesi, referentnaVrednost, ribbon, rowStyle, splitter, sumaDanoci, sumaPridonesi, td, update, view)
+module Main exposing (Danoci, Msg(..), Pridonesi, TaxModel, bold, bruto2neto, containerStyle, details, initModel, inputFields, licnoOsloboduvanje, main, maxOsnovica, minBruto, minNeto, minOsnovica, neto2bruto, od, presmetajDanoci, presmetajPridonesi, procentiDanoci, procentiPridonesi, referentnaVrednost, ribbon, rowStyle, splitter, sumaDanoci, sumaPridonesi, td, update, view)
 
 import Browser exposing (..)
 import Html exposing (..)
@@ -107,7 +107,7 @@ sumaPridonesi p =
 -- Главни функции за конверзија од бруто во нето и обратно
 
 
-bruto2neto : Int -> Model
+bruto2neto : Int -> TaxModel
 bruto2neto bruto =
     let
         pridonesi =
@@ -139,7 +139,7 @@ bruto2neto bruto =
     }
 
 
-neto2bruto : Int -> Model
+neto2bruto : Int -> TaxModel
 neto2bruto neto =
     let
         vkupnoPridonesi =
@@ -158,7 +158,35 @@ neto2bruto neto =
     bruto2neto (floor bruto)
 
 
-main : Platform.Program () Model Msg
+
+-- Овие функции ја менуваат состојбата во зависност од корисничка интеракција
+
+
+brutoUIChange : String -> UIModel
+brutoUIChange val =
+    let
+        model =
+            bruto2neto (Maybe.withDefault 0 (String.toInt val))
+    in
+    { tax = model
+    , brutoText = val
+    , netoText = String.fromInt model.neto
+    }
+
+
+netoUIChange : String -> UIModel
+netoUIChange val =
+    let
+        model =
+            neto2bruto (Maybe.withDefault 0 (String.toInt val))
+    in
+    { tax = model
+    , netoText = val
+    , brutoText = String.fromInt model.neto
+    }
+
+
+main : Platform.Program () UIModel Msg
 main =
     Browser.sandbox
         { init = initModel
@@ -167,7 +195,7 @@ main =
         }
 
 
-type alias Model =
+type alias TaxModel =
     { bruto : Int
     , neto : Int
     , pridonesi : Pridonesi Int
@@ -179,16 +207,27 @@ type alias Model =
     }
 
 
-initModel : Model
+type alias UIModel =
+    { tax : TaxModel
+    , brutoText : String
+    , netoText : String
+    }
+
+
+initModel : UIModel
 initModel =
-    { bruto = 0
-    , neto = 0
-    , pridonesi = presmetajPridonesi 0 procentiPridonesi
-    , danoci = presmetajDanoci 0 procentiDanoci
-    , pddOsnovica = 0
-    , vkupnoDavacki = 0
-    , vkupnoPridonesi = 0
-    , brutoMinusPridonesi = 0
+    { brutoText = ""
+    , netoText = ""
+    , tax =
+        { bruto = 0
+        , neto = 0
+        , pridonesi = presmetajPridonesi 0 procentiPridonesi
+        , danoci = presmetajDanoci 0 procentiDanoci
+        , pddOsnovica = 0
+        , vkupnoDavacki = 0
+        , vkupnoPridonesi = 0
+        , brutoMinusPridonesi = 0
+        }
     }
 
 
@@ -197,30 +236,14 @@ type Msg
     | Neto String
 
 
-update : Msg -> Model -> Model
+update : Msg -> UIModel -> UIModel
 update msg model =
     case msg of
         Bruto amount ->
-            let
-                fAmount =
-                    Maybe.withDefault 0 (String.toInt amount)
-            in
-            if fAmount >= minBruto then
-                bruto2neto fAmount
-
-            else
-                { model | bruto = fAmount }
+            brutoUIChange amount
 
         Neto amount ->
-            let
-                fAmount =
-                    Maybe.withDefault 0 (String.toInt amount)
-            in
-            if fAmount >= minNeto then
-                neto2bruto fAmount
-
-            else
-                { model | neto = fAmount }
+            netoUIChange amount
 
 
 
@@ -282,18 +305,18 @@ td txt =
     Html.td rowStyle [ text txt ]
 
 
-view : Model -> Html Msg
+view : UIModel -> Html Msg
 view model =
     div []
         [ div [] [ ribbon ]
         , div containerStyle
             [ inputFields model
-            , details model
+            , details model.tax
             ]
         ]
 
 
-inputFields : Model -> Html Msg
+inputFields : UIModel -> Html Msg
 inputFields model =
     table splitter
         [ tr []
@@ -301,13 +324,13 @@ inputFields model =
             , th [] [ text "Нето" ]
             ]
         , tr []
-            [ Html.td [] [ input [ type_ "text", placeholder "Бруто", onInput Bruto, value (String.fromInt model.bruto), style "width" "250px" ] [] ]
-            , Html.td [] [ input [ type_ "text", placeholder "Нето", onInput Neto, value (String.fromInt model.neto), style "width" "250px" ] [] ]
+            [ Html.td [] [ input [ type_ "number", placeholder "Бруто", onInput Bruto, value model.brutoText, style "width" "250px" ] [] ]
+            , Html.td [] [ input [ type_ "number", placeholder "Нето", onInput Neto, value model.netoText, style "width" "250px" ] [] ]
             ]
         ]
 
 
-details : Model -> Html Msg
+details : TaxModel -> Html Msg
 details model =
     div [ style "margin" "0 0 50px 0" ]
         [ table []
