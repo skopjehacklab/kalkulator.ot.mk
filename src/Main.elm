@@ -301,8 +301,8 @@ inputFields model =
             , th [] [ text "Нето" ]
             ]
         , tr []
-            [ Html.td [] [ input [ type_ "text", placeholder "Бруто", onInput Bruto, value (String.fromInt model.bruto), style "width" "250px" ] [] ]
-            , Html.td [] [ input [ type_ "text", placeholder "Нето", onInput Neto, value (String.fromInt model.neto), style "width" "250px" ] [] ]
+            [ Html.td [] [ input [ type_ "number", placeholder "Бруто", onInput Bruto, value (String.fromInt model.bruto), style "width" "250px" ] [] ]
+            , Html.td [] [ input [ type_ "number", placeholder "Нето", onInput Neto, value (String.fromInt model.neto), style "width" "250px" ] [] ]
             ]
         ]
 
