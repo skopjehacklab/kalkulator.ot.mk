@@ -4,6 +4,7 @@ before_deploy:
   - elm make src/Main.elm --output=dist/index.html --optimize
 
 deploy:
+  skip_cleanup: true
   local-dir: dist/
   provider: pages
   keep-history: true
