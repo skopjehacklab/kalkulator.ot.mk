@@ -1,1 +1,13 @@
 language: elm
+
+before_deploy:
+  - elm make src/Main.elm --output=dist/index.html --optimize
+
+deploy:
+  local-dir: dist/
+  provider: pages
+  keep-history: true
+  fqdn: plata.m.ie.mk
+  github-token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+  on:
+    branch: master
