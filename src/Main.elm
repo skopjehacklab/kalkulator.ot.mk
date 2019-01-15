@@ -2,7 +2,7 @@ module Main exposing (Danoci, Model, Msg(..), Pridonesi, bold, bruto2neto, conta
 
 import Browser exposing (..)
 import Html exposing (..)
-import Html.Attributes exposing (..)
+import Html.Attributes exposing (alt, href, placeholder, src, style, type_, value)
 import Html.Events exposing (onInput)
 
 
@@ -13,7 +13,7 @@ referentnaVrednost =
 
 licnoOsloboduvanje : Int
 licnoOsloboduvanje =
-    7531
+    8000
 
 
 minNeto : Int
@@ -33,7 +33,12 @@ maxOsnovica =
 
 minOsnovica : Int
 minOsnovica =
-    round (toFloat referentnaVrednost / 2)
+    referentnaVrednost // 2
+
+
+limit : Int
+limit =
+    90000
 
 
 od : Float -> Int -> Int
@@ -41,30 +46,30 @@ od x =
     toFloat >> (*) x >> round
 
 
-
--- Даноци (за сега само еден)
-
-
 type alias Danoci number =
-    { pdd : number -- персонален данок на добивка
+    { dld10 : number -- данок на личен доход од 10%
+    , dld18 : number -- данок на личен доход од 18%
     }
 
 
 procentiDanoci : Danoci Float
 procentiDanoci =
-    { pdd = 0.1
+    { dld10 = 0.1
+    , dld18 = 0.18
     }
 
 
 presmetajDanoci : Int -> Danoci Float -> Danoci Int
-presmetajDanoci osnovica d =
-    { pdd = osnovica |> od d.pdd
+presmetajDanoci osnova d =
+    { dld10 = min limit osnova |> od d.dld10
+    , dld18 = max 0 (osnova - limit) |> od d.dld18
     }
 
 
-sumaDanoci : Danoci Int -> Int
+sumaDanoci : Danoci number -> number
 sumaDanoci d =
-    d.pdd
+    [ d.dld10, d.dld18 ]
+        |> List.sum
 
 
 
@@ -81,8 +86,8 @@ type alias Pridonesi number =
 
 procentiPridonesi : Pridonesi Float
 procentiPridonesi =
-    { penzisko = 0.18
-    , zdravstveno = 0.073
+    { penzisko = 0.184
+    , zdravstveno = 0.074
     , pridones = 0.012
     , boluvanje = 0.005
     }
@@ -116,11 +121,17 @@ bruto2neto bruto =
         vkupnoPridonesi =
             sumaPridonesi pridonesi
 
-        pddOsnovica =
+        dldOsnova =
             bruto - vkupnoPridonesi - licnoOsloboduvanje
 
+        dldOsnova10 =
+            min limit dldOsnova
+
+        dldOsnova18 =
+            max 0 (dldOsnova - limit)
+
         danoci =
-            presmetajDanoci pddOsnovica procentiDanoci
+            presmetajDanoci dldOsnova procentiDanoci
 
         vkupnoDanoci =
             sumaDanoci danoci
@@ -132,30 +143,40 @@ bruto2neto bruto =
     , neto = neto
     , pridonesi = pridonesi
     , danoci = danoci
-    , pddOsnovica = pddOsnovica
+    , dldOsnova10 = dldOsnova10
+    , dldOsnova18 = dldOsnova18
     , vkupnoDavacki = vkupnoPridonesi + vkupnoDanoci
     , vkupnoPridonesi = vkupnoPridonesi
     , brutoMinusPridonesi = bruto - vkupnoPridonesi
     }
 
 
+binSearch : Int -> Int -> Int -> Int
+binSearch searchValue lo hi =
+    let
+        mid =
+            lo + floor (toFloat (hi - lo) / 2)
+
+        value =
+            (bruto2neto mid).neto
+    in
+    if searchValue < value then
+        binSearch searchValue lo mid
+
+    else if searchValue > value then
+        binSearch searchValue mid hi
+
+    else
+        mid
+
+
 neto2bruto : Int -> Model
 neto2bruto neto =
     let
-        vkupnoPridonesi =
-            sumaPridonesi procentiPridonesi
-
-        -- ова фејла (помалку)
-        p =
-            procentiDanoci.pdd * 100
-
-        danok =
-            (toFloat (neto - licnoOsloboduvanje) * p) / (100 - p)
-
         bruto =
-            (toFloat neto + danok) / (1 - vkupnoPridonesi)
+            binSearch neto neto (3 * neto)
     in
-    bruto2neto (floor bruto)
+    bruto2neto bruto
 
 
 main : Platform.Program () Model Msg
@@ -172,7 +193,8 @@ type alias Model =
     , neto : Int
     , pridonesi : Pridonesi Int
     , danoci : Danoci Int
-    , pddOsnovica : Int
+    , dldOsnova10 : Int
+    , dldOsnova18 : Int
     , vkupnoDavacki : Int
     , vkupnoPridonesi : Int
     , brutoMinusPridonesi : Int
@@ -185,7 +207,8 @@ initModel =
     , neto = 0
     , pridonesi = presmetajPridonesi 0 procentiPridonesi
     , danoci = presmetajDanoci 0 procentiDanoci
-    , pddOsnovica = 0
+    , dldOsnova10 = 0
+    , dldOsnova18 = 0
     , vkupnoDavacki = 0
     , vkupnoPridonesi = 0
     , brutoMinusPridonesi = 0
@@ -274,6 +297,7 @@ splitter =
     , style "border-right" "5px solid #afafaf"
     , style "padding" "30px 25px"
     , style "background-color" "#fffcda"
+    , style "width" "600px"
     ]
 
 
@@ -372,15 +396,27 @@ details model =
                 , td "МКД"
                 ]
             , tr []
-                [ td "Даночна основа за пресметка на персонален данок на доход"
+                [ td "Даночна основа за пресметка на данок на личен доход со 10% (за даночна основа под 90.000 денари)"
                 , td ""
-                , td (String.fromInt model.pddOsnovica)
+                , td (String.fromInt model.dldOsnova10)
                 , td "МКД"
                 ]
             , tr []
-                [ td "Персонален данок на доход (ПДД)"
-                , td (String.fromFloat (procentiDanoci.pdd * 100) ++ "%")
-                , td (String.fromInt model.danoci.pdd)
+                [ td "Данок на личен доход"
+                , td (String.fromFloat (procentiDanoci.dld10 * 100) ++ "%")
+                , td (String.fromInt model.danoci.dld10)
+                , td "МКД"
+                ]
+            , tr []
+                [ td "Даночна основа за пресметка на данок на личен доход со 18% (за даночна основа над 90.000 денари)"
+                , td ""
+                , td (String.fromInt model.dldOsnova18)
+                , td "МКД"
+                ]
+            , tr []
+                [ td "Данок на личен доход"
+                , td (String.fromFloat (procentiDanoci.dld18 * 100) ++ "%")
+                , td (String.fromInt model.danoci.dld18)
                 , td "МКД"
                 ]
             , tr []
