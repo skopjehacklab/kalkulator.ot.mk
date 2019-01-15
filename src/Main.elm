@@ -4,6 +4,17 @@ import Browser exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (alt, href, placeholder, src, style, type_, value)
 import Html.Events exposing (onInput)
+import Round
+
+
+maxSafeInt : Int
+maxSafeInt =
+    2 ^ 53 - 1
+
+
+maxBrutoNetoOdnos : Int
+maxBrutoNetoOdnos =
+    10
 
 
 referentnaVrednost : Int
@@ -151,6 +162,15 @@ bruto2neto bruto =
     }
 
 
+findNeto : Int -> Int
+findNeto brutoVal =
+    let
+        val =
+            clamp minBruto maxSafeInt brutoVal
+    in
+    binSearch val val (val * maxBrutoNetoOdnos)
+
+
 binSearch : Int -> Int -> Int -> Int
 binSearch searchValue lo hi =
     let
@@ -161,22 +181,18 @@ binSearch searchValue lo hi =
             (bruto2neto mid).neto
     in
     if searchValue < value then
-        binSearch searchValue lo mid
+        binSearch searchValue lo (mid - 1)
 
     else if searchValue > value then
-        binSearch searchValue mid hi
+        binSearch searchValue (mid + 1) hi
 
     else
         mid
 
 
 neto2bruto : Int -> Model
-neto2bruto neto =
-    let
-        bruto =
-            binSearch neto neto (3 * neto)
-    in
-    bruto2neto bruto
+neto2bruto val =
+    bruto2neto (findNeto val)
 
 
 main : Platform.Program () Model Msg
@@ -355,25 +371,25 @@ details model =
                 ]
             , tr []
                 [ td "Придонеси за задолжително ПИО"
-                , td (String.fromFloat (procentiPridonesi.penzisko * 100) ++ "%")
+                , td (Round.round 2 (procentiPridonesi.penzisko * 100) ++ "%")
                 , td (String.fromInt model.pridonesi.penzisko)
                 , td "МКД"
                 ]
             , tr []
                 [ td "Придонеси за задолжително здравствено осигурување"
-                , td (String.fromFloat (procentiPridonesi.zdravstveno * 100) ++ "%")
+                , td (Round.round 2 (procentiPridonesi.zdravstveno * 100) ++ "%")
                 , td (String.fromInt model.pridonesi.zdravstveno)
                 , td "МКД"
                 ]
             , tr []
                 [ td "Придонеси за вработување"
-                , td (String.fromFloat (procentiPridonesi.pridones * 100) ++ "%")
+                , td (Round.round 2 (procentiPridonesi.pridones * 100) ++ "%")
                 , td (String.fromInt model.pridonesi.pridones)
                 , td "МКД"
                 ]
             , tr []
                 [ td "Дополнителен придонес за задолжително осигурување во случај повреда или професионално заболување"
-                , td (String.fromFloat (procentiPridonesi.boluvanje * 100) ++ "%")
+                , td (Round.round 2 (procentiPridonesi.boluvanje * 100) ++ "%")
                 , td (String.fromInt model.pridonesi.boluvanje)
                 , td "МКД"
                 ]
@@ -403,7 +419,7 @@ details model =
                 ]
             , tr []
                 [ td "Данок на личен доход"
-                , td (String.fromFloat (procentiDanoci.dld10 * 100) ++ "%")
+                , td (Round.round 2 (procentiDanoci.dld10 * 100) ++ "%")
                 , td (String.fromInt model.danoci.dld10)
                 , td "МКД"
                 ]
@@ -415,7 +431,7 @@ details model =
                 ]
             , tr []
                 [ td "Данок на личен доход"
-                , td (String.fromFloat (procentiDanoci.dld18 * 100) ++ "%")
+                , td (Round.round 2 (procentiDanoci.dld18 * 100) ++ "%")
                 , td (String.fromInt model.danoci.dld18)
                 , td "МКД"
                 ]
