@@ -7,6 +7,10 @@ import Html.Events exposing (onInput)
 import Round
 
 
+
+-- Константи и коефициенти
+
+
 maxSafeInt : Int
 maxSafeInt =
     2 ^ 53 - 1
@@ -81,10 +85,6 @@ sumaDanoci : Danoci number -> number
 sumaDanoci d =
     [ d.dld10, d.dld18 ]
         |> List.sum
-
-
-
--- Константни коефициенти
 
 
 type alias Pridonesi number =
