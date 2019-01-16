@@ -2,7 +2,7 @@ module Main exposing (Danoci, Model, Msg(..), Pridonesi, bold, bruto2neto, conta
 
 import Browser exposing (..)
 import Html exposing (..)
-import Html.Attributes exposing (align, alt, href, placeholder, src, style, type_, value)
+import Html.Attributes exposing (align, alt, href, placeholder, src, style, title, type_, value)
 import Html.Events exposing (onInput)
 import Round
 
@@ -298,6 +298,26 @@ ribbon =
         ]
 
 
+pdfLinkTxt : String
+pdfLinkTxt =
+    "УЈП - Закон за данокот на личен доход"
+
+
+pdfLink : Html Msg
+pdfLink =
+    a [ href "http://ujp.gov.mk/e/regulativa/opis/337", title pdfLinkTxt ]
+        [ img
+            [ style "position" "absolute"
+            , style "top" "10px"
+            , style "right" "10px"
+            , style "width" "100px"
+            , src "http://www.ujp.gov.mk/uploads/Image/Logo_UJP.png"
+            , alt pdfLinkTxt
+            ]
+            []
+        ]
+
+
 splitter : List (Attribute msg)
 splitter =
     [ style "margin-bottom" "30px"
@@ -343,6 +363,7 @@ view : Model -> Html Msg
 view model =
     div []
         [ div [] [ ribbon ]
+        , div [] [ pdfLink ]
         , div containerStyle
             [ inputFields model
             , details model
