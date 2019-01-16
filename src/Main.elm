@@ -29,12 +29,12 @@ licnoOsloboduvanje =
 
 minNeto : Int
 minNeto =
-    12000
+    12165
 
 
 minBruto : Int
 minBruto =
-    17040
+    17418
 
 
 maxOsnovica : Int
