@@ -214,4 +214,4 @@ neto2bruto val =
 
 progresivnoNamaluvanje : Model -> Int
 progresivnoNamaluvanje model =
-    model.danoci.dld18 - round (toFloat model.dldOsnova18 * 0.1)
+    model.danoci.dld18 - (model.dldOsnova18 |> od procentiDanoci.dld10)
