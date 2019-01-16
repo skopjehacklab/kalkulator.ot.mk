@@ -4558,20 +4558,19 @@ var author$project$Main$binSearch = F3(
 			}
 		}
 	});
-var author$project$Main$maxBrutoNetoOdnos = 10;
 var elm$core$Basics$pow = _Basics_pow;
 var author$project$Main$maxSafeInt = A2(elm$core$Basics$pow, 2, 53) - 1;
 var elm$core$Basics$clamp = F3(
 	function (low, high, number) {
 		return (_Utils_cmp(number, low) < 0) ? low : ((_Utils_cmp(number, high) > 0) ? high : number);
 	});
-var author$project$Main$findNeto = function (brutoVal) {
-	var val = A3(elm$core$Basics$clamp, author$project$Main$minBruto, author$project$Main$maxSafeInt, brutoVal);
-	return A3(author$project$Main$binSearch, val, val, val * author$project$Main$maxBrutoNetoOdnos);
+var author$project$Main$findBruto = function (netoVal) {
+	var val = A3(elm$core$Basics$clamp, author$project$Main$minNeto, author$project$Main$maxSafeInt, netoVal);
+	return A3(author$project$Main$binSearch, val, val, author$project$Main$maxSafeInt);
 };
 var author$project$Main$neto2bruto = function (val) {
 	return author$project$Main$bruto2neto(
-		author$project$Main$findNeto(val));
+		author$project$Main$findBruto(val));
 };
 var elm$core$Basics$ge = _Utils_ge;
 var elm$core$Maybe$withDefault = F2(
