@@ -12,6 +12,11 @@ maxSafeInt =
     2 ^ 53 - 1
 
 
+maxBrutoNetoOdnos : Int
+maxBrutoNetoOdnos =
+    10
+
+
 referentnaVrednost : Int
 referentnaVrednost =
     34079
@@ -163,7 +168,7 @@ findBruto netoVal =
         val =
             clamp minNeto maxSafeInt netoVal
     in
-    binSearch val val maxSafeInt
+    binSearch val val (val * maxBrutoNetoOdnos)
 
 
 binSearch : Int -> Int -> Int -> Int
