@@ -38,7 +38,7 @@ minNeto =
 
 minBruto : Int
 minBruto =
-    17418
+    17040
 
 
 maxOsnovica : Int
