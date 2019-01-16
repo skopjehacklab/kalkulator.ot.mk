@@ -4108,17 +4108,17 @@ var _Browser_decodeEvent = F2(function(decoder, event)
 function _Browser_visibilityInfo()
 {
 	return (typeof _VirtualDom_doc.hidden !== 'undefined')
-		? { bg: 'hidden', H: 'visibilitychange' }
+		? { bg: 'hidden', J: 'visibilitychange' }
 		:
 	(typeof _VirtualDom_doc.mozHidden !== 'undefined')
-		? { bg: 'mozHidden', H: 'mozvisibilitychange' }
+		? { bg: 'mozHidden', J: 'mozvisibilitychange' }
 		:
 	(typeof _VirtualDom_doc.msHidden !== 'undefined')
-		? { bg: 'msHidden', H: 'msvisibilitychange' }
+		? { bg: 'msHidden', J: 'msvisibilitychange' }
 		:
 	(typeof _VirtualDom_doc.webkitHidden !== 'undefined')
-		? { bg: 'webkitHidden', H: 'webkitvisibilitychange' }
-		: { bg: 'hidden', H: 'visibilitychange' };
+		? { bg: 'webkitHidden', J: 'webkitvisibilitychange' }
+		: { bg: 'hidden', J: 'visibilitychange' };
 }
 
 
@@ -4201,10 +4201,10 @@ function _Browser_getViewport()
 	return {
 		aW: _Browser_getScene(),
 		a0: {
-			_: _Browser_window.pageXOffset,
-			aa: _Browser_window.pageYOffset,
-			E: _Browser_doc.documentElement.clientWidth,
-			z: _Browser_doc.documentElement.clientHeight
+			ab: _Browser_window.pageXOffset,
+			ac: _Browser_window.pageYOffset,
+			G: _Browser_doc.documentElement.clientWidth,
+			B: _Browser_doc.documentElement.clientHeight
 		}
 	};
 }
@@ -4214,8 +4214,8 @@ function _Browser_getScene()
 	var body = _Browser_doc.body;
 	var elem = _Browser_doc.documentElement;
 	return {
-		E: Math.max(body.scrollWidth, body.offsetWidth, elem.scrollWidth, elem.offsetWidth, elem.clientWidth),
-		z: Math.max(body.scrollHeight, body.offsetHeight, elem.scrollHeight, elem.offsetHeight, elem.clientHeight)
+		G: Math.max(body.scrollWidth, body.offsetWidth, elem.scrollWidth, elem.offsetWidth, elem.clientWidth),
+		B: Math.max(body.scrollHeight, body.offsetHeight, elem.scrollHeight, elem.offsetHeight, elem.clientHeight)
 	};
 }
 
@@ -4239,14 +4239,14 @@ function _Browser_getViewportOf(id)
 	{
 		return {
 			aW: {
-				E: node.scrollWidth,
-				z: node.scrollHeight
+				G: node.scrollWidth,
+				B: node.scrollHeight
 			},
 			a0: {
-				_: node.scrollLeft,
-				aa: node.scrollTop,
-				E: node.clientWidth,
-				z: node.clientHeight
+				ab: node.scrollLeft,
+				ac: node.scrollTop,
+				G: node.clientWidth,
+				B: node.clientHeight
 			}
 		};
 	});
@@ -4278,16 +4278,16 @@ function _Browser_getElement(id)
 		return {
 			aW: _Browser_getScene(),
 			a0: {
-				_: x,
-				aa: y,
-				E: _Browser_doc.documentElement.clientWidth,
-				z: _Browser_doc.documentElement.clientHeight
+				ab: x,
+				ac: y,
+				G: _Browser_doc.documentElement.clientWidth,
+				B: _Browser_doc.documentElement.clientHeight
 			},
 			a9: {
-				_: x + rect.left,
-				aa: y + rect.top,
-				E: rect.width,
-				z: rect.height
+				ab: x + rect.left,
+				ac: y + rect.top,
+				G: rect.width,
+				B: rect.height
 			}
 		};
 	});
@@ -4438,34 +4438,34 @@ var elm$core$Basics$sub = _Basics_sub;
 var author$project$Danok$presmetajDanoci = F2(
 	function (osnova, d) {
 		return {
-			I: A2(
+			y: A2(
 				author$project$Danok$od,
-				d.I,
+				d.y,
 				A2(elm$core$Basics$min, author$project$Danok$limit, osnova)),
-			J: A2(
+			z: A2(
 				author$project$Danok$od,
-				d.J,
+				d.z,
 				A2(elm$core$Basics$max, 0, osnova - author$project$Danok$limit))
 		};
 	});
 var author$project$Danok$presmetajPridonesi = F2(
 	function (bruto, p) {
 		return {
-			G: A2(author$project$Danok$od, p.G, bruto),
+			I: A2(author$project$Danok$od, p.I, bruto),
 			N: A2(author$project$Danok$od, p.N, bruto),
 			O: A2(author$project$Danok$od, p.O, bruto),
 			U: A2(author$project$Danok$od, p.U, bruto)
 		};
 	});
-var author$project$Danok$procentiDanoci = {I: 0.1, J: 0.18};
-var author$project$Danok$procentiPridonesi = {G: 5.0e-3, N: 0.184, O: 1.2e-2, U: 7.4e-2};
+var author$project$Danok$procentiDanoci = {y: 0.1, z: 0.18};
+var author$project$Danok$procentiPridonesi = {I: 5.0e-3, N: 0.184, O: 1.2e-2, U: 7.4e-2};
 var author$project$Danok$initModel = {
-	ab: 0,
-	ac: 0,
-	ad: A2(author$project$Danok$presmetajDanoci, 0, author$project$Danok$procentiDanoci),
-	af: 0,
+	ad: 0,
+	ae: 0,
+	V: A2(author$project$Danok$presmetajDanoci, 0, author$project$Danok$procentiDanoci),
 	ag: 0,
-	X: 0,
+	W: 0,
+	Z: 0,
 	am: A2(author$project$Danok$presmetajPridonesi, 0, author$project$Danok$procentiPridonesi),
 	ar: 0,
 	as: 0
@@ -4497,12 +4497,12 @@ var elm$core$List$sum = function (numbers) {
 var author$project$Danok$sumaDanoci = function (d) {
 	return elm$core$List$sum(
 		_List_fromArray(
-			[d.I, d.J]));
+			[d.y, d.z]));
 };
 var author$project$Danok$sumaPridonesi = function (p) {
 	return elm$core$List$sum(
 		_List_fromArray(
-			[p.N, p.U, p.O, p.G]));
+			[p.N, p.U, p.O, p.I]));
 };
 var author$project$Danok$bruto2neto = function (bruto) {
 	var pridonesi = A2(author$project$Danok$presmetajPridonesi, bruto, author$project$Danok$procentiPridonesi);
@@ -4513,7 +4513,7 @@ var author$project$Danok$bruto2neto = function (bruto) {
 	var danoci = A2(author$project$Danok$presmetajDanoci, dldOsnova, author$project$Danok$procentiDanoci);
 	var vkupnoDanoci = author$project$Danok$sumaDanoci(danoci);
 	var neto = (bruto - vkupnoPridonesi) - vkupnoDanoci;
-	return {ab: bruto, ac: bruto - vkupnoPridonesi, ad: danoci, af: dldOsnova10, ag: dldOsnova18, X: neto, am: pridonesi, ar: vkupnoPridonesi + vkupnoDanoci, as: vkupnoPridonesi};
+	return {ad: bruto, ae: bruto - vkupnoPridonesi, V: danoci, ag: dldOsnova10, W: dldOsnova18, Z: neto, am: pridonesi, ar: vkupnoPridonesi + vkupnoDanoci, as: vkupnoPridonesi};
 };
 var author$project$Danok$minBruto = 17040;
 var author$project$Danok$minNeto = 12165;
@@ -4524,7 +4524,7 @@ var author$project$Danok$binSearch = F3(
 		binSearch:
 		while (true) {
 			var mid = lo + elm$core$Basics$floor((hi - lo) / 2);
-			var value = author$project$Danok$bruto2neto(mid).X;
+			var value = author$project$Danok$bruto2neto(mid).Z;
 			if (_Utils_cmp(searchValue, value) < 0) {
 				var $temp$searchValue = searchValue,
 					$temp$lo = lo,
@@ -4588,7 +4588,7 @@ var author$project$Main$update = F2(
 				elm$core$String$toInt(amount));
 			return (_Utils_cmp(fAmount, author$project$Danok$minBruto) > -1) ? author$project$Danok$bruto2neto(fAmount) : _Utils_update(
 				model,
-				{ab: fAmount});
+				{ad: fAmount});
 		} else {
 			var amount = msg.a;
 			var fAmount = A2(
@@ -4597,7 +4597,7 @@ var author$project$Main$update = F2(
 				elm$core$String$toInt(amount));
 			return (_Utils_cmp(fAmount, author$project$Danok$minNeto) > -1) ? author$project$Danok$neto2bruto(fAmount) : _Utils_update(
 				model,
-				{X: fAmount});
+				{Z: fAmount});
 		}
 	});
 var elm$core$Basics$identity = function (x) {
@@ -4989,14 +4989,69 @@ var author$project$Views$bold = _List_fromArray(
 	[
 		A2(elm$html$Html$Attributes$style, 'font-weight', 'bold')
 	]);
+var author$project$Danok$progresivnoNamaluvanje = function (model) {
+	return model.V.z - A2(author$project$Danok$od, author$project$Danok$procentiDanoci.y, model.W);
+};
+var elm$html$Html$i = _VirtualDom_node('i');
+var elm$html$Html$span = _VirtualDom_node('span');
+var elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
+var elm$html$Html$text = elm$virtual_dom$VirtualDom$text;
+var author$project$Views$infoIcon = A2(
+	elm$html$Html$span,
+	_List_fromArray(
+		[
+			A2(elm$html$Html$Attributes$style, 'display', 'inline-block'),
+			A2(elm$html$Html$Attributes$style, 'width', '16px'),
+			A2(elm$html$Html$Attributes$style, 'height', '16px'),
+			A2(elm$html$Html$Attributes$style, 'text-align', 'center'),
+			A2(elm$html$Html$Attributes$style, 'border-radius', '50%'),
+			A2(elm$html$Html$Attributes$style, 'background', '#9898ea'),
+			A2(elm$html$Html$Attributes$style, 'color', '#fff'),
+			A2(elm$html$Html$Attributes$style, 'margin-right', '5px'),
+			A2(elm$html$Html$Attributes$style, 'user-select', 'none')
+		]),
+	_List_fromArray(
+		[
+			A2(
+			elm$html$Html$i,
+			_List_Nil,
+			_List_fromArray(
+				[
+					elm$html$Html$text('i')
+				]))
+		]));
+var elm$html$Html$div = _VirtualDom_node('div');
+var author$project$Views$progressiveInfo = function (model) {
+	return A2(
+		elm$html$Html$div,
+		_List_fromArray(
+			[
+				A2(elm$html$Html$Attributes$style, 'padding', '10px'),
+				A2(elm$html$Html$Attributes$style, 'border', '1px solid #ddd'),
+				A2(elm$html$Html$Attributes$style, 'background', '#eee'),
+				A2(elm$html$Html$Attributes$style, 'margin-top', '10px')
+			]),
+		_List_fromArray(
+			[
+				author$project$Views$infoIcon,
+				function () {
+				var namaluvanje = author$project$Danok$progresivnoNamaluvanje(model);
+				if (!namaluvanje) {
+					return elm$html$Html$text(
+						'Прогресивниот данок не влијае за плата со нето износ ' + (elm$core$String$fromInt(model.Z) + ' денар(и).'));
+				} else {
+					return elm$html$Html$text(
+						'Со прогресивниот данок, новата нето плата е намалена за ' + (elm$core$String$fromInt(namaluvanje) + '  денар(и).'));
+				}
+			}()
+			]));
+};
 var author$project$Views$rowStyle = _List_fromArray(
 	[
 		A2(elm$html$Html$Attributes$style, 'border-bottom', '1px solid #afafaf'),
 		A2(elm$html$Html$Attributes$style, 'padding', '15px')
 	]);
 var elm$html$Html$td = _VirtualDom_node('td');
-var elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
-var elm$html$Html$text = elm$virtual_dom$VirtualDom$text;
 var elm$json$Json$Encode$string = _Json_wrap;
 var elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
@@ -5027,7 +5082,6 @@ var author$project$Views$tdLeft = function (txt) {
 				elm$html$Html$text(txt)
 			]));
 };
-var elm$html$Html$div = _VirtualDom_node('div');
 var elm$html$Html$table = _VirtualDom_node('table');
 var elm$html$Html$tr = _VirtualDom_node('tr');
 var elm$core$Basics$not = _Basics_not;
@@ -5323,7 +5377,7 @@ var author$project$Views$details = function (model) {
 								author$project$Views$tdLeft('Бруто'),
 								author$project$Views$td(''),
 								author$project$Views$td(
-								elm$core$String$fromInt(model.ab)),
+								elm$core$String$fromInt(model.ad)),
 								author$project$Views$td('МКД')
 							])),
 						A2(
@@ -5369,9 +5423,9 @@ var author$project$Views$details = function (model) {
 							[
 								author$project$Views$tdLeft('Дополнителен придонес за задолжително осигурување во случај повреда или професионално заболување'),
 								author$project$Views$td(
-								A2(myrho$elm_round$Round$round, 2, author$project$Danok$procentiPridonesi.G * 100) + '%'),
+								A2(myrho$elm_round$Round$round, 2, author$project$Danok$procentiPridonesi.I * 100) + '%'),
 								author$project$Views$td(
-								elm$core$String$fromInt(model.am.G)),
+								elm$core$String$fromInt(model.am.I)),
 								author$project$Views$td('МКД')
 							])),
 						A2(
@@ -5393,7 +5447,7 @@ var author$project$Views$details = function (model) {
 								author$project$Views$tdLeft('Бруто плата намалена за придонеси'),
 								author$project$Views$td(''),
 								author$project$Views$td(
-								elm$core$String$fromInt(model.ac)),
+								elm$core$String$fromInt(model.ae)),
 								author$project$Views$td('МКД')
 							])),
 						A2(
@@ -5415,29 +5469,6 @@ var author$project$Views$details = function (model) {
 								author$project$Views$tdLeft('Даночна основа за пресметка на данок на личен доход со 10% (за даночна основа под 90.000 денари)'),
 								author$project$Views$td(''),
 								author$project$Views$td(
-								elm$core$String$fromInt(model.af)),
-								author$project$Views$td('МКД')
-							])),
-						A2(
-						elm$html$Html$tr,
-						_List_Nil,
-						_List_fromArray(
-							[
-								author$project$Views$tdLeft('Данок на личен доход'),
-								author$project$Views$td(
-								A2(myrho$elm_round$Round$round, 2, author$project$Danok$procentiDanoci.I * 100) + '%'),
-								author$project$Views$td(
-								elm$core$String$fromInt(model.ad.I)),
-								author$project$Views$td('МКД')
-							])),
-						A2(
-						elm$html$Html$tr,
-						_List_Nil,
-						_List_fromArray(
-							[
-								author$project$Views$tdLeft('Даночна основа за пресметка на данок на личен доход со 18% (за даночна основа над 90.000 денари)'),
-								author$project$Views$td(''),
-								author$project$Views$td(
 								elm$core$String$fromInt(model.ag)),
 								author$project$Views$td('МКД')
 							])),
@@ -5448,9 +5479,32 @@ var author$project$Views$details = function (model) {
 							[
 								author$project$Views$tdLeft('Данок на личен доход'),
 								author$project$Views$td(
-								A2(myrho$elm_round$Round$round, 2, author$project$Danok$procentiDanoci.J * 100) + '%'),
+								A2(myrho$elm_round$Round$round, 2, author$project$Danok$procentiDanoci.y * 100) + '%'),
 								author$project$Views$td(
-								elm$core$String$fromInt(model.ad.J)),
+								elm$core$String$fromInt(model.V.y)),
+								author$project$Views$td('МКД')
+							])),
+						A2(
+						elm$html$Html$tr,
+						_List_Nil,
+						_List_fromArray(
+							[
+								author$project$Views$tdLeft('Даночна основа за пресметка на данок на личен доход со 18% (за даночна основа над 90.000 денари)'),
+								author$project$Views$td(''),
+								author$project$Views$td(
+								elm$core$String$fromInt(model.W)),
+								author$project$Views$td('МКД')
+							])),
+						A2(
+						elm$html$Html$tr,
+						_List_Nil,
+						_List_fromArray(
+							[
+								author$project$Views$tdLeft('Данок на личен доход'),
+								author$project$Views$td(
+								A2(myrho$elm_round$Round$round, 2, author$project$Danok$procentiDanoci.z * 100) + '%'),
+								author$project$Views$td(
+								elm$core$String$fromInt(model.V.z)),
 								author$project$Views$td('МКД')
 							])),
 						A2(
@@ -5472,10 +5526,11 @@ var author$project$Views$details = function (model) {
 								author$project$Views$tdLeft('Нето'),
 								author$project$Views$td(''),
 								author$project$Views$td(
-								elm$core$String$fromInt(model.X)),
+								elm$core$String$fromInt(model.Z)),
 								author$project$Views$td('МКД')
 							]))
-					]))
+					])),
+				author$project$Views$progressiveInfo(model)
 			]));
 };
 var author$project$Views$Bruto = function (a) {
@@ -5643,7 +5698,7 @@ var author$project$Views$inputFields = function (model) {
 											elm$html$Html$Attributes$placeholder('Бруто'),
 											elm$html$Html$Events$onInput(author$project$Views$Bruto),
 											elm$html$Html$Attributes$value(
-											elm$core$String$fromInt(model.ab))
+											elm$core$String$fromInt(model.ad))
 										]),
 									author$project$Views$inputStyle),
 								_List_Nil)
@@ -5662,7 +5717,7 @@ var author$project$Views$inputFields = function (model) {
 											elm$html$Html$Attributes$placeholder('Нето'),
 											elm$html$Html$Events$onInput(author$project$Views$Neto),
 											elm$html$Html$Attributes$value(
-											elm$core$String$fromInt(model.X))
+											elm$core$String$fromInt(model.Z))
 										]),
 									author$project$Views$inputStyle),
 								_List_Nil)
@@ -5680,19 +5735,23 @@ var elm$html$Html$Attributes$href = function (url) {
 		'href',
 		_VirtualDom_noJavaScriptUri(url));
 };
+var elm$html$Html$Attributes$rel = _VirtualDom_attribute('rel');
 var elm$html$Html$Attributes$src = function (url) {
 	return A2(
 		elm$html$Html$Attributes$stringProperty,
 		'src',
 		_VirtualDom_noJavaScriptOrHtmlUri(url));
 };
+var elm$html$Html$Attributes$target = elm$html$Html$Attributes$stringProperty('target');
 var elm$html$Html$Attributes$title = elm$html$Html$Attributes$stringProperty('title');
 var author$project$Views$pdfLink = A2(
 	elm$html$Html$a,
 	_List_fromArray(
 		[
 			elm$html$Html$Attributes$href('http://ujp.gov.mk/e/regulativa/opis/337'),
-			elm$html$Html$Attributes$title(author$project$Views$pdfLinkTxt)
+			elm$html$Html$Attributes$title(author$project$Views$pdfLinkTxt),
+			elm$html$Html$Attributes$target('_blank'),
+			elm$html$Html$Attributes$rel('noopener')
 		]),
 	_List_fromArray(
 		[
