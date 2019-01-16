@@ -770,11 +770,11 @@ function _Debug_crash_UNUSED(identifier, fact1, fact2, fact3, fact4)
 
 function _Debug_regionToString(region)
 {
-	if (region.ap.R === region.az.R)
+	if (region.an.K === region.az.K)
 	{
-		return 'on line ' + region.ap.R;
+		return 'on line ' + region.an.K;
 	}
-	return 'on lines ' + region.ap.R + ' through ' + region.az.R;
+	return 'on lines ' + region.an.K + ' through ' + region.az.K;
 }
 
 
@@ -2644,8 +2644,8 @@ var _VirtualDom_mapEventRecord = F2(function(func, record)
 {
 	return {
 		r: func(record.r),
-		aq: record.aq,
-		ao: record.ao
+		ao: record.ao,
+		al: record.al
 	}
 });
 
@@ -2914,10 +2914,10 @@ function _VirtualDom_makeCallback(eventNode, initialHandler)
 
 		var value = result.a;
 		var message = !tag ? value : tag < 3 ? value.a : value.r;
-		var stopPropagation = tag == 1 ? value.b : tag == 3 && value.aq;
+		var stopPropagation = tag == 1 ? value.b : tag == 3 && value.ao;
 		var currentEventNode = (
 			stopPropagation && event.stopPropagation(),
-			(tag == 2 ? value.b : tag == 3 && value.ao) && event.preventDefault(),
+			(tag == 2 ? value.b : tag == 3 && value.al) && event.preventDefault(),
 			eventNode
 		);
 		var tagger;
@@ -3940,7 +3940,7 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 		impl.bD,
 		impl.bz,
 		function(sendToApp, initialModel) {
-			var divertHrefToApp = impl.U && impl.U(sendToApp)
+			var divertHrefToApp = impl.P && impl.P(sendToApp)
 			var view = impl.bF;
 			var title = _VirtualDom_doc.title;
 			var bodyNode = _VirtualDom_doc.body;
@@ -4010,7 +4010,7 @@ function _Browser_application(impl)
 	var key = function() { key.a(onUrlChange(_Browser_getUrl())); };
 
 	return _Browser_document({
-		U: function(sendToApp)
+		P: function(sendToApp)
 		{
 			key.a = sendToApp;
 			_Browser_window.addEventListener('popstate', key);
@@ -4108,17 +4108,17 @@ var _Browser_decodeEvent = F2(function(decoder, event)
 function _Browser_visibilityInfo()
 {
 	return (typeof _VirtualDom_doc.hidden !== 'undefined')
-		? { bg: 'hidden', P: 'visibilitychange' }
+		? { bg: 'hidden', H: 'visibilitychange' }
 		:
 	(typeof _VirtualDom_doc.mozHidden !== 'undefined')
-		? { bg: 'mozHidden', P: 'mozvisibilitychange' }
+		? { bg: 'mozHidden', H: 'mozvisibilitychange' }
 		:
 	(typeof _VirtualDom_doc.msHidden !== 'undefined')
-		? { bg: 'msHidden', P: 'msvisibilitychange' }
+		? { bg: 'msHidden', H: 'msvisibilitychange' }
 		:
 	(typeof _VirtualDom_doc.webkitHidden !== 'undefined')
-		? { bg: 'webkitHidden', P: 'webkitvisibilitychange' }
-		: { bg: 'hidden', P: 'visibilitychange' };
+		? { bg: 'webkitHidden', H: 'webkitvisibilitychange' }
+		: { bg: 'hidden', H: 'visibilitychange' };
 }
 
 
@@ -4201,10 +4201,10 @@ function _Browser_getViewport()
 	return {
 		aW: _Browser_getScene(),
 		a0: {
-			ah: _Browser_window.pageXOffset,
-			ai: _Browser_window.pageYOffset,
-			N: _Browser_doc.documentElement.clientWidth,
-			I: _Browser_doc.documentElement.clientHeight
+			_: _Browser_window.pageXOffset,
+			aa: _Browser_window.pageYOffset,
+			E: _Browser_doc.documentElement.clientWidth,
+			z: _Browser_doc.documentElement.clientHeight
 		}
 	};
 }
@@ -4214,8 +4214,8 @@ function _Browser_getScene()
 	var body = _Browser_doc.body;
 	var elem = _Browser_doc.documentElement;
 	return {
-		N: Math.max(body.scrollWidth, body.offsetWidth, elem.scrollWidth, elem.offsetWidth, elem.clientWidth),
-		I: Math.max(body.scrollHeight, body.offsetHeight, elem.scrollHeight, elem.offsetHeight, elem.clientHeight)
+		E: Math.max(body.scrollWidth, body.offsetWidth, elem.scrollWidth, elem.offsetWidth, elem.clientWidth),
+		z: Math.max(body.scrollHeight, body.offsetHeight, elem.scrollHeight, elem.offsetHeight, elem.clientHeight)
 	};
 }
 
@@ -4239,14 +4239,14 @@ function _Browser_getViewportOf(id)
 	{
 		return {
 			aW: {
-				N: node.scrollWidth,
-				I: node.scrollHeight
+				E: node.scrollWidth,
+				z: node.scrollHeight
 			},
 			a0: {
-				ah: node.scrollLeft,
-				ai: node.scrollTop,
-				N: node.clientWidth,
-				I: node.clientHeight
+				_: node.scrollLeft,
+				aa: node.scrollTop,
+				E: node.clientWidth,
+				z: node.clientHeight
 			}
 		};
 	});
@@ -4278,16 +4278,16 @@ function _Browser_getElement(id)
 		return {
 			aW: _Browser_getScene(),
 			a0: {
-				ah: x,
-				ai: y,
-				N: _Browser_doc.documentElement.clientWidth,
-				I: _Browser_doc.documentElement.clientHeight
+				_: x,
+				aa: y,
+				E: _Browser_doc.documentElement.clientWidth,
+				z: _Browser_doc.documentElement.clientHeight
 			},
 			a9: {
-				ah: x + rect.left,
-				ai: y + rect.top,
-				N: rect.width,
-				I: rect.height
+				_: x + rect.left,
+				aa: y + rect.top,
+				E: rect.width,
+				z: rect.height
 			}
 		};
 	});
@@ -4322,7 +4322,7 @@ function _Browser_load(url)
 		}
 	}));
 }
-var author$project$Main$limit = 90000;
+var author$project$Danok$limit = 90000;
 var elm$core$Basics$composeR = F3(
 	function (f, g, x) {
 		return g(
@@ -4411,7 +4411,7 @@ var elm$core$Array$toList = function (array) {
 var elm$core$Basics$mul = _Basics_mul;
 var elm$core$Basics$round = _Basics_round;
 var elm$core$Basics$toFloat = _Basics_toFloat;
-var author$project$Main$od = function (x) {
+var author$project$Danok$od = function (x) {
 	return A2(
 		elm$core$Basics$composeR,
 		elm$core$Basics$toFloat,
@@ -4435,42 +4435,42 @@ var elm$core$Basics$min = F2(
 		return (_Utils_cmp(x, y) < 0) ? x : y;
 	});
 var elm$core$Basics$sub = _Basics_sub;
-var author$project$Main$presmetajDanoci = F2(
+var author$project$Danok$presmetajDanoci = F2(
 	function (osnova, d) {
 		return {
-			v: A2(
-				author$project$Main$od,
-				d.v,
-				A2(elm$core$Basics$min, author$project$Main$limit, osnova)),
-			w: A2(
-				author$project$Main$od,
-				d.w,
-				A2(elm$core$Basics$max, 0, osnova - author$project$Main$limit))
+			I: A2(
+				author$project$Danok$od,
+				d.I,
+				A2(elm$core$Basics$min, author$project$Danok$limit, osnova)),
+			J: A2(
+				author$project$Danok$od,
+				d.J,
+				A2(elm$core$Basics$max, 0, osnova - author$project$Danok$limit))
 		};
 	});
-var author$project$Main$presmetajPridonesi = F2(
+var author$project$Danok$presmetajPridonesi = F2(
 	function (bruto, p) {
 		return {
-			u: A2(author$project$Main$od, p.u, bruto),
-			B: A2(author$project$Main$od, p.B, bruto),
-			C: A2(author$project$Main$od, p.C, bruto),
-			F: A2(author$project$Main$od, p.F, bruto)
+			G: A2(author$project$Danok$od, p.G, bruto),
+			N: A2(author$project$Danok$od, p.N, bruto),
+			O: A2(author$project$Danok$od, p.O, bruto),
+			U: A2(author$project$Danok$od, p.U, bruto)
 		};
 	});
-var author$project$Main$procentiDanoci = {v: 0.1, w: 0.18};
-var author$project$Main$procentiPridonesi = {u: 5.0e-3, B: 0.184, C: 1.2e-2, F: 7.4e-2};
-var author$project$Main$initModel = {
-	G: 0,
-	Z: 0,
-	Q: A2(author$project$Main$presmetajDanoci, 0, author$project$Main$procentiDanoci),
-	_: 0,
-	aa: 0,
-	z: 0,
-	D: A2(author$project$Main$presmetajPridonesi, 0, author$project$Main$procentiPridonesi),
+var author$project$Danok$procentiDanoci = {I: 0.1, J: 0.18};
+var author$project$Danok$procentiPridonesi = {G: 5.0e-3, N: 0.184, O: 1.2e-2, U: 7.4e-2};
+var author$project$Danok$initModel = {
+	ab: 0,
+	ac: 0,
+	ad: A2(author$project$Danok$presmetajDanoci, 0, author$project$Danok$procentiDanoci),
 	af: 0,
-	ag: 0
+	ag: 0,
+	X: 0,
+	am: A2(author$project$Danok$presmetajPridonesi, 0, author$project$Danok$procentiPridonesi),
+	ar: 0,
+	as: 0
 };
-var author$project$Main$licnoOsloboduvanje = 8000;
+var author$project$Danok$licnoOsloboduvanje = 8000;
 var elm$core$Basics$add = _Basics_add;
 var elm$core$List$foldl = F3(
 	function (func, acc, list) {
@@ -4494,37 +4494,37 @@ var elm$core$List$foldl = F3(
 var elm$core$List$sum = function (numbers) {
 	return A3(elm$core$List$foldl, elm$core$Basics$add, 0, numbers);
 };
-var author$project$Main$sumaDanoci = function (d) {
+var author$project$Danok$sumaDanoci = function (d) {
 	return elm$core$List$sum(
 		_List_fromArray(
-			[d.v, d.w]));
+			[d.I, d.J]));
 };
-var author$project$Main$sumaPridonesi = function (p) {
+var author$project$Danok$sumaPridonesi = function (p) {
 	return elm$core$List$sum(
 		_List_fromArray(
-			[p.B, p.F, p.C, p.u]));
+			[p.N, p.U, p.O, p.G]));
 };
-var author$project$Main$bruto2neto = function (bruto) {
-	var pridonesi = A2(author$project$Main$presmetajPridonesi, bruto, author$project$Main$procentiPridonesi);
-	var vkupnoPridonesi = author$project$Main$sumaPridonesi(pridonesi);
-	var dldOsnova = (bruto - vkupnoPridonesi) - author$project$Main$licnoOsloboduvanje;
-	var dldOsnova10 = A2(elm$core$Basics$min, author$project$Main$limit, dldOsnova);
-	var dldOsnova18 = A2(elm$core$Basics$max, 0, dldOsnova - author$project$Main$limit);
-	var danoci = A2(author$project$Main$presmetajDanoci, dldOsnova, author$project$Main$procentiDanoci);
-	var vkupnoDanoci = author$project$Main$sumaDanoci(danoci);
+var author$project$Danok$bruto2neto = function (bruto) {
+	var pridonesi = A2(author$project$Danok$presmetajPridonesi, bruto, author$project$Danok$procentiPridonesi);
+	var vkupnoPridonesi = author$project$Danok$sumaPridonesi(pridonesi);
+	var dldOsnova = (bruto - vkupnoPridonesi) - author$project$Danok$licnoOsloboduvanje;
+	var dldOsnova10 = A2(elm$core$Basics$min, author$project$Danok$limit, dldOsnova);
+	var dldOsnova18 = A2(elm$core$Basics$max, 0, dldOsnova - author$project$Danok$limit);
+	var danoci = A2(author$project$Danok$presmetajDanoci, dldOsnova, author$project$Danok$procentiDanoci);
+	var vkupnoDanoci = author$project$Danok$sumaDanoci(danoci);
 	var neto = (bruto - vkupnoPridonesi) - vkupnoDanoci;
-	return {G: bruto, Z: bruto - vkupnoPridonesi, Q: danoci, _: dldOsnova10, aa: dldOsnova18, z: neto, D: pridonesi, af: vkupnoPridonesi + vkupnoDanoci, ag: vkupnoPridonesi};
+	return {ab: bruto, ac: bruto - vkupnoPridonesi, ad: danoci, af: dldOsnova10, ag: dldOsnova18, X: neto, am: pridonesi, ar: vkupnoPridonesi + vkupnoDanoci, as: vkupnoPridonesi};
 };
-var author$project$Main$minBruto = 17040;
-var author$project$Main$minNeto = 12165;
+var author$project$Danok$minBruto = 17040;
+var author$project$Danok$minNeto = 12165;
 var elm$core$Basics$fdiv = _Basics_fdiv;
 var elm$core$Basics$floor = _Basics_floor;
-var author$project$Main$binSearch = F3(
+var author$project$Danok$binSearch = F3(
 	function (searchValue, lo, hi) {
 		binSearch:
 		while (true) {
 			var mid = lo + elm$core$Basics$floor((hi - lo) / 2);
-			var value = author$project$Main$bruto2neto(mid).z;
+			var value = author$project$Danok$bruto2neto(mid).X;
 			if (_Utils_cmp(searchValue, value) < 0) {
 				var $temp$searchValue = searchValue,
 					$temp$lo = lo,
@@ -4548,20 +4548,20 @@ var author$project$Main$binSearch = F3(
 			}
 		}
 	});
-var author$project$Main$maxBrutoNetoOdnos = 10;
+var author$project$Danok$maxBrutoNetoOdnos = 10;
 var elm$core$Basics$pow = _Basics_pow;
-var author$project$Main$maxSafeInt = A2(elm$core$Basics$pow, 2, 53) - 1;
+var author$project$Danok$maxSafeInt = A2(elm$core$Basics$pow, 2, 53) - 1;
 var elm$core$Basics$clamp = F3(
 	function (low, high, number) {
 		return (_Utils_cmp(number, low) < 0) ? low : ((_Utils_cmp(number, high) > 0) ? high : number);
 	});
-var author$project$Main$findBruto = function (netoVal) {
-	var val = A3(elm$core$Basics$clamp, author$project$Main$minNeto, author$project$Main$maxSafeInt, netoVal);
-	return A3(author$project$Main$binSearch, val, val, val * author$project$Main$maxBrutoNetoOdnos);
+var author$project$Danok$findBruto = function (netoVal) {
+	var val = A3(elm$core$Basics$clamp, author$project$Danok$minNeto, author$project$Danok$maxSafeInt, netoVal);
+	return A3(author$project$Danok$binSearch, val, val, val * author$project$Danok$maxBrutoNetoOdnos);
 };
-var author$project$Main$neto2bruto = function (val) {
-	return author$project$Main$bruto2neto(
-		author$project$Main$findBruto(val));
+var author$project$Danok$neto2bruto = function (val) {
+	return author$project$Danok$bruto2neto(
+		author$project$Danok$findBruto(val));
 };
 var elm$core$Basics$ge = _Utils_ge;
 var elm$core$Maybe$withDefault = F2(
@@ -4586,18 +4586,18 @@ var author$project$Main$update = F2(
 				elm$core$Maybe$withDefault,
 				0,
 				elm$core$String$toInt(amount));
-			return (_Utils_cmp(fAmount, author$project$Main$minBruto) > -1) ? author$project$Main$bruto2neto(fAmount) : _Utils_update(
+			return (_Utils_cmp(fAmount, author$project$Danok$minBruto) > -1) ? author$project$Danok$bruto2neto(fAmount) : _Utils_update(
 				model,
-				{G: fAmount});
+				{ab: fAmount});
 		} else {
 			var amount = msg.a;
 			var fAmount = A2(
 				elm$core$Maybe$withDefault,
 				0,
 				elm$core$String$toInt(amount));
-			return (_Utils_cmp(fAmount, author$project$Main$minNeto) > -1) ? author$project$Main$neto2bruto(fAmount) : _Utils_update(
+			return (_Utils_cmp(fAmount, author$project$Danok$minNeto) > -1) ? author$project$Danok$neto2bruto(fAmount) : _Utils_update(
 				model,
-				{z: fAmount});
+				{X: fAmount});
 		}
 	});
 var elm$core$Basics$identity = function (x) {
@@ -4976,7 +4976,7 @@ var elm$virtual_dom$VirtualDom$toHandlerInt = function (handler) {
 };
 var elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
 var elm$html$Html$Attributes$style = elm$virtual_dom$VirtualDom$style;
-var author$project$Main$containerStyle = _List_fromArray(
+var author$project$Views$containerStyle = _List_fromArray(
 	[
 		A2(elm$html$Html$Attributes$style, 'width', '600px'),
 		A2(elm$html$Html$Attributes$style, 'left', '50%'),
@@ -4985,11 +4985,11 @@ var author$project$Main$containerStyle = _List_fromArray(
 		A2(elm$html$Html$Attributes$style, 'vertical-align', 'center'),
 		A2(elm$html$Html$Attributes$style, 'font', '0.8em sans-serif')
 	]);
-var author$project$Main$bold = _List_fromArray(
+var author$project$Views$bold = _List_fromArray(
 	[
 		A2(elm$html$Html$Attributes$style, 'font-weight', 'bold')
 	]);
-var author$project$Main$rowStyle = _List_fromArray(
+var author$project$Views$rowStyle = _List_fromArray(
 	[
 		A2(elm$html$Html$Attributes$style, 'border-bottom', '1px solid #afafaf'),
 		A2(elm$html$Html$Attributes$style, 'padding', '15px')
@@ -5006,22 +5006,22 @@ var elm$html$Html$Attributes$stringProperty = F2(
 			elm$json$Json$Encode$string(string));
 	});
 var elm$html$Html$Attributes$align = elm$html$Html$Attributes$stringProperty('align');
-var author$project$Main$td = function (txt) {
+var author$project$Views$td = function (txt) {
 	return A2(
 		elm$html$Html$td,
 		A2(
 			elm$core$List$cons,
 			elm$html$Html$Attributes$align('right'),
-			author$project$Main$rowStyle),
+			author$project$Views$rowStyle),
 		_List_fromArray(
 			[
 				elm$html$Html$text(txt)
 			]));
 };
-var author$project$Main$tdLeft = function (txt) {
+var author$project$Views$tdLeft = function (txt) {
 	return A2(
 		elm$html$Html$td,
-		author$project$Main$rowStyle,
+		author$project$Views$rowStyle,
 		_List_fromArray(
 			[
 				elm$html$Html$text(txt)
@@ -5301,7 +5301,7 @@ var myrho$elm_round$Round$round = myrho$elm_round$Round$roundFun(
 				}
 			}
 		}));
-var author$project$Main$details = function (model) {
+var author$project$Views$details = function (model) {
 	return A2(
 		elm$html$Html$div,
 		_List_fromArray(
@@ -5317,174 +5317,174 @@ var author$project$Main$details = function (model) {
 					[
 						A2(
 						elm$html$Html$tr,
-						author$project$Main$bold,
+						author$project$Views$bold,
 						_List_fromArray(
 							[
-								author$project$Main$tdLeft('Бруто'),
-								author$project$Main$td(''),
-								author$project$Main$td(
-								elm$core$String$fromInt(model.G)),
-								author$project$Main$td('МКД')
+								author$project$Views$tdLeft('Бруто'),
+								author$project$Views$td(''),
+								author$project$Views$td(
+								elm$core$String$fromInt(model.ab)),
+								author$project$Views$td('МКД')
 							])),
 						A2(
 						elm$html$Html$tr,
 						_List_Nil,
 						_List_fromArray(
 							[
-								author$project$Main$tdLeft('Придонеси за задолжително ПИО'),
-								author$project$Main$td(
-								A2(myrho$elm_round$Round$round, 2, author$project$Main$procentiPridonesi.B * 100) + '%'),
-								author$project$Main$td(
-								elm$core$String$fromInt(model.D.B)),
-								author$project$Main$td('МКД')
+								author$project$Views$tdLeft('Придонеси за задолжително ПИО'),
+								author$project$Views$td(
+								A2(myrho$elm_round$Round$round, 2, author$project$Danok$procentiPridonesi.N * 100) + '%'),
+								author$project$Views$td(
+								elm$core$String$fromInt(model.am.N)),
+								author$project$Views$td('МКД')
 							])),
 						A2(
 						elm$html$Html$tr,
 						_List_Nil,
 						_List_fromArray(
 							[
-								author$project$Main$tdLeft('Придонеси за задолжително здравствено осигурување'),
-								author$project$Main$td(
-								A2(myrho$elm_round$Round$round, 2, author$project$Main$procentiPridonesi.F * 100) + '%'),
-								author$project$Main$td(
-								elm$core$String$fromInt(model.D.F)),
-								author$project$Main$td('МКД')
+								author$project$Views$tdLeft('Придонеси за задолжително здравствено осигурување'),
+								author$project$Views$td(
+								A2(myrho$elm_round$Round$round, 2, author$project$Danok$procentiPridonesi.U * 100) + '%'),
+								author$project$Views$td(
+								elm$core$String$fromInt(model.am.U)),
+								author$project$Views$td('МКД')
 							])),
 						A2(
 						elm$html$Html$tr,
 						_List_Nil,
 						_List_fromArray(
 							[
-								author$project$Main$tdLeft('Придонеси за вработување'),
-								author$project$Main$td(
-								A2(myrho$elm_round$Round$round, 2, author$project$Main$procentiPridonesi.C * 100) + '%'),
-								author$project$Main$td(
-								elm$core$String$fromInt(model.D.C)),
-								author$project$Main$td('МКД')
+								author$project$Views$tdLeft('Придонеси за вработување'),
+								author$project$Views$td(
+								A2(myrho$elm_round$Round$round, 2, author$project$Danok$procentiPridonesi.O * 100) + '%'),
+								author$project$Views$td(
+								elm$core$String$fromInt(model.am.O)),
+								author$project$Views$td('МКД')
 							])),
 						A2(
 						elm$html$Html$tr,
 						_List_Nil,
 						_List_fromArray(
 							[
-								author$project$Main$tdLeft('Дополнителен придонес за задолжително осигурување во случај повреда или професионално заболување'),
-								author$project$Main$td(
-								A2(myrho$elm_round$Round$round, 2, author$project$Main$procentiPridonesi.u * 100) + '%'),
-								author$project$Main$td(
-								elm$core$String$fromInt(model.D.u)),
-								author$project$Main$td('МКД')
+								author$project$Views$tdLeft('Дополнителен придонес за задолжително осигурување во случај повреда или професионално заболување'),
+								author$project$Views$td(
+								A2(myrho$elm_round$Round$round, 2, author$project$Danok$procentiPridonesi.G * 100) + '%'),
+								author$project$Views$td(
+								elm$core$String$fromInt(model.am.G)),
+								author$project$Views$td('МКД')
 							])),
 						A2(
 						elm$html$Html$tr,
-						author$project$Main$bold,
+						author$project$Views$bold,
 						_List_fromArray(
 							[
-								author$project$Main$tdLeft('Вкупно придонеси'),
-								author$project$Main$td(''),
-								author$project$Main$td(
-								elm$core$String$fromInt(model.ag)),
-								author$project$Main$td('МКД')
-							])),
-						A2(
-						elm$html$Html$tr,
-						_List_Nil,
-						_List_fromArray(
-							[
-								author$project$Main$tdLeft('Бруто плата намалена за придонеси'),
-								author$project$Main$td(''),
-								author$project$Main$td(
-								elm$core$String$fromInt(model.Z)),
-								author$project$Main$td('МКД')
+								author$project$Views$tdLeft('Вкупно придонеси'),
+								author$project$Views$td(''),
+								author$project$Views$td(
+								elm$core$String$fromInt(model.as)),
+								author$project$Views$td('МКД')
 							])),
 						A2(
 						elm$html$Html$tr,
 						_List_Nil,
 						_List_fromArray(
 							[
-								author$project$Main$tdLeft('Лично ослободување'),
-								author$project$Main$td(''),
-								author$project$Main$td(
-								elm$core$String$fromInt(author$project$Main$licnoOsloboduvanje)),
-								author$project$Main$td('МКД')
+								author$project$Views$tdLeft('Бруто плата намалена за придонеси'),
+								author$project$Views$td(''),
+								author$project$Views$td(
+								elm$core$String$fromInt(model.ac)),
+								author$project$Views$td('МКД')
 							])),
 						A2(
 						elm$html$Html$tr,
 						_List_Nil,
 						_List_fromArray(
 							[
-								author$project$Main$tdLeft('Даночна основа за пресметка на данок на личен доход со 10% (за даночна основа под 90.000 денари)'),
-								author$project$Main$td(''),
-								author$project$Main$td(
-								elm$core$String$fromInt(model._)),
-								author$project$Main$td('МКД')
+								author$project$Views$tdLeft('Лично ослободување'),
+								author$project$Views$td(''),
+								author$project$Views$td(
+								elm$core$String$fromInt(author$project$Danok$licnoOsloboduvanje)),
+								author$project$Views$td('МКД')
 							])),
 						A2(
 						elm$html$Html$tr,
 						_List_Nil,
 						_List_fromArray(
 							[
-								author$project$Main$tdLeft('Данок на личен доход'),
-								author$project$Main$td(
-								A2(myrho$elm_round$Round$round, 2, author$project$Main$procentiDanoci.v * 100) + '%'),
-								author$project$Main$td(
-								elm$core$String$fromInt(model.Q.v)),
-								author$project$Main$td('МКД')
-							])),
-						A2(
-						elm$html$Html$tr,
-						_List_Nil,
-						_List_fromArray(
-							[
-								author$project$Main$tdLeft('Даночна основа за пресметка на данок на личен доход со 18% (за даночна основа над 90.000 денари)'),
-								author$project$Main$td(''),
-								author$project$Main$td(
-								elm$core$String$fromInt(model.aa)),
-								author$project$Main$td('МКД')
-							])),
-						A2(
-						elm$html$Html$tr,
-						_List_Nil,
-						_List_fromArray(
-							[
-								author$project$Main$tdLeft('Данок на личен доход'),
-								author$project$Main$td(
-								A2(myrho$elm_round$Round$round, 2, author$project$Main$procentiDanoci.w * 100) + '%'),
-								author$project$Main$td(
-								elm$core$String$fromInt(model.Q.w)),
-								author$project$Main$td('МКД')
-							])),
-						A2(
-						elm$html$Html$tr,
-						_List_Nil,
-						_List_fromArray(
-							[
-								author$project$Main$tdLeft('Вкупно придонеси и данок'),
-								author$project$Main$td(''),
-								author$project$Main$td(
+								author$project$Views$tdLeft('Даночна основа за пресметка на данок на личен доход со 10% (за даночна основа под 90.000 денари)'),
+								author$project$Views$td(''),
+								author$project$Views$td(
 								elm$core$String$fromInt(model.af)),
-								author$project$Main$td('МКД')
+								author$project$Views$td('МКД')
 							])),
 						A2(
 						elm$html$Html$tr,
-						author$project$Main$bold,
+						_List_Nil,
 						_List_fromArray(
 							[
-								author$project$Main$tdLeft('Нето'),
-								author$project$Main$td(''),
-								author$project$Main$td(
-								elm$core$String$fromInt(model.z)),
-								author$project$Main$td('МКД')
+								author$project$Views$tdLeft('Данок на личен доход'),
+								author$project$Views$td(
+								A2(myrho$elm_round$Round$round, 2, author$project$Danok$procentiDanoci.I * 100) + '%'),
+								author$project$Views$td(
+								elm$core$String$fromInt(model.ad.I)),
+								author$project$Views$td('МКД')
+							])),
+						A2(
+						elm$html$Html$tr,
+						_List_Nil,
+						_List_fromArray(
+							[
+								author$project$Views$tdLeft('Даночна основа за пресметка на данок на личен доход со 18% (за даночна основа над 90.000 денари)'),
+								author$project$Views$td(''),
+								author$project$Views$td(
+								elm$core$String$fromInt(model.ag)),
+								author$project$Views$td('МКД')
+							])),
+						A2(
+						elm$html$Html$tr,
+						_List_Nil,
+						_List_fromArray(
+							[
+								author$project$Views$tdLeft('Данок на личен доход'),
+								author$project$Views$td(
+								A2(myrho$elm_round$Round$round, 2, author$project$Danok$procentiDanoci.J * 100) + '%'),
+								author$project$Views$td(
+								elm$core$String$fromInt(model.ad.J)),
+								author$project$Views$td('МКД')
+							])),
+						A2(
+						elm$html$Html$tr,
+						_List_Nil,
+						_List_fromArray(
+							[
+								author$project$Views$tdLeft('Вкупно придонеси и данок'),
+								author$project$Views$td(''),
+								author$project$Views$td(
+								elm$core$String$fromInt(model.ar)),
+								author$project$Views$td('МКД')
+							])),
+						A2(
+						elm$html$Html$tr,
+						author$project$Views$bold,
+						_List_fromArray(
+							[
+								author$project$Views$tdLeft('Нето'),
+								author$project$Views$td(''),
+								author$project$Views$td(
+								elm$core$String$fromInt(model.X)),
+								author$project$Views$td('МКД')
 							]))
 					]))
 			]));
 };
-var author$project$Main$Bruto = function (a) {
+var author$project$Views$Bruto = function (a) {
 	return {$: 0, a: a};
 };
-var author$project$Main$Neto = function (a) {
+var author$project$Views$Neto = function (a) {
 	return {$: 1, a: a};
 };
-var author$project$Main$inputStyle = _List_fromArray(
+var author$project$Views$inputStyle = _List_fromArray(
 	[
 		A2(elm$html$Html$Attributes$style, 'box-sizing', 'border-box'),
 		A2(elm$html$Html$Attributes$style, 'line-height', '1.25'),
@@ -5494,7 +5494,7 @@ var author$project$Main$inputStyle = _List_fromArray(
 		A2(elm$html$Html$Attributes$style, 'border-radius', '.25rem'),
 		A2(elm$html$Html$Attributes$style, 'border', '1px solid rgba(0,0,0,.15)')
 	]);
-var author$project$Main$splitter = _List_fromArray(
+var author$project$Views$splitter = _List_fromArray(
 	[
 		A2(elm$html$Html$Attributes$style, 'margin-bottom', '30px'),
 		A2(elm$html$Html$Attributes$style, 'border-bottom', '5px solid #afafaf'),
@@ -5598,10 +5598,10 @@ var elm$html$Html$Events$onInput = function (tagger) {
 			elm$html$Html$Events$alwaysStop,
 			A2(elm$json$Json$Decode$map, tagger, elm$html$Html$Events$targetValue)));
 };
-var author$project$Main$inputFields = function (model) {
+var author$project$Views$inputFields = function (model) {
 	return A2(
 		elm$html$Html$table,
-		author$project$Main$splitter,
+		author$project$Views$splitter,
 		_List_fromArray(
 			[
 				A2(
@@ -5641,11 +5641,11 @@ var author$project$Main$inputFields = function (model) {
 										[
 											elm$html$Html$Attributes$type_('number'),
 											elm$html$Html$Attributes$placeholder('Бруто'),
-											elm$html$Html$Events$onInput(author$project$Main$Bruto),
+											elm$html$Html$Events$onInput(author$project$Views$Bruto),
 											elm$html$Html$Attributes$value(
-											elm$core$String$fromInt(model.G))
+											elm$core$String$fromInt(model.ab))
 										]),
-									author$project$Main$inputStyle),
+									author$project$Views$inputStyle),
 								_List_Nil)
 							])),
 						A2(
@@ -5660,17 +5660,17 @@ var author$project$Main$inputFields = function (model) {
 										[
 											elm$html$Html$Attributes$type_('number'),
 											elm$html$Html$Attributes$placeholder('Нето'),
-											elm$html$Html$Events$onInput(author$project$Main$Neto),
+											elm$html$Html$Events$onInput(author$project$Views$Neto),
 											elm$html$Html$Attributes$value(
-											elm$core$String$fromInt(model.z))
+											elm$core$String$fromInt(model.X))
 										]),
-									author$project$Main$inputStyle),
+									author$project$Views$inputStyle),
 								_List_Nil)
 							]))
 					]))
 			]));
 };
-var author$project$Main$pdfLinkTxt = 'УЈП - Закон за данокот на личен доход';
+var author$project$Views$pdfLinkTxt = 'УЈП - Закон за данокот на личен доход';
 var elm$html$Html$a = _VirtualDom_node('a');
 var elm$html$Html$img = _VirtualDom_node('img');
 var elm$html$Html$Attributes$alt = elm$html$Html$Attributes$stringProperty('alt');
@@ -5687,12 +5687,12 @@ var elm$html$Html$Attributes$src = function (url) {
 		_VirtualDom_noJavaScriptOrHtmlUri(url));
 };
 var elm$html$Html$Attributes$title = elm$html$Html$Attributes$stringProperty('title');
-var author$project$Main$pdfLink = A2(
+var author$project$Views$pdfLink = A2(
 	elm$html$Html$a,
 	_List_fromArray(
 		[
 			elm$html$Html$Attributes$href('http://ujp.gov.mk/e/regulativa/opis/337'),
-			elm$html$Html$Attributes$title(author$project$Main$pdfLinkTxt)
+			elm$html$Html$Attributes$title(author$project$Views$pdfLinkTxt)
 		]),
 	_List_fromArray(
 		[
@@ -5705,11 +5705,11 @@ var author$project$Main$pdfLink = A2(
 					A2(elm$html$Html$Attributes$style, 'right', '10px'),
 					A2(elm$html$Html$Attributes$style, 'width', '100px'),
 					elm$html$Html$Attributes$src('http://www.ujp.gov.mk/uploads/Image/Logo_UJP.png'),
-					elm$html$Html$Attributes$alt(author$project$Main$pdfLinkTxt)
+					elm$html$Html$Attributes$alt(author$project$Views$pdfLinkTxt)
 				]),
 			_List_Nil)
 		]));
-var author$project$Main$ribbon = A2(
+var author$project$Views$ribbon = A2(
 	elm$html$Html$a,
 	_List_fromArray(
 		[
@@ -5730,7 +5730,7 @@ var author$project$Main$ribbon = A2(
 				]),
 			_List_Nil)
 		]));
-var author$project$Main$view = function (model) {
+var author$project$Views$view = function (model) {
 	return A2(
 		elm$html$Html$div,
 		_List_Nil,
@@ -5740,19 +5740,19 @@ var author$project$Main$view = function (model) {
 				elm$html$Html$div,
 				_List_Nil,
 				_List_fromArray(
-					[author$project$Main$ribbon])),
+					[author$project$Views$ribbon])),
 				A2(
 				elm$html$Html$div,
 				_List_Nil,
 				_List_fromArray(
-					[author$project$Main$pdfLink])),
+					[author$project$Views$pdfLink])),
 				A2(
 				elm$html$Html$div,
-				author$project$Main$containerStyle,
+				author$project$Views$containerStyle,
 				_List_fromArray(
 					[
-						author$project$Main$inputFields(model),
-						author$project$Main$details(model)
+						author$project$Views$inputFields(model),
+						author$project$Views$details(model)
 					]))
 			]));
 };
@@ -6001,6 +6001,6 @@ var elm$browser$Browser$sandbox = function (impl) {
 		});
 };
 var author$project$Main$main = elm$browser$Browser$sandbox(
-	{bi: author$project$Main$initModel, bD: author$project$Main$update, bF: author$project$Main$view});
+	{bi: author$project$Danok$initModel, bD: author$project$Main$update, bF: author$project$Views$view});
 _Platform_export({'Main':{'init':author$project$Main$main(
 	elm$json$Json$Decode$succeed(0))(0)}});}(this));
