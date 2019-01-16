@@ -156,6 +156,7 @@ bruto2neto bruto =
     , danoci = danoci
     , dldOsnova10 = dldOsnova10
     , dldOsnova18 = dldOsnova18
+    , razlika = danoci.dld18 - (dldOsnova18 |> od procentiDanoci.dld10)
     , vkupnoDavacki = vkupnoPridonesi + vkupnoDanoci
     , vkupnoPridonesi = vkupnoPridonesi
     , brutoMinusPridonesi = bruto - vkupnoPridonesi
@@ -213,6 +214,7 @@ type alias Model =
     , dldOsnova18 : Int
     , vkupnoDavacki : Int
     , vkupnoPridonesi : Int
+    , razlika : Int
     , brutoMinusPridonesi : Int
     }
 
@@ -225,6 +227,7 @@ initModel =
     , danoci = presmetajDanoci 0 procentiDanoci
     , dldOsnova10 = 0
     , dldOsnova18 = 0
+    , razlika = 0
     , vkupnoDavacki = 0
     , vkupnoPridonesi = 0
     , brutoMinusPridonesi = 0
@@ -438,6 +441,12 @@ details model =
                 [ tdLeft "Данок на личен доход"
                 , td (Round.round 2 (procentiDanoci.dld18 * 100) ++ "%")
                 , td (String.fromInt model.danoci.dld18)
+                , td "МКД"
+                ]
+            , tr []
+                [ tdLeft "Дополнително прогресивно даночење на основица над 90000"
+                , td (Round.round 2 ((procentiDanoci.dld18 - procentiDanoci.dld10) * 100) ++ "%")
+                , td (String.fromInt model.razlika)
                 , td "МКД"
                 ]
             , tr []
