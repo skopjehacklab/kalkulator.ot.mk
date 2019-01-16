@@ -5007,7 +5007,28 @@ var author$project$Main$rowStyle = _List_fromArray(
 var elm$html$Html$td = _VirtualDom_node('td');
 var elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var elm$html$Html$text = elm$virtual_dom$VirtualDom$text;
+var elm$json$Json$Encode$string = _Json_wrap;
+var elm$html$Html$Attributes$stringProperty = F2(
+	function (key, string) {
+		return A2(
+			_VirtualDom_property,
+			key,
+			elm$json$Json$Encode$string(string));
+	});
+var elm$html$Html$Attributes$align = elm$html$Html$Attributes$stringProperty('align');
 var author$project$Main$td = function (txt) {
+	return A2(
+		elm$html$Html$td,
+		A2(
+			elm$core$List$cons,
+			elm$html$Html$Attributes$align('right'),
+			author$project$Main$rowStyle),
+		_List_fromArray(
+			[
+				elm$html$Html$text(txt)
+			]));
+};
+var author$project$Main$tdLeft = function (txt) {
 	return A2(
 		elm$html$Html$td,
 		author$project$Main$rowStyle,
@@ -5309,7 +5330,7 @@ var author$project$Main$details = function (model) {
 						author$project$Main$bold,
 						_List_fromArray(
 							[
-								author$project$Main$td('Бруто'),
+								author$project$Main$tdLeft('Бруто'),
 								author$project$Main$td(''),
 								author$project$Main$td(
 								elm$core$String$fromInt(model.G)),
@@ -5320,7 +5341,7 @@ var author$project$Main$details = function (model) {
 						_List_Nil,
 						_List_fromArray(
 							[
-								author$project$Main$td('Придонеси за задолжително ПИО'),
+								author$project$Main$tdLeft('Придонеси за задолжително ПИО'),
 								author$project$Main$td(
 								A2(myrho$elm_round$Round$round, 2, author$project$Main$procentiPridonesi.B * 100) + '%'),
 								author$project$Main$td(
@@ -5332,7 +5353,7 @@ var author$project$Main$details = function (model) {
 						_List_Nil,
 						_List_fromArray(
 							[
-								author$project$Main$td('Придонеси за задолжително здравствено осигурување'),
+								author$project$Main$tdLeft('Придонеси за задолжително здравствено осигурување'),
 								author$project$Main$td(
 								A2(myrho$elm_round$Round$round, 2, author$project$Main$procentiPridonesi.F * 100) + '%'),
 								author$project$Main$td(
@@ -5344,7 +5365,7 @@ var author$project$Main$details = function (model) {
 						_List_Nil,
 						_List_fromArray(
 							[
-								author$project$Main$td('Придонеси за вработување'),
+								author$project$Main$tdLeft('Придонеси за вработување'),
 								author$project$Main$td(
 								A2(myrho$elm_round$Round$round, 2, author$project$Main$procentiPridonesi.C * 100) + '%'),
 								author$project$Main$td(
@@ -5356,7 +5377,7 @@ var author$project$Main$details = function (model) {
 						_List_Nil,
 						_List_fromArray(
 							[
-								author$project$Main$td('Дополнителен придонес за задолжително осигурување во случај повреда или професионално заболување'),
+								author$project$Main$tdLeft('Дополнителен придонес за задолжително осигурување во случај повреда или професионално заболување'),
 								author$project$Main$td(
 								A2(myrho$elm_round$Round$round, 2, author$project$Main$procentiPridonesi.u * 100) + '%'),
 								author$project$Main$td(
@@ -5368,7 +5389,7 @@ var author$project$Main$details = function (model) {
 						author$project$Main$bold,
 						_List_fromArray(
 							[
-								author$project$Main$td('Вкупно придонеси'),
+								author$project$Main$tdLeft('Вкупно придонеси'),
 								author$project$Main$td(''),
 								author$project$Main$td(
 								elm$core$String$fromInt(model.ag)),
@@ -5379,7 +5400,7 @@ var author$project$Main$details = function (model) {
 						_List_Nil,
 						_List_fromArray(
 							[
-								author$project$Main$td('Бруто плата намалена за придонеси'),
+								author$project$Main$tdLeft('Бруто плата намалена за придонеси'),
 								author$project$Main$td(''),
 								author$project$Main$td(
 								elm$core$String$fromInt(model.Z)),
@@ -5390,7 +5411,7 @@ var author$project$Main$details = function (model) {
 						_List_Nil,
 						_List_fromArray(
 							[
-								author$project$Main$td('Лично ослободување'),
+								author$project$Main$tdLeft('Лично ослободување'),
 								author$project$Main$td(''),
 								author$project$Main$td(
 								elm$core$String$fromInt(author$project$Main$licnoOsloboduvanje)),
@@ -5401,7 +5422,7 @@ var author$project$Main$details = function (model) {
 						_List_Nil,
 						_List_fromArray(
 							[
-								author$project$Main$td('Даночна основа за пресметка на данок на личен доход со 10% (за даночна основа под 90.000 денари)'),
+								author$project$Main$tdLeft('Даночна основа за пресметка на данок на личен доход со 10% (за даночна основа под 90.000 денари)'),
 								author$project$Main$td(''),
 								author$project$Main$td(
 								elm$core$String$fromInt(model._)),
@@ -5412,7 +5433,7 @@ var author$project$Main$details = function (model) {
 						_List_Nil,
 						_List_fromArray(
 							[
-								author$project$Main$td('Данок на личен доход'),
+								author$project$Main$tdLeft('Данок на личен доход'),
 								author$project$Main$td(
 								A2(myrho$elm_round$Round$round, 2, author$project$Main$procentiDanoci.v * 100) + '%'),
 								author$project$Main$td(
@@ -5424,7 +5445,7 @@ var author$project$Main$details = function (model) {
 						_List_Nil,
 						_List_fromArray(
 							[
-								author$project$Main$td('Даночна основа за пресметка на данок на личен доход со 18% (за даночна основа над 90.000 денари)'),
+								author$project$Main$tdLeft('Даночна основа за пресметка на данок на личен доход со 18% (за даночна основа над 90.000 денари)'),
 								author$project$Main$td(''),
 								author$project$Main$td(
 								elm$core$String$fromInt(model.aa)),
@@ -5435,7 +5456,7 @@ var author$project$Main$details = function (model) {
 						_List_Nil,
 						_List_fromArray(
 							[
-								author$project$Main$td('Данок на личен доход'),
+								author$project$Main$tdLeft('Данок на личен доход'),
 								author$project$Main$td(
 								A2(myrho$elm_round$Round$round, 2, author$project$Main$procentiDanoci.w * 100) + '%'),
 								author$project$Main$td(
@@ -5447,7 +5468,7 @@ var author$project$Main$details = function (model) {
 						_List_Nil,
 						_List_fromArray(
 							[
-								author$project$Main$td('Вкупно придонеси и данок'),
+								author$project$Main$tdLeft('Вкупно придонеси и данок'),
 								author$project$Main$td(''),
 								author$project$Main$td(
 								elm$core$String$fromInt(model.af)),
@@ -5458,7 +5479,7 @@ var author$project$Main$details = function (model) {
 						author$project$Main$bold,
 						_List_fromArray(
 							[
-								author$project$Main$td('Нето'),
+								author$project$Main$tdLeft('Нето'),
 								author$project$Main$td(''),
 								author$project$Main$td(
 								elm$core$String$fromInt(model.z)),
@@ -5495,14 +5516,6 @@ var author$project$Main$splitter = _List_fromArray(
 	]);
 var elm$html$Html$input = _VirtualDom_node('input');
 var elm$html$Html$th = _VirtualDom_node('th');
-var elm$json$Json$Encode$string = _Json_wrap;
-var elm$html$Html$Attributes$stringProperty = F2(
-	function (key, string) {
-		return A2(
-			_VirtualDom_property,
-			key,
-			elm$json$Json$Encode$string(string));
-	});
 var elm$html$Html$Attributes$placeholder = elm$html$Html$Attributes$stringProperty('placeholder');
 var elm$html$Html$Attributes$type_ = elm$html$Html$Attributes$stringProperty('type');
 var elm$html$Html$Attributes$value = elm$html$Html$Attributes$stringProperty('value');
