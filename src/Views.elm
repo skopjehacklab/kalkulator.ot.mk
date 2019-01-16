@@ -2,7 +2,7 @@ module Views exposing (Msg(..), view)
 
 import Danok exposing (Model, licnoOsloboduvanje, procentiDanoci, procentiPridonesi, progresivnoNamaluvanje)
 import Html exposing (..)
-import Html.Attributes exposing (align, alt, href, placeholder, src, style, title, type_, value)
+import Html.Attributes exposing (align, alt, href, placeholder, rel, src, style, target, title, type_, value)
 import Html.Events exposing (onInput)
 import Round
 
@@ -51,7 +51,7 @@ pdfLinkTxt =
 
 pdfLink : Html Msg
 pdfLink =
-    a [ href "http://ujp.gov.mk/e/regulativa/opis/337", title pdfLinkTxt ]
+    a [ href "http://ujp.gov.mk/e/regulativa/opis/337", title pdfLinkTxt, target "_blank", rel "noopener" ]
         [ img
             [ style "position" "absolute"
             , style "top" "10px"
