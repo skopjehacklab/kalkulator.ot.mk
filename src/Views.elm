@@ -1,6 +1,6 @@
 module Views exposing (Msg(..), view)
 
-import Danok exposing (Model, licnoOsloboduvanje, procentiDanoci, procentiPridonesi)
+import Danok exposing (Model, licnoOsloboduvanje, procentiDanoci, procentiPridonesi, progresivnoNamaluvanje)
 import Html exposing (..)
 import Html.Attributes exposing (align, alt, href, placeholder, src, style, title, type_, value)
 import Html.Events exposing (onInput)
@@ -119,6 +119,39 @@ inputFields model =
         ]
 
 
+infoIcon : Html Msg
+infoIcon =
+    span
+        [ style "display" "inline-block"
+        , style "width" "16px"
+        , style "height" "16px"
+        , style "text-align" "center"
+        , style "border-radius" "50%"
+        , style "background" "#9898ea"
+        , style "color" "#fff"
+        , style "margin-right" "5px"
+        , style "user-select" "none"
+        ]
+        [ i [] [ text "i" ] ]
+
+
+progressiveInfo : Model -> Html Msg
+progressiveInfo model =
+    div [ style "padding" "10px", style "border" "1px solid #ddd", style "background" "#eee", style "margin-top" "10px" ]
+        [ infoIcon
+        , let
+            namaluvanje =
+                progresivnoNamaluvanje model
+          in
+          case namaluvanje of
+            0 ->
+                text ("Прогресивниот данок не влијае за плата со нето износ " ++ String.fromInt model.neto ++ " денар(и).")
+
+            _ ->
+                text ("Со прогресивниот данок, новата нето плата е намалена за " ++ String.fromInt namaluvanje ++ "  денар(и).")
+        ]
+
+
 details : Model -> Html Msg
 details model =
     div [ style "margin" "0 0 50px 0" ]
@@ -208,6 +241,7 @@ details model =
                 , td "МКД"
                 ]
             ]
+        , progressiveInfo model
         ]
 
 
