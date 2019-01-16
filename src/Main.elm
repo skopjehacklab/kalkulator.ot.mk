@@ -2,7 +2,7 @@ module Main exposing (Danoci, Model, Msg(..), Pridonesi, bold, bruto2neto, conta
 
 import Browser exposing (..)
 import Html exposing (..)
-import Html.Attributes exposing (alt, href, placeholder, src, style, type_, value)
+import Html.Attributes exposing (align, alt, href, placeholder, src, style, type_, value)
 import Html.Events exposing (onInput)
 import Round
 
@@ -277,13 +277,6 @@ containerStyle =
     ]
 
 
-rowStyle : List (Attribute msg)
-rowStyle =
-    [ style "border-bottom" "1px solid #afafaf"
-    , style "padding" "15px"
-    ]
-
-
 bold : List (Attribute msg)
 bold =
     [ style "font-weight" "bold"
@@ -329,8 +322,20 @@ inputStyle =
     ]
 
 
+rowStyle : List (Attribute msg)
+rowStyle =
+    [ style "border-bottom" "1px solid #afafaf"
+    , style "padding" "15px"
+    ]
+
+
 td : String -> Html Msg
 td txt =
+    Html.td (align "right" :: rowStyle) [ text txt ]
+
+
+tdLeft : String -> Html Msg
+tdLeft txt =
     Html.td rowStyle [ text txt ]
 
 
@@ -364,85 +369,85 @@ details model =
     div [ style "margin" "0 0 50px 0" ]
         [ table []
             [ tr bold
-                [ td "Бруто"
+                [ tdLeft "Бруто"
                 , td ""
                 , td (String.fromInt model.bruto)
                 , td "МКД"
                 ]
             , tr []
-                [ td "Придонеси за задолжително ПИО"
+                [ tdLeft "Придонеси за задолжително ПИО"
                 , td (Round.round 2 (procentiPridonesi.penzisko * 100) ++ "%")
                 , td (String.fromInt model.pridonesi.penzisko)
                 , td "МКД"
                 ]
             , tr []
-                [ td "Придонеси за задолжително здравствено осигурување"
+                [ tdLeft "Придонеси за задолжително здравствено осигурување"
                 , td (Round.round 2 (procentiPridonesi.zdravstveno * 100) ++ "%")
                 , td (String.fromInt model.pridonesi.zdravstveno)
                 , td "МКД"
                 ]
             , tr []
-                [ td "Придонеси за вработување"
+                [ tdLeft "Придонеси за вработување"
                 , td (Round.round 2 (procentiPridonesi.pridones * 100) ++ "%")
                 , td (String.fromInt model.pridonesi.pridones)
                 , td "МКД"
                 ]
             , tr []
-                [ td "Дополнителен придонес за задолжително осигурување во случај повреда или професионално заболување"
+                [ tdLeft "Дополнителен придонес за задолжително осигурување во случај повреда или професионално заболување"
                 , td (Round.round 2 (procentiPridonesi.boluvanje * 100) ++ "%")
                 , td (String.fromInt model.pridonesi.boluvanje)
                 , td "МКД"
                 ]
             , tr bold
-                [ td "Вкупно придонеси"
+                [ tdLeft "Вкупно придонеси"
                 , td ""
                 , td (String.fromInt model.vkupnoPridonesi)
                 , td "МКД"
                 ]
             , tr []
-                [ td "Бруто плата намалена за придонеси"
+                [ tdLeft "Бруто плата намалена за придонеси"
                 , td ""
                 , td (String.fromInt model.brutoMinusPridonesi)
                 , td "МКД"
                 ]
             , tr []
-                [ td "Лично ослободување"
+                [ tdLeft "Лично ослободување"
                 , td ""
                 , td (String.fromInt licnoOsloboduvanje)
                 , td "МКД"
                 ]
             , tr []
-                [ td "Даночна основа за пресметка на данок на личен доход со 10% (за даночна основа под 90.000 денари)"
+                [ tdLeft "Даночна основа за пресметка на данок на личен доход со 10% (за даночна основа под 90.000 денари)"
                 , td ""
                 , td (String.fromInt model.dldOsnova10)
                 , td "МКД"
                 ]
             , tr []
-                [ td "Данок на личен доход"
+                [ tdLeft "Данок на личен доход"
                 , td (Round.round 2 (procentiDanoci.dld10 * 100) ++ "%")
                 , td (String.fromInt model.danoci.dld10)
                 , td "МКД"
                 ]
             , tr []
-                [ td "Даночна основа за пресметка на данок на личен доход со 18% (за даночна основа над 90.000 денари)"
+                [ tdLeft "Даночна основа за пресметка на данок на личен доход со 18% (за даночна основа над 90.000 денари)"
                 , td ""
                 , td (String.fromInt model.dldOsnova18)
                 , td "МКД"
                 ]
             , tr []
-                [ td "Данок на личен доход"
+                [ tdLeft "Данок на личен доход"
                 , td (Round.round 2 (procentiDanoci.dld18 * 100) ++ "%")
                 , td (String.fromInt model.danoci.dld18)
                 , td "МКД"
                 ]
             , tr []
-                [ td "Вкупно придонеси и данок"
+                [ tdLeft "Вкупно придонеси и данок"
                 , td ""
                 , td (String.fromInt model.vkupnoDavacki)
                 , td "МКД"
                 ]
             , tr bold
-                [ td "Нето"
+                [ tdLeft "Нето"
                 , td ""
                 , td (String.fromInt model.neto)
                 , td "МКД"
