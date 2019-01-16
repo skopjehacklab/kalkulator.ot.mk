@@ -4515,7 +4515,7 @@ var author$project$Main$bruto2neto = function (bruto) {
 	var neto = (bruto - vkupnoPridonesi) - vkupnoDanoci;
 	return {G: bruto, Z: bruto - vkupnoPridonesi, Q: danoci, _: dldOsnova10, aa: dldOsnova18, z: neto, D: pridonesi, af: vkupnoPridonesi + vkupnoDanoci, ag: vkupnoPridonesi};
 };
-var author$project$Main$minBruto = 17418;
+var author$project$Main$minBruto = 17040;
 var author$project$Main$minNeto = 12165;
 var elm$core$Basics$fdiv = _Basics_fdiv;
 var elm$core$Basics$floor = _Basics_floor;
