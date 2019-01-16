@@ -1,7 +1,7 @@
 language: elm
 
 before_deploy:
-  - elm make src/Main.elm --output=dist/index.html --optimize
+  - elm make src/Main.elm --output=dist/app.js --optimize
 
 deploy:
   skip_cleanup: true
