@@ -770,11 +770,11 @@ function _Debug_crash_UNUSED(identifier, fact1, fact2, fact3, fact4)
 
 function _Debug_regionToString(region)
 {
-	if (region.ap.R === region.az.R)
+	if (region.aq.R === region.aA.R)
 	{
-		return 'on line ' + region.ap.R;
+		return 'on line ' + region.aq.R;
 	}
-	return 'on lines ' + region.ap.R + ' through ' + region.az.R;
+	return 'on lines ' + region.aq.R + ' through ' + region.aA.R;
 }
 
 
@@ -1841,9 +1841,9 @@ var _Platform_worker = F4(function(impl, flagDecoder, debugMetadata, args)
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.bi,
-		impl.bD,
-		impl.bz,
+		impl.bj,
+		impl.bE,
+		impl.bA,
 		function() { return function() {} }
 	);
 });
@@ -2643,9 +2643,9 @@ var _VirtualDom_mapEventTuple = F2(function(func, tuple)
 var _VirtualDom_mapEventRecord = F2(function(func, record)
 {
 	return {
-		r: func(record.r),
-		aq: record.aq,
-		ao: record.ao
+		t: func(record.t),
+		ar: record.ar,
+		ap: record.ap
 	}
 });
 
@@ -2913,11 +2913,11 @@ function _VirtualDom_makeCallback(eventNode, initialHandler)
 		// 3 = Custom
 
 		var value = result.a;
-		var message = !tag ? value : tag < 3 ? value.a : value.r;
-		var stopPropagation = tag == 1 ? value.b : tag == 3 && value.aq;
+		var message = !tag ? value : tag < 3 ? value.a : value.t;
+		var stopPropagation = tag == 1 ? value.b : tag == 3 && value.ar;
 		var currentEventNode = (
 			stopPropagation && event.stopPropagation(),
-			(tag == 2 ? value.b : tag == 3 && value.ao) && event.preventDefault(),
+			(tag == 2 ? value.b : tag == 3 && value.ap) && event.preventDefault(),
 			eventNode
 		);
 		var tagger;
@@ -3900,11 +3900,11 @@ var _Browser_element = _Debugger_element || F4(function(impl, flagDecoder, debug
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.bi,
-		impl.bD,
-		impl.bz,
+		impl.bj,
+		impl.bE,
+		impl.bA,
 		function(sendToApp, initialModel) {
-			var view = impl.bF;
+			var view = impl.bG;
 			/**/
 			var domNode = args['node'];
 			//*/
@@ -3936,12 +3936,12 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.bi,
-		impl.bD,
-		impl.bz,
+		impl.bj,
+		impl.bE,
+		impl.bA,
 		function(sendToApp, initialModel) {
 			var divertHrefToApp = impl.U && impl.U(sendToApp)
-			var view = impl.bF;
+			var view = impl.bG;
 			var title = _VirtualDom_doc.title;
 			var bodyNode = _VirtualDom_doc.body;
 			var currNode = _VirtualDom_virtualize(bodyNode);
@@ -3949,12 +3949,12 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 			{
 				_VirtualDom_divertHrefToApp = divertHrefToApp;
 				var doc = view(model);
-				var nextNode = _VirtualDom_node('body')(_List_Nil)(doc.a4);
+				var nextNode = _VirtualDom_node('body')(_List_Nil)(doc.a5);
 				var patches = _VirtualDom_diff(currNode, nextNode);
 				bodyNode = _VirtualDom_applyPatches(bodyNode, currNode, patches, sendToApp);
 				currNode = nextNode;
 				_VirtualDom_divertHrefToApp = 0;
-				(title !== doc.bC) && (_VirtualDom_doc.title = title = doc.bC);
+				(title !== doc.bD) && (_VirtualDom_doc.title = title = doc.bD);
 			});
 		}
 	);
@@ -4005,8 +4005,8 @@ function _Browser_makeAnimator(model, draw)
 
 function _Browser_application(impl)
 {
-	var onUrlChange = impl.bt;
-	var onUrlRequest = impl.bu;
+	var onUrlChange = impl.bu;
+	var onUrlRequest = impl.bv;
 	var key = function() { key.a(onUrlChange(_Browser_getUrl())); };
 
 	return _Browser_document({
@@ -4026,9 +4026,9 @@ function _Browser_application(impl)
 					var next = elm$url$Url$fromString(href).a;
 					sendToApp(onUrlRequest(
 						(next
-							&& curr.aQ === next.aQ
-							&& curr.aE === next.aE
-							&& curr.aN.a === next.aN.a
+							&& curr.aR === next.aR
+							&& curr.aF === next.aF
+							&& curr.aO.a === next.aO.a
 						)
 							? elm$browser$Browser$Internal(next)
 							: elm$browser$Browser$External(href)
@@ -4036,13 +4036,13 @@ function _Browser_application(impl)
 				}
 			});
 		},
-		bi: function(flags)
+		bj: function(flags)
 		{
-			return A3(impl.bi, flags, _Browser_getUrl(), key);
+			return A3(impl.bj, flags, _Browser_getUrl(), key);
 		},
-		bF: impl.bF,
-		bD: impl.bD,
-		bz: impl.bz
+		bG: impl.bG,
+		bE: impl.bE,
+		bA: impl.bA
 	});
 }
 
@@ -4108,17 +4108,17 @@ var _Browser_decodeEvent = F2(function(decoder, event)
 function _Browser_visibilityInfo()
 {
 	return (typeof _VirtualDom_doc.hidden !== 'undefined')
-		? { bg: 'hidden', P: 'visibilitychange' }
+		? { bh: 'hidden', P: 'visibilitychange' }
 		:
 	(typeof _VirtualDom_doc.mozHidden !== 'undefined')
-		? { bg: 'mozHidden', P: 'mozvisibilitychange' }
+		? { bh: 'mozHidden', P: 'mozvisibilitychange' }
 		:
 	(typeof _VirtualDom_doc.msHidden !== 'undefined')
-		? { bg: 'msHidden', P: 'msvisibilitychange' }
+		? { bh: 'msHidden', P: 'msvisibilitychange' }
 		:
 	(typeof _VirtualDom_doc.webkitHidden !== 'undefined')
-		? { bg: 'webkitHidden', P: 'webkitvisibilitychange' }
-		: { bg: 'hidden', P: 'visibilitychange' };
+		? { bh: 'webkitHidden', P: 'webkitvisibilitychange' }
+		: { bh: 'hidden', P: 'visibilitychange' };
 }
 
 
@@ -4199,10 +4199,10 @@ var _Browser_call = F2(function(functionName, id)
 function _Browser_getViewport()
 {
 	return {
-		aW: _Browser_getScene(),
-		a0: {
-			ah: _Browser_window.pageXOffset,
-			ai: _Browser_window.pageYOffset,
+		aX: _Browser_getScene(),
+		a1: {
+			ai: _Browser_window.pageXOffset,
+			aj: _Browser_window.pageYOffset,
 			N: _Browser_doc.documentElement.clientWidth,
 			I: _Browser_doc.documentElement.clientHeight
 		}
@@ -4238,13 +4238,13 @@ function _Browser_getViewportOf(id)
 	return _Browser_withNode(id, function(node)
 	{
 		return {
-			aW: {
+			aX: {
 				N: node.scrollWidth,
 				I: node.scrollHeight
 			},
-			a0: {
-				ah: node.scrollLeft,
-				ai: node.scrollTop,
+			a1: {
+				ai: node.scrollLeft,
+				aj: node.scrollTop,
 				N: node.clientWidth,
 				I: node.clientHeight
 			}
@@ -4276,16 +4276,16 @@ function _Browser_getElement(id)
 		var x = _Browser_window.pageXOffset;
 		var y = _Browser_window.pageYOffset;
 		return {
-			aW: _Browser_getScene(),
-			a0: {
-				ah: x,
-				ai: y,
+			aX: _Browser_getScene(),
+			a1: {
+				ai: x,
+				aj: y,
 				N: _Browser_doc.documentElement.clientWidth,
 				I: _Browser_doc.documentElement.clientHeight
 			},
-			a9: {
-				ah: x + rect.left,
-				ai: y + rect.top,
+			ba: {
+				ai: x + rect.left,
+				aj: y + rect.top,
 				N: rect.width,
 				I: rect.height
 			}
@@ -4438,27 +4438,27 @@ var elm$core$Basics$sub = _Basics_sub;
 var author$project$Main$presmetajDanoci = F2(
 	function (osnova, d) {
 		return {
-			v: A2(
+			o: A2(
 				author$project$Main$od,
-				d.v,
+				d.o,
 				A2(elm$core$Basics$min, author$project$Main$limit, osnova)),
-			w: A2(
+			p: A2(
 				author$project$Main$od,
-				d.w,
+				d.p,
 				A2(elm$core$Basics$max, 0, osnova - author$project$Main$limit))
 		};
 	});
 var author$project$Main$presmetajPridonesi = F2(
 	function (bruto, p) {
 		return {
-			u: A2(author$project$Main$od, p.u, bruto),
+			w: A2(author$project$Main$od, p.w, bruto),
 			B: A2(author$project$Main$od, p.B, bruto),
 			C: A2(author$project$Main$od, p.C, bruto),
 			F: A2(author$project$Main$od, p.F, bruto)
 		};
 	});
-var author$project$Main$procentiDanoci = {v: 0.1, w: 0.18};
-var author$project$Main$procentiPridonesi = {u: 5.0e-3, B: 0.184, C: 1.2e-2, F: 7.4e-2};
+var author$project$Main$procentiDanoci = {o: 0.1, p: 0.18};
+var author$project$Main$procentiPridonesi = {w: 5.0e-3, B: 0.184, C: 1.2e-2, F: 7.4e-2};
 var author$project$Main$initModel = {
 	G: 0,
 	Z: 0,
@@ -4467,8 +4467,9 @@ var author$project$Main$initModel = {
 	aa: 0,
 	z: 0,
 	D: A2(author$project$Main$presmetajPridonesi, 0, author$project$Main$procentiPridonesi),
-	af: 0,
-	ag: 0
+	ae: 0,
+	ag: 0,
+	ah: 0
 };
 var author$project$Main$licnoOsloboduvanje = 8000;
 var elm$core$Basics$add = _Basics_add;
@@ -4497,12 +4498,12 @@ var elm$core$List$sum = function (numbers) {
 var author$project$Main$sumaDanoci = function (d) {
 	return elm$core$List$sum(
 		_List_fromArray(
-			[d.v, d.w]));
+			[d.o, d.p]));
 };
 var author$project$Main$sumaPridonesi = function (p) {
 	return elm$core$List$sum(
 		_List_fromArray(
-			[p.B, p.F, p.C, p.u]));
+			[p.B, p.F, p.C, p.w]));
 };
 var author$project$Main$bruto2neto = function (bruto) {
 	var pridonesi = A2(author$project$Main$presmetajPridonesi, bruto, author$project$Main$procentiPridonesi);
@@ -4513,7 +4514,18 @@ var author$project$Main$bruto2neto = function (bruto) {
 	var danoci = A2(author$project$Main$presmetajDanoci, dldOsnova, author$project$Main$procentiDanoci);
 	var vkupnoDanoci = author$project$Main$sumaDanoci(danoci);
 	var neto = (bruto - vkupnoPridonesi) - vkupnoDanoci;
-	return {G: bruto, Z: bruto - vkupnoPridonesi, Q: danoci, _: dldOsnova10, aa: dldOsnova18, z: neto, D: pridonesi, af: vkupnoPridonesi + vkupnoDanoci, ag: vkupnoPridonesi};
+	return {
+		G: bruto,
+		Z: bruto - vkupnoPridonesi,
+		Q: danoci,
+		_: dldOsnova10,
+		aa: dldOsnova18,
+		z: neto,
+		D: pridonesi,
+		ae: danoci.p - A2(author$project$Main$od, author$project$Main$procentiDanoci.o, dldOsnova18),
+		ag: vkupnoPridonesi + vkupnoDanoci,
+		ah: vkupnoPridonesi
+	};
 };
 var author$project$Main$minBruto = 17040;
 var author$project$Main$minNeto = 12165;
@@ -5369,9 +5381,9 @@ var author$project$Main$details = function (model) {
 							[
 								author$project$Main$tdLeft('Дополнителен придонес за задолжително осигурување во случај повреда или професионално заболување'),
 								author$project$Main$td(
-								A2(myrho$elm_round$Round$round, 2, author$project$Main$procentiPridonesi.u * 100) + '%'),
+								A2(myrho$elm_round$Round$round, 2, author$project$Main$procentiPridonesi.w * 100) + '%'),
 								author$project$Main$td(
-								elm$core$String$fromInt(model.D.u)),
+								elm$core$String$fromInt(model.D.w)),
 								author$project$Main$td('МКД')
 							])),
 						A2(
@@ -5382,7 +5394,7 @@ var author$project$Main$details = function (model) {
 								author$project$Main$tdLeft('Вкупно придонеси'),
 								author$project$Main$td(''),
 								author$project$Main$td(
-								elm$core$String$fromInt(model.ag)),
+								elm$core$String$fromInt(model.ah)),
 								author$project$Main$td('МКД')
 							])),
 						A2(
@@ -5425,9 +5437,9 @@ var author$project$Main$details = function (model) {
 							[
 								author$project$Main$tdLeft('Данок на личен доход'),
 								author$project$Main$td(
-								A2(myrho$elm_round$Round$round, 2, author$project$Main$procentiDanoci.v * 100) + '%'),
+								A2(myrho$elm_round$Round$round, 2, author$project$Main$procentiDanoci.o * 100) + '%'),
 								author$project$Main$td(
-								elm$core$String$fromInt(model.Q.v)),
+								elm$core$String$fromInt(model.Q.o)),
 								author$project$Main$td('МКД')
 							])),
 						A2(
@@ -5448,9 +5460,21 @@ var author$project$Main$details = function (model) {
 							[
 								author$project$Main$tdLeft('Данок на личен доход'),
 								author$project$Main$td(
-								A2(myrho$elm_round$Round$round, 2, author$project$Main$procentiDanoci.w * 100) + '%'),
+								A2(myrho$elm_round$Round$round, 2, author$project$Main$procentiDanoci.p * 100) + '%'),
 								author$project$Main$td(
-								elm$core$String$fromInt(model.Q.w)),
+								elm$core$String$fromInt(model.Q.p)),
+								author$project$Main$td('МКД')
+							])),
+						A2(
+						elm$html$Html$tr,
+						_List_Nil,
+						_List_fromArray(
+							[
+								author$project$Main$tdLeft('Дополнително прогресивно даночење на основица над 90000'),
+								author$project$Main$td(
+								A2(myrho$elm_round$Round$round, 2, (author$project$Main$procentiDanoci.p - author$project$Main$procentiDanoci.o) * 100) + '%'),
+								author$project$Main$td(
+								elm$core$String$fromInt(model.ae)),
 								author$project$Main$td('МКД')
 							])),
 						A2(
@@ -5461,7 +5485,7 @@ var author$project$Main$details = function (model) {
 								author$project$Main$tdLeft('Вкупно придонеси и данок'),
 								author$project$Main$td(''),
 								author$project$Main$td(
-								elm$core$String$fromInt(model.af)),
+								elm$core$String$fromInt(model.ag)),
 								author$project$Main$td('МКД')
 							])),
 						A2(
@@ -5849,7 +5873,7 @@ var elm$core$String$left = F2(
 var elm$core$String$contains = _String_contains;
 var elm$url$Url$Url = F6(
 	function (protocol, host, port_, path, query, fragment) {
-		return {aB: fragment, aE: host, aL: path, aN: port_, aQ: protocol, aR: query};
+		return {aC: fragment, aF: host, aM: path, aO: port_, aR: protocol, aS: query};
 	});
 var elm$url$Url$chompBeforePath = F5(
 	function (protocol, path, params, frag, str) {
@@ -5956,22 +5980,22 @@ var elm$url$Url$fromString = function (str) {
 var elm$browser$Browser$sandbox = function (impl) {
 	return _Browser_element(
 		{
-			bi: function (_n0) {
-				return _Utils_Tuple2(impl.bi, elm$core$Platform$Cmd$none);
+			bj: function (_n0) {
+				return _Utils_Tuple2(impl.bj, elm$core$Platform$Cmd$none);
 			},
-			bz: function (_n1) {
+			bA: function (_n1) {
 				return elm$core$Platform$Sub$none;
 			},
-			bD: F2(
+			bE: F2(
 				function (msg, model) {
 					return _Utils_Tuple2(
-						A2(impl.bD, msg, model),
+						A2(impl.bE, msg, model),
 						elm$core$Platform$Cmd$none);
 				}),
-			bF: impl.bF
+			bG: impl.bG
 		});
 };
 var author$project$Main$main = elm$browser$Browser$sandbox(
-	{bi: author$project$Main$initModel, bD: author$project$Main$update, bF: author$project$Main$view});
+	{bj: author$project$Main$initModel, bE: author$project$Main$update, bG: author$project$Main$view});
 _Platform_export({'Main':{'init':author$project$Main$main(
 	elm$json$Json$Decode$succeed(0))(0)}});}(this));
