@@ -1,4 +1,4 @@
-module Danok exposing (Danoci, Model, bruto2neto, initModel, licnoOsloboduvanje, minBruto, minNeto, neto2bruto, procentiDanoci, procentiPridonesi)
+module Danok exposing (Danoci, Model, bruto2neto, initModel, licnoOsloboduvanje, minBruto, minNeto, neto2bruto, procentiDanoci, procentiPridonesi, progresivnoNamaluvanje)
 
 
 type alias Model =
@@ -210,3 +210,8 @@ binSearch searchValue lo hi =
 neto2bruto : Int -> Model
 neto2bruto val =
     bruto2neto (findBruto val)
+
+
+progresivnoNamaluvanje : Model -> Int
+progresivnoNamaluvanje model =
+    model.danoci.dld18 - (model.dldOsnova18 |> od procentiDanoci.dld10)
