@@ -5041,7 +5041,7 @@ var author$project$Views$progressiveInfo = function (model) {
 						'Прогресивниот данок не влијае за плата со нето износ ' + (elm$core$String$fromInt(model.Z) + ' денар(и).'));
 				} else {
 					return elm$html$Html$text(
-						'Со прогресивниот данок, новата нето плата е намалена за ' + (elm$core$String$fromInt(namaluvanje) + '  денар(и).'));
+						'Со прогресивната даночна реформа, се плаќаат дополнителни ' + (elm$core$String$fromInt(namaluvanje) + ' денар(и).'));
 				}
 			}()
 			]));
