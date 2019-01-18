@@ -148,7 +148,7 @@ progressiveInfo model =
                 text ("Прогресивниот данок не влијае за плата со нето износ " ++ String.fromInt model.neto ++ " денар(и).")
 
             _ ->
-                text ("Со прогресивниот данок, новата нето плата е намалена за " ++ String.fromInt namaluvanje ++ "  денар(и).")
+                text ("Со прогресивната даночна реформа, се плаќаат дополнителни " ++ String.fromInt namaluvanje ++ " денар(и).")
         ]
 
 
