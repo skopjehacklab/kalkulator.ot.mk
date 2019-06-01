@@ -57,7 +57,7 @@ pdfLink =
             , style "top" "10px"
             , style "right" "10px"
             , style "width" "100px"
-            , src "http://www.ujp.gov.mk/uploads/Image/Logo_UJP.png"
+            , src "logo_ujp.png"
             , alt pdfLinkTxt
             ]
             []
