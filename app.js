@@ -5763,7 +5763,7 @@ var author$project$Views$pdfLink = A2(
 					A2(elm$html$Html$Attributes$style, 'top', '10px'),
 					A2(elm$html$Html$Attributes$style, 'right', '10px'),
 					A2(elm$html$Html$Attributes$style, 'width', '100px'),
-					elm$html$Html$Attributes$src('http://www.ujp.gov.mk/uploads/Image/Logo_UJP.png'),
+					elm$html$Html$Attributes$src('logo_ujp.png'),
 					elm$html$Html$Attributes$alt(author$project$Views$pdfLinkTxt)
 				]),
 			_List_Nil)
