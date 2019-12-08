@@ -1,7 +1,7 @@
 module Main exposing (main, update)
 
-import Browser exposing (..)
-import Danok exposing (Danoci, Model, bruto2neto, initModel, minBruto, minNeto, neto2bruto)
+import Browser
+import Danok exposing (Model, bruto2neto, initModel, minBruto, minNeto, neto2bruto)
 import Views exposing (Msg(..), view)
 
 
