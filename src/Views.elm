@@ -1,6 +1,6 @@
 module Views exposing (Msg(..), view)
 
-import Danok exposing (Model, licnoOsloboduvanje, procentiDanoci, procentiPridonesi, progresivnoNamaluvanje)
+import Danok exposing (Model, licnoOsloboduvanje, procentiDanoci, procentiPridonesi)
 import Html exposing (..)
 import Html.Attributes exposing (align, alt, href, placeholder, rel, src, style, target, title, type_, value)
 import Html.Events exposing (onInput)
@@ -135,23 +135,6 @@ infoIcon =
         [ i [] [ text "i" ] ]
 
 
-progressiveInfo : Model -> Html Msg
-progressiveInfo model =
-    div [ style "padding" "10px", style "border" "1px solid #ddd", style "background" "#eee", style "margin-top" "10px" ]
-        [ infoIcon
-        , let
-            namaluvanje =
-                progresivnoNamaluvanje model
-          in
-          case namaluvanje of
-            0 ->
-                text ("Прогресивниот данок не влијае за плата со нето износ " ++ String.fromInt model.neto ++ " денар(и).")
-
-            _ ->
-                text ("Со прогресивната даночна реформа, се плаќаат дополнителни " ++ String.fromInt namaluvanje ++ " денар(и).")
-        ]
-
-
 details : Model -> Html Msg
 details model =
     div [ style "margin" "0 0 50px 0" ]
@@ -205,7 +188,7 @@ details model =
                 , td "МКД"
                 ]
             , tr []
-                [ tdLeft "Даночна основа за пресметка на данок на личен доход со 10% (за даночна основа под 90.000 денари)"
+                [ tdLeft "Даночна основа за пресметка на данок на личен доход"
                 , td ""
                 , td (String.fromInt model.dldOsnova10)
                 , td "МКД"
@@ -214,18 +197,6 @@ details model =
                 [ tdLeft "Данок на личен доход"
                 , td (Round.round 2 (procentiDanoci.dld10 * 100) ++ "%")
                 , td (String.fromInt model.danoci.dld10)
-                , td "МКД"
-                ]
-            , tr []
-                [ tdLeft "Даночна основа за пресметка на данок на личен доход со 18% (за даночна основа над 90.000 денари)"
-                , td ""
-                , td (String.fromInt model.dldOsnova18)
-                , td "МКД"
-                ]
-            , tr []
-                [ tdLeft "Данок на личен доход"
-                , td (Round.round 2 (procentiDanoci.dld18 * 100) ++ "%")
-                , td (String.fromInt model.danoci.dld18)
                 , td "МКД"
                 ]
             , tr []
@@ -241,7 +212,6 @@ details model =
                 , td "МКД"
                 ]
             ]
-        , progressiveInfo model
         ]
 
 

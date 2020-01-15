@@ -1,4 +1,4 @@
-module Danok exposing (Danoci, Model, bruto2neto, initModel, licnoOsloboduvanje, minBruto, minNeto, neto2bruto, procentiDanoci, procentiPridonesi, progresivnoNamaluvanje)
+module Danok exposing (Danoci, Model, bruto2neto, initModel, licnoOsloboduvanje, minBruto, minNeto, neto2bruto, procentiDanoci, procentiPridonesi)
 
 
 type alias Model =
@@ -7,7 +7,6 @@ type alias Model =
     , pridonesi : Pridonesi Int
     , danoci : Danoci Int
     , dldOsnova10 : Int
-    , dldOsnova18 : Int
     , vkupnoDavacki : Int
     , vkupnoPridonesi : Int
     , brutoMinusPridonesi : Int
@@ -21,7 +20,6 @@ initModel =
     , pridonesi = presmetajPridonesi 0 procentiPridonesi
     , danoci = presmetajDanoci 0 procentiDanoci
     , dldOsnova10 = 0
-    , dldOsnova18 = 0
     , vkupnoDavacki = 0
     , vkupnoPridonesi = 0
     , brutoMinusPridonesi = 0
@@ -80,28 +78,24 @@ od x =
 
 type alias Danoci number =
     { dld10 : number -- данок на личен доход од 10%
-    , dld18 : number -- данок на личен доход од 18%
     }
 
 
 procentiDanoci : Danoci Float
 procentiDanoci =
     { dld10 = 0.1
-    , dld18 = 0.18
     }
 
 
 presmetajDanoci : Int -> Danoci Float -> Danoci Int
 presmetajDanoci osnova d =
     { dld10 = min limit osnova |> od d.dld10
-    , dld18 = max 0 (osnova - limit) |> od d.dld18
     }
 
 
 sumaDanoci : Danoci number -> number
 sumaDanoci d =
-    [ d.dld10, d.dld18 ]
-        |> List.sum
+    d.dld10
 
 
 type alias Pridonesi number =
@@ -155,9 +149,6 @@ bruto2neto bruto =
         dldOsnova10 =
             min limit dldOsnova
 
-        dldOsnova18 =
-            max 0 (dldOsnova - limit)
-
         danoci =
             presmetajDanoci dldOsnova procentiDanoci
 
@@ -172,7 +163,6 @@ bruto2neto bruto =
     , pridonesi = pridonesi
     , danoci = danoci
     , dldOsnova10 = dldOsnova10
-    , dldOsnova18 = dldOsnova18
     , vkupnoDavacki = vkupnoPridonesi + vkupnoDanoci
     , vkupnoPridonesi = vkupnoPridonesi
     , brutoMinusPridonesi = bruto - vkupnoPridonesi
@@ -210,8 +200,3 @@ binSearch searchValue lo hi =
 neto2bruto : Int -> Model
 neto2bruto val =
     bruto2neto (findBruto val)
-
-
-progresivnoNamaluvanje : Model -> Int
-progresivnoNamaluvanje model =
-    model.danoci.dld18 - (model.dldOsnova18 |> od procentiDanoci.dld10)
