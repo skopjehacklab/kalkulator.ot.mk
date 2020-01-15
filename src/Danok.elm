@@ -43,7 +43,7 @@ referentnaVrednost =
 
 licnoOsloboduvanje : Int
 licnoOsloboduvanje =
-    8000
+    8228
 
 
 minNeto : Int
@@ -108,8 +108,8 @@ type alias Pridonesi number =
 
 procentiPridonesi : Pridonesi Float
 procentiPridonesi =
-    { penzisko = 0.184
-    , zdravstveno = 0.074
+    { penzisko = 0.188
+    , zdravstveno = 0.075
     , pridones = 0.012
     , boluvanje = 0.005
     }
