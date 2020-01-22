@@ -38,7 +38,7 @@ maxBrutoNetoOdnos =
 
 referentnaVrednost : Int
 referentnaVrednost =
-    34079
+    38319
 
 
 licnoOsloboduvanje : Int
