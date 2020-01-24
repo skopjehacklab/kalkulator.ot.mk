@@ -66,11 +66,6 @@ minOsnovica =
     referentnaVrednost // 2
 
 
-limit : Int
-limit =
-    90000
-
-
 od : Float -> Int -> Int
 od x =
     toFloat >> (*) x >> round
@@ -89,7 +84,7 @@ procentiDanoci =
 
 presmetajDanoci : Int -> Danoci Float -> Danoci Int
 presmetajDanoci osnova d =
-    { dld10 = min limit osnova |> od d.dld10
+    { dld10 = osnova |> od d.dld10
     }
 
 
@@ -147,7 +142,7 @@ bruto2neto bruto =
             bruto - vkupnoPridonesi - licnoOsloboduvanje
 
         dldOsnova10 =
-            min limit dldOsnova
+            dldOsnova
 
         danoci =
             presmetajDanoci dldOsnova procentiDanoci
