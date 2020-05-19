@@ -46,22 +46,26 @@ ribbon =
 
 pdfLinkTxt : String
 pdfLinkTxt =
-    "УЈП - Закон за данокот на личен доход"
+    "Закон за данокот на личен доход"
+
+
+pdfLinkStyle : List (Attribute msg)
+pdfLinkStyle =
+    [ style "float" "right"
+    , style "padding" "10px"
+    , style "font-size" "12px"
+    , style "background-color" "#fffcda"
+    , style "color" "#000000"
+    ]
 
 
 pdfLink : Html Msg
 pdfLink =
-    a [ href "http://ujp.gov.mk/e/regulativa/opis/337", title pdfLinkTxt, target "_blank", rel "noopener" ]
-        [ img
-            [ style "position" "absolute"
-            , style "top" "10px"
-            , style "right" "10px"
-            , style "width" "100px"
-            , src "logo_ujp.png"
-            , alt pdfLinkTxt
-            ]
-            []
-        ]
+    a
+        (pdfLinkStyle
+            ++ [ href "http://ujp.gov.mk/e/regulativa/opis/337", title pdfLinkTxt, target "_blank", rel "noopener" ]
+        )
+        [ text pdfLinkTxt ]
 
 
 splitter : List (Attribute msg)
