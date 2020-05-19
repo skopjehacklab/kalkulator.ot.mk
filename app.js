@@ -5876,48 +5876,47 @@ var $author$project$Views$inputFields = function (model) {
 			]));
 };
 var $elm$html$Html$a = _VirtualDom_node('a');
-var $elm$html$Html$Attributes$alt = $elm$html$Html$Attributes$stringProperty('alt');
 var $elm$html$Html$Attributes$href = function (url) {
 	return A2(
 		$elm$html$Html$Attributes$stringProperty,
 		'href',
 		_VirtualDom_noJavaScriptUri(url));
 };
-var $elm$html$Html$img = _VirtualDom_node('img');
-var $author$project$Views$pdfLinkTxt = 'УЈП - Закон за данокот на личен доход';
+var $author$project$Views$pdfLinkStyle = _List_fromArray(
+	[
+		A2($elm$html$Html$Attributes$style, 'float', 'right'),
+		A2($elm$html$Html$Attributes$style, 'padding', '10px'),
+		A2($elm$html$Html$Attributes$style, 'font-size', '12px'),
+		A2($elm$html$Html$Attributes$style, 'background-color', '#fffcda'),
+		A2($elm$html$Html$Attributes$style, 'color', '#000000')
+	]);
+var $author$project$Views$pdfLinkTxt = 'Закон за данокот на личен доход';
 var $elm$html$Html$Attributes$rel = _VirtualDom_attribute('rel');
+var $elm$html$Html$Attributes$target = $elm$html$Html$Attributes$stringProperty('target');
+var $elm$html$Html$Attributes$title = $elm$html$Html$Attributes$stringProperty('title');
+var $author$project$Views$pdfLink = A2(
+	$elm$html$Html$a,
+	_Utils_ap(
+		$author$project$Views$pdfLinkStyle,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$href('http://ujp.gov.mk/e/regulativa/opis/337'),
+				$elm$html$Html$Attributes$title($author$project$Views$pdfLinkTxt),
+				$elm$html$Html$Attributes$target('_blank'),
+				$elm$html$Html$Attributes$rel('noopener')
+			])),
+	_List_fromArray(
+		[
+			$elm$html$Html$text($author$project$Views$pdfLinkTxt)
+		]));
+var $elm$html$Html$Attributes$alt = $elm$html$Html$Attributes$stringProperty('alt');
+var $elm$html$Html$img = _VirtualDom_node('img');
 var $elm$html$Html$Attributes$src = function (url) {
 	return A2(
 		$elm$html$Html$Attributes$stringProperty,
 		'src',
 		_VirtualDom_noJavaScriptOrHtmlUri(url));
 };
-var $elm$html$Html$Attributes$target = $elm$html$Html$Attributes$stringProperty('target');
-var $elm$html$Html$Attributes$title = $elm$html$Html$Attributes$stringProperty('title');
-var $author$project$Views$pdfLink = A2(
-	$elm$html$Html$a,
-	_List_fromArray(
-		[
-			$elm$html$Html$Attributes$href('http://ujp.gov.mk/e/regulativa/opis/337'),
-			$elm$html$Html$Attributes$title($author$project$Views$pdfLinkTxt),
-			$elm$html$Html$Attributes$target('_blank'),
-			$elm$html$Html$Attributes$rel('noopener')
-		]),
-	_List_fromArray(
-		[
-			A2(
-			$elm$html$Html$img,
-			_List_fromArray(
-				[
-					A2($elm$html$Html$Attributes$style, 'position', 'absolute'),
-					A2($elm$html$Html$Attributes$style, 'top', '10px'),
-					A2($elm$html$Html$Attributes$style, 'right', '10px'),
-					A2($elm$html$Html$Attributes$style, 'width', '100px'),
-					$elm$html$Html$Attributes$src('logo_ujp.png'),
-					$elm$html$Html$Attributes$alt($author$project$Views$pdfLinkTxt)
-				]),
-			_List_Nil)
-		]));
 var $author$project$Views$ribbon = A2(
 	$elm$html$Html$a,
 	_List_fromArray(
