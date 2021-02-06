@@ -43,17 +43,17 @@ referentnaVrednost =
 
 licnoOsloboduvanje : Int
 licnoOsloboduvanje =
-    8228
+    8438
 
 
 minNeto : Int
 minNeto =
-    12165
+    14955
 
 
 minBruto : Int
 minBruto =
-    17040
+    20571
 
 
 maxOsnovica : Int
