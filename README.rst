@@ -22,8 +22,8 @@ plata.m.ie.mk
 * апликацијата нема сервер, сѐ се случува во browser
 * за локална работа, може да користите `elm reactor`
 * за пуштање во продукција: `elm make src/Main.elm --output=dist/app.js --optimize`
-* во нашиов случај, користиме travis-ci кој откога ќе направи build на апликацијата, го закачува во gh-pages branch-от
-  на истово repo (види `.travis.yml`)
+* во нашиов случај, користиме `github actions <.github/workflows/>`_ кој откога ќе направи build на апликацијата, го закачува во gh-pages branch-от
+  на истово repo.
 
-.. image:: https://travis-ci.org/skopjehacklab/kalkulator.ot.mk.svg?branch=master
-    :target: https://travis-ci.org/skopjehacklab/kalkulator.ot.mk
+.. image:: https://github.com/skopjehacklab/kalkulator.ot.mk/workflows/Build%20and%20Deploy/badge.svg
+    :target: https://github.com/skopjehacklab/kalkulator.ot.mk/actions
