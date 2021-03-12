@@ -36,9 +36,9 @@ maxBrutoNetoOdnos =
     10
 
 
-referentnaVrednost : Int
-referentnaVrednost =
-    38319
+prosecnaPlata : Int
+prosecnaPlata =
+    41141
 
 
 licnoOsloboduvanje : Int
@@ -58,12 +58,12 @@ minBruto =
 
 maxOsnovica : Int
 maxOsnovica =
-    referentnaVrednost * 16
+    prosecnaPlata * 16
 
 
 minOsnovica : Int
 minOsnovica =
-    referentnaVrednost // 2
+    prosecnaPlata // 2
 
 
 od : Float -> Int -> Int
