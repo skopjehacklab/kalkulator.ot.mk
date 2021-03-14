@@ -117,8 +117,8 @@ inputFields model =
             , th [] [ text "Нето" ]
             ]
         , tr []
-            [ Html.td [] [ input ([ type_ "number", placeholder "Бруто", onInput Bruto, value (String.fromInt model.bruto) ] ++ inputStyle) [] ]
-            , Html.td [] [ input ([ type_ "number", placeholder "Нето", onInput Neto, value (String.fromInt model.neto) ] ++ inputStyle) [] ]
+            [ Html.td [] [ input ([ title "Бруто, износ кој ја вклучува чистата плата што ја добива работникот (нето-плата) заедно со сите јавни давачки (даноци и придонеси), во бруто-платата се вклучени надоместоците кои ги добиваат вработените за храна и за превоз", type_ "number", placeholder "Бруто", onInput Bruto, value (String.fromInt model.bruto) ] ++ inputStyle) [] ]
+            , Html.td [] [ input ([ title "Нето, чистата плата што ја добива работникот на својата трансакциска сметка", type_ "number", placeholder "Нето", onInput Neto, value (String.fromInt model.neto) ] ++ inputStyle) [] ]
             ]
         ]
 
