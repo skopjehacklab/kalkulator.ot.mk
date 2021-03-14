@@ -5169,6 +5169,8 @@ var $elm$browser$Browser$sandbox = function (impl) {
 		});
 };
 var $author$project$Danok$licnoOsloboduvanje = 8438;
+var $author$project$Danok$prosecnaPlata = 41141;
+var $author$project$Danok$maxOsnovica = $author$project$Danok$prosecnaPlata * 16;
 var $author$project$Danok$sumaDanoci = function (d) {
 	return d.I;
 };
@@ -5181,7 +5183,8 @@ var $author$project$Danok$sumaPridonesi = function (p) {
 			[p.M, p.S, p.N, p.G]));
 };
 var $author$project$Danok$bruto2neto = function (bruto) {
-	var pridonesi = A2($author$project$Danok$presmetajPridonesi, bruto, $author$project$Danok$procentiPridonesi);
+	var osnovica = (_Utils_cmp(bruto, $author$project$Danok$maxOsnovica) > 0) ? $author$project$Danok$maxOsnovica : bruto;
+	var pridonesi = A2($author$project$Danok$presmetajPridonesi, osnovica, $author$project$Danok$procentiPridonesi);
 	var vkupnoPridonesi = $author$project$Danok$sumaPridonesi(pridonesi);
 	var dldOsnova = (bruto - vkupnoPridonesi) - $author$project$Danok$licnoOsloboduvanje;
 	var dldOsnova10 = dldOsnova;
