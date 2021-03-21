@@ -132,7 +132,7 @@ sumaPridonesi p =
 bruto2neto : Int -> Model
 bruto2neto bruto =
     let
-        osnovica = if bruto > maxOsnovica then maxOsnovica else bruto
+        osnovica = min bruto maxOsnovica
 
         pridonesi =
             presmetajPridonesi osnovica procentiPridonesi
