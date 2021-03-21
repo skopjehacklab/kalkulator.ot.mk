@@ -5171,6 +5171,10 @@ var $elm$browser$Browser$sandbox = function (impl) {
 var $author$project$Danok$licnoOsloboduvanje = 8438;
 var $author$project$Danok$prosecnaPlata = 41141;
 var $author$project$Danok$maxOsnovica = $author$project$Danok$prosecnaPlata * 16;
+var $elm$core$Basics$min = F2(
+	function (x, y) {
+		return (_Utils_cmp(x, y) < 0) ? x : y;
+	});
 var $author$project$Danok$sumaDanoci = function (d) {
 	return d.I;
 };
@@ -5183,7 +5187,7 @@ var $author$project$Danok$sumaPridonesi = function (p) {
 			[p.M, p.S, p.N, p.G]));
 };
 var $author$project$Danok$bruto2neto = function (bruto) {
-	var osnovica = (_Utils_cmp(bruto, $author$project$Danok$maxOsnovica) > 0) ? $author$project$Danok$maxOsnovica : bruto;
+	var osnovica = A2($elm$core$Basics$min, bruto, $author$project$Danok$maxOsnovica);
 	var pridonesi = A2($author$project$Danok$presmetajPridonesi, osnovica, $author$project$Danok$procentiPridonesi);
 	var vkupnoPridonesi = $author$project$Danok$sumaPridonesi(pridonesi);
 	var dldOsnova = (bruto - vkupnoPridonesi) - $author$project$Danok$licnoOsloboduvanje;
@@ -5804,6 +5808,7 @@ var $author$project$Views$splitter = _List_fromArray(
 		A2($elm$html$Html$Attributes$style, 'width', '600px')
 	]);
 var $elm$html$Html$th = _VirtualDom_node('th');
+var $elm$html$Html$Attributes$title = $elm$html$Html$Attributes$stringProperty('title');
 var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('type');
 var $elm$html$Html$Attributes$value = $elm$html$Html$Attributes$stringProperty('value');
 var $author$project$Views$inputFields = function (model) {
@@ -5847,6 +5852,7 @@ var $author$project$Views$inputFields = function (model) {
 								_Utils_ap(
 									_List_fromArray(
 										[
+											$elm$html$Html$Attributes$title('Бруто, износ кој ја вклучува чистата плата што ја добива работникот (нето-плата) заедно со сите јавни давачки (даноци и придонеси), во бруто-платата се вклучени надоместоците кои ги добиваат вработените за храна и за превоз'),
 											$elm$html$Html$Attributes$type_('number'),
 											$elm$html$Html$Attributes$placeholder('Бруто'),
 											$elm$html$Html$Events$onInput($author$project$Views$Bruto),
@@ -5866,6 +5872,7 @@ var $author$project$Views$inputFields = function (model) {
 								_Utils_ap(
 									_List_fromArray(
 										[
+											$elm$html$Html$Attributes$title('Нето, чистата плата што ја добива работникот на својата трансакциска сметка'),
 											$elm$html$Html$Attributes$type_('number'),
 											$elm$html$Html$Attributes$placeholder('Нето'),
 											$elm$html$Html$Events$onInput($author$project$Views$Neto),
@@ -5896,7 +5903,6 @@ var $author$project$Views$pdfLinkStyle = _List_fromArray(
 var $author$project$Views$pdfLinkTxt = 'Закон за данокот на личен доход';
 var $elm$html$Html$Attributes$rel = _VirtualDom_attribute('rel');
 var $elm$html$Html$Attributes$target = $elm$html$Html$Attributes$stringProperty('target');
-var $elm$html$Html$Attributes$title = $elm$html$Html$Attributes$stringProperty('title');
 var $author$project$Views$pdfLink = A2(
 	$elm$html$Html$a,
 	_Utils_ap(
