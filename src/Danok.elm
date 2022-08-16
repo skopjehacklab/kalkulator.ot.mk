@@ -96,7 +96,7 @@ sumaDanoci d =
 type alias Pridonesi number =
     { penzisko : number
     , zdravstveno : number
-    , pridones : number
+    , nevrabotenost : number
     , boluvanje : number
     }
 
@@ -105,7 +105,7 @@ procentiPridonesi : Pridonesi Float
 procentiPridonesi =
     { penzisko = 0.188
     , zdravstveno = 0.075
-    , pridones = 0.012
+    , nevrabotenost = 0.012
     , boluvanje = 0.005
     }
 
@@ -114,14 +114,14 @@ presmetajPridonesi : Int -> Pridonesi Float -> Pridonesi Int
 presmetajPridonesi bruto p =
     { penzisko = bruto |> od p.penzisko
     , zdravstveno = bruto |> od p.zdravstveno
-    , pridones = bruto |> od p.pridones
+    , nevrabotenost = bruto |> od p.nevrabotenost
     , boluvanje = bruto |> od p.boluvanje
     }
 
 
 sumaPridonesi : Pridonesi number -> number
 sumaPridonesi p =
-    [ p.penzisko, p.zdravstveno, p.pridones, p.boluvanje ]
+    [ p.penzisko, p.zdravstveno, p.nevrabotenost, p.boluvanje ]
         |> List.sum
 
 

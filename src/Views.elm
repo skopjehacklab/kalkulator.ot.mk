@@ -162,9 +162,9 @@ details model =
                 , td "МКД"
                 ]
             , tr []
-                [ tdLeft "Придонеси за вработување"
-                , td (Round.round 2 (procentiPridonesi.pridones * 100) ++ "%")
-                , td (String.fromInt model.pridonesi.pridones)
+                [ tdLeft "Придонес за осигурување во случај на невработеност"
+                , td (Round.round 2 (procentiPridonesi.nevrabotenost * 100) ++ "%")
+                , td (String.fromInt model.pridonesi.nevrabotenost)
                 , td "МКД"
                 ]
             , tr []
