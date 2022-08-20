@@ -4433,13 +4433,13 @@ var $author$project$Danok$presmetajPridonesi = F2(
 	function (bruto, p) {
 		return {
 			G: A2($author$project$Danok$od, p.G, bruto),
-			M: A2($author$project$Danok$od, p.M, bruto),
+			K: A2($author$project$Danok$od, p.K, bruto),
 			N: A2($author$project$Danok$od, p.N, bruto),
 			S: A2($author$project$Danok$od, p.S, bruto)
 		};
 	});
 var $author$project$Danok$procentiDanoci = {I: 0.1};
-var $author$project$Danok$procentiPridonesi = {G: 0.005, M: 0.188, N: 0.012, S: 0.075};
+var $author$project$Danok$procentiPridonesi = {G: 0.005, K: 0.012, N: 0.188, S: 0.075};
 var $author$project$Danok$initModel = {
 	_: 0,
 	aa: 0,
@@ -5184,7 +5184,7 @@ var $elm$core$List$sum = function (numbers) {
 var $author$project$Danok$sumaPridonesi = function (p) {
 	return $elm$core$List$sum(
 		_List_fromArray(
-			[p.M, p.S, p.N, p.G]));
+			[p.N, p.S, p.K, p.G]));
 };
 var $author$project$Danok$bruto2neto = function (bruto) {
 	var osnovica = A2($elm$core$Basics$min, bruto, $author$project$Danok$maxOsnovica);
@@ -5623,9 +5623,9 @@ var $author$project$Views$details = function (model) {
 							[
 								$author$project$Views$tdLeft('Придонеси за задолжително ПИО'),
 								$author$project$Views$td(
-								A2($myrho$elm_round$Round$round, 2, $author$project$Danok$procentiPridonesi.M * 100) + '%'),
+								A2($myrho$elm_round$Round$round, 2, $author$project$Danok$procentiPridonesi.N * 100) + '%'),
 								$author$project$Views$td(
-								$elm$core$String$fromInt(model.aj.M)),
+								$elm$core$String$fromInt(model.aj.N)),
 								$author$project$Views$td('МКД')
 							])),
 						A2(
@@ -5645,11 +5645,11 @@ var $author$project$Views$details = function (model) {
 						_List_Nil,
 						_List_fromArray(
 							[
-								$author$project$Views$tdLeft('Придонеси за вработување'),
+								$author$project$Views$tdLeft('Придонес за осигурување во случај на невработеност'),
 								$author$project$Views$td(
-								A2($myrho$elm_round$Round$round, 2, $author$project$Danok$procentiPridonesi.N * 100) + '%'),
+								A2($myrho$elm_round$Round$round, 2, $author$project$Danok$procentiPridonesi.K * 100) + '%'),
 								$author$project$Views$td(
-								$elm$core$String$fromInt(model.aj.N)),
+								$elm$core$String$fromInt(model.aj.K)),
 								$author$project$Views$td('МКД')
 							])),
 						A2(
