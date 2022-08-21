@@ -5262,8 +5262,8 @@ var $author$project$Main$update = F2(
 				0,
 				$elm$core$String$toInt(amount));
 			return (_Utils_cmp(fAmount, $author$project$Danok$minBruto) > -1) ? $author$project$Danok$bruto2neto(fAmount) : _Utils_update(
-				model,
-				{_: fAmount});
+				$author$project$Danok$initModel,
+				{_: fAmount, V: fAmount});
 		} else {
 			var amount = msg.a;
 			var fAmount = A2(
@@ -5271,8 +5271,8 @@ var $author$project$Main$update = F2(
 				0,
 				$elm$core$String$toInt(amount));
 			return (_Utils_cmp(fAmount, $author$project$Danok$minNeto) > -1) ? $author$project$Danok$neto2bruto(fAmount) : _Utils_update(
-				model,
-				{V: fAmount});
+				$author$project$Danok$initModel,
+				{_: fAmount, V: fAmount});
 		}
 	});
 var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
