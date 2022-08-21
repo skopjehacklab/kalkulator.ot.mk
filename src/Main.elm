@@ -26,7 +26,7 @@ update msg model =
                 bruto2neto fAmount
 
             else
-                { model | bruto = fAmount }
+                { initModel | bruto = fAmount, neto = fAmount }
 
         Neto amount ->
             let
@@ -37,4 +37,4 @@ update msg model =
                 neto2bruto fAmount
 
             else
-                { model | neto = fAmount }
+                { initModel | bruto = fAmount, neto = fAmount }
