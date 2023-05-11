@@ -31,16 +31,40 @@ bold =
 
 ribbon : Html Msg
 ribbon =
-    a [ href "https://github.com/skopjehacklab/kalkulator.ot.mk" ]
-        [ img
-            [ style "position" "absolute"
-            , style "top" "0"
-            , style "left" "0"
-            , style "border" "0"
-            , src "https://s3.amazonaws.com/github/ribbons/forkme_left_orange_ff7600.png"
-            , alt "Fork me on GitHub"
+    div [ style "position" "absolute"
+        , style "top" "42px"
+        , style "width" "200px"
+        , style "padding" "1px 0"
+        , style "background" "#000"
+        , style "color" "#eee"
+        , style "-moz-box-shadow" "0 0 10px rgba(0,0,0,0.5)"
+        , style "-webkit-box-shadow" "0 0 10px rgba(0,0,0,0.5)"
+        , style "box-shadow" "0 0 10px rgba(0,0,0,0.5)"
+        , style "left" "-42px"
+        , style "-moz-transform" "rotate(-45deg)"
+        , style "-webkit-transform" "rotate(-45deg)"
+        , style "-o-transform" "rotate(-45deg)"
+        , style "-ms-transform" "rotate(-45deg)"
+        , style "transform" "rotate(-45deg)"
+        , style "background" "#0a0"
+        ]
+        [ a [ href "https://github.com/skopjehacklab/kalkulator.ot.mk"
+            , style "display" "block"
+            , style "padding" "1px 0"
+            , style "height" "24px"
+            , style "line-height" "24px"
+            , style "color" "inherit"
+            , style "text-align" "center"
+            , style "text-decoration" "none"
+            , style "font-family" "'Cabin Condensed', sans-serif"
+            , style "font-size" "16px"
+            , style "font-weight" "500"
+            , style "border" "1px solid rgba(255,255,255,0.3)"
+            , style "-moz-text-shadow" "0 0 10px rgba(0,0,0,0.31)"
+            , style "-webkit-text-shadow" "0 0 10px rgba(0,0,0,0.31)"
+            , style "text-shadow" "0 0 10px rgba(0,0,0,0.31)"
             ]
-            []
+            [ text "Fork me on GitHub" ]
         ]
 
 
