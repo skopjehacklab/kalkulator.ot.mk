@@ -5918,34 +5918,53 @@ var $author$project$Views$pdfLink = A2(
 		[
 			$elm$html$Html$text($author$project$Views$pdfLinkTxt)
 		]));
-var $elm$html$Html$Attributes$alt = $elm$html$Html$Attributes$stringProperty('alt');
-var $elm$html$Html$img = _VirtualDom_node('img');
-var $elm$html$Html$Attributes$src = function (url) {
-	return A2(
-		$elm$html$Html$Attributes$stringProperty,
-		'src',
-		_VirtualDom_noJavaScriptOrHtmlUri(url));
-};
 var $author$project$Views$ribbon = A2(
-	$elm$html$Html$a,
+	$elm$html$Html$div,
 	_List_fromArray(
 		[
-			$elm$html$Html$Attributes$href('https://github.com/skopjehacklab/kalkulator.ot.mk')
+			A2($elm$html$Html$Attributes$style, 'position', 'absolute'),
+			A2($elm$html$Html$Attributes$style, 'top', '42px'),
+			A2($elm$html$Html$Attributes$style, 'width', '200px'),
+			A2($elm$html$Html$Attributes$style, 'padding', '1px 0'),
+			A2($elm$html$Html$Attributes$style, 'background', '#000'),
+			A2($elm$html$Html$Attributes$style, 'color', '#eee'),
+			A2($elm$html$Html$Attributes$style, '-moz-box-shadow', '0 0 10px rgba(0,0,0,0.5)'),
+			A2($elm$html$Html$Attributes$style, '-webkit-box-shadow', '0 0 10px rgba(0,0,0,0.5)'),
+			A2($elm$html$Html$Attributes$style, 'box-shadow', '0 0 10px rgba(0,0,0,0.5)'),
+			A2($elm$html$Html$Attributes$style, 'left', '-42px'),
+			A2($elm$html$Html$Attributes$style, '-moz-transform', 'rotate(-45deg)'),
+			A2($elm$html$Html$Attributes$style, '-webkit-transform', 'rotate(-45deg)'),
+			A2($elm$html$Html$Attributes$style, '-o-transform', 'rotate(-45deg)'),
+			A2($elm$html$Html$Attributes$style, '-ms-transform', 'rotate(-45deg)'),
+			A2($elm$html$Html$Attributes$style, 'transform', 'rotate(-45deg)'),
+			A2($elm$html$Html$Attributes$style, 'background', '#0a0')
 		]),
 	_List_fromArray(
 		[
 			A2(
-			$elm$html$Html$img,
+			$elm$html$Html$a,
 			_List_fromArray(
 				[
-					A2($elm$html$Html$Attributes$style, 'position', 'absolute'),
-					A2($elm$html$Html$Attributes$style, 'top', '0'),
-					A2($elm$html$Html$Attributes$style, 'left', '0'),
-					A2($elm$html$Html$Attributes$style, 'border', '0'),
-					$elm$html$Html$Attributes$src('https://s3.amazonaws.com/github/ribbons/forkme_left_orange_ff7600.png'),
-					$elm$html$Html$Attributes$alt('Fork me on GitHub')
+					$elm$html$Html$Attributes$href('https://github.com/skopjehacklab/kalkulator.ot.mk'),
+					A2($elm$html$Html$Attributes$style, 'display', 'block'),
+					A2($elm$html$Html$Attributes$style, 'padding', '1px 0'),
+					A2($elm$html$Html$Attributes$style, 'height', '24px'),
+					A2($elm$html$Html$Attributes$style, 'line-height', '24px'),
+					A2($elm$html$Html$Attributes$style, 'color', 'inherit'),
+					A2($elm$html$Html$Attributes$style, 'text-align', 'center'),
+					A2($elm$html$Html$Attributes$style, 'text-decoration', 'none'),
+					A2($elm$html$Html$Attributes$style, 'font-family', '\'Cabin Condensed\', sans-serif'),
+					A2($elm$html$Html$Attributes$style, 'font-size', '16px'),
+					A2($elm$html$Html$Attributes$style, 'font-weight', '500'),
+					A2($elm$html$Html$Attributes$style, 'border', '1px solid rgba(255,255,255,0.3)'),
+					A2($elm$html$Html$Attributes$style, '-moz-text-shadow', '0 0 10px rgba(0,0,0,0.31)'),
+					A2($elm$html$Html$Attributes$style, '-webkit-text-shadow', '0 0 10px rgba(0,0,0,0.31)'),
+					A2($elm$html$Html$Attributes$style, 'text-shadow', '0 0 10px rgba(0,0,0,0.31)')
 				]),
-			_List_Nil)
+			_List_fromArray(
+				[
+					$elm$html$Html$text('Fork me on GitHub')
+				]))
 		]));
 var $author$project$Views$view = function (model) {
 	return A2(
