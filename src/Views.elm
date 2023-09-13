@@ -87,7 +87,7 @@ pdfLink : Html Msg
 pdfLink =
     a
         (pdfLinkStyle
-            ++ [ href "http://ujp.gov.mk/e/regulativa/opis/337", title pdfLinkTxt, target "_blank", rel "noopener" ]
+            ++ [ href "http://www.ujp.gov.mk/mk/regulativa/opis/425", title pdfLinkTxt, target "_blank", rel "noopener" ]
         )
         [ text pdfLinkTxt ]
 

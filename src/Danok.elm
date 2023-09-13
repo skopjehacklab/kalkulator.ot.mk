@@ -72,13 +72,13 @@ od x =
 
 
 type alias Danoci number =
-    { dld10 : number -- данок на личен доход од 10%
+    { dld10 : number -- данок на личен доход од 11.11%
     }
 
 
 procentiDanoci : Danoci Float
 procentiDanoci =
-    { dld10 = 0.1
+    { dld10 = 0.1111
     }
 
 
