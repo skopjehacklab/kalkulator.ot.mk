@@ -43,7 +43,7 @@ prosecnaPlata =
 
 licnoOsloboduvanje : Int
 licnoOsloboduvanje =
-    9540
+    10270
 
 
 minNeto : Int
