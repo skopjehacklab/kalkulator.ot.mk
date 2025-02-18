@@ -5168,7 +5168,7 @@ var $elm$browser$Browser$sandbox = function (impl) {
 			bB: impl.bB
 		});
 };
-var $author$project$Danok$licnoOsloboduvanje = 9540;
+var $author$project$Danok$licnoOsloboduvanje = 10270;
 var $author$project$Danok$prosecnaPlata = 57609;
 var $author$project$Danok$maxOsnovica = $author$project$Danok$prosecnaPlata * 16;
 var $elm$core$Basics$min = F2(
