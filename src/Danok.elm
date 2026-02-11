@@ -38,22 +38,22 @@ maxBrutoNetoOdnos =
 
 prosecnaPlata : Int
 prosecnaPlata =
-    57609
+    69141
 
 
 licnoOsloboduvanje : Int
 licnoOsloboduvanje =
-    10270
+    10932
 
 
 minNeto : Int
 minNeto =
-    20225
+    24379
 
 
 minBruto : Int
 minBruto =
-    29739
+    34571
 
 
 maxOsnovica : Int
