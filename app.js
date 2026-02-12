@@ -5168,8 +5168,8 @@ var $elm$browser$Browser$sandbox = function (impl) {
 			bB: impl.bB
 		});
 };
-var $author$project$Danok$licnoOsloboduvanje = 10270;
-var $author$project$Danok$prosecnaPlata = 57609;
+var $author$project$Danok$licnoOsloboduvanje = 10932;
+var $author$project$Danok$prosecnaPlata = 69141;
 var $author$project$Danok$maxOsnovica = $author$project$Danok$prosecnaPlata * 16;
 var $elm$core$Basics$min = F2(
 	function (x, y) {
@@ -5198,8 +5198,8 @@ var $author$project$Danok$bruto2neto = function (bruto) {
 	return {_: bruto, aa: bruto - vkupnoPridonesi, ab: danoci, ad: dldOsnova10, V: neto, aj: pridonesi, ap: vkupnoPridonesi + vkupnoDanoci, aq: vkupnoPridonesi};
 };
 var $elm$core$Basics$ge = _Utils_ge;
-var $author$project$Danok$minBruto = 29739;
-var $author$project$Danok$minNeto = 20225;
+var $author$project$Danok$minBruto = 34571;
+var $author$project$Danok$minNeto = 24379;
 var $author$project$Danok$binSearch = F3(
 	function (searchValue, lo, hi) {
 		binSearch:
