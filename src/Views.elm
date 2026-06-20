@@ -229,7 +229,15 @@ details model =
                 ]
             , tr []
                 [ tdLeft "Вкупно придонеси и данок"
-                , td ""
+                , td
+                    (Round.round 2
+                        (if model.bruto == 0 then
+                            0
+
+                         else
+                            (toFloat model.vkupnoDavacki / toFloat model.bruto) * 100
+                        ) ++ "%"
+                    )
                 , td (String.fromInt model.vkupnoDavacki)
                 , td "МКД"
                 ]
