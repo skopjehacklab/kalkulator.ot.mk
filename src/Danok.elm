@@ -101,11 +101,16 @@ type alias Pridonesi number =
     }
 
 
+-- Сл. весник 148/2026: привремено, за платите од јули до декември 2026,
+-- стапката за ПИО е зголемена од 18,8% на 19,9%, а за невработеност е
+-- намалена од 1,2% на 0,1%. Вкупната стапка останува 28%.
+
+
 procentiPridonesi : Pridonesi Float
 procentiPridonesi =
-    { penzisko = 0.188
+    { penzisko = 0.199
     , zdravstveno = 0.075
-    , nevrabotenost = 0.012
+    , nevrabotenost = 0.001
     , boluvanje = 0.005
     }
 
